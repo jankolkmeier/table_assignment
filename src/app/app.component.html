@@ -1,9 +1,14 @@
-<h1>{{title}}</h1>
-<nav>
-    <ul>
-        <li><a href="/users">users</a></li>
-        <li><a href="/products">products</a></li>
-    </ul>
-</nav>
+<div id="root">
+    <h1>{{title}}</h1>
+    <nav>
+        <ul>
+            <li><a href="/assignment">Assignment Description</a></li>
+            <li><a href="/users">Users Page</a></li>
+            <li><a href="/products">Products Page</a></li>
+        </ul>
+    </nav>
 
-<router-outlet />
+    <div class="page">
+        <router-outlet />
+    </div>
+</div>
