@@ -96,6 +96,10 @@ export class TableComponent {
    */
   prepareTable(data: object[]): void {
     this._data = data.map(TableUtils.flattenObjectToRow);
+    for (let idx = 0; idx < this._data.length; idx++) {
+      this._data[idx]["__index"] = idx;
+    }
+
     const tableSpec = TableUtils.inferColumnTypes(this._data);
 
     if (!this._displayColumns) {
@@ -108,28 +112,64 @@ export class TableComponent {
         return tableSpec[colspec.name];
       });
     }
-
-    for (let idx = 0; idx < this._data.length; idx++) {
-      this._data[idx]["__index"] = idx;
-    }
   }
 
   /**
-   * 
+   * TODO: 
+   *  - Refactor the sorting functions to be able to either toggle or set the sorting setting 
+   *    of a given column
+   *  - Then make function that sorts the table based on the current sorting state (no parameters)
+   *    to allow users of the component to provide a default sorting direction in the columns parameter.
+   */
+
+  /**
+   * Update sorting state by going through column specifications and toggling the current 
+   * sorting mode of the column provided
+   * @param columnName name of column to change sort mode on
    */
   toggleSortMode(columnName: string) {
     // Get total number of sort modes (used for modulo operation when toggling)
     const n_sort_modes = Object.keys(ColumnSort).length / 2;
-    if (!this._displayColumns)
+    let spec: ColumnSpec | null = null;
+    let mode: ColumnSort = ColumnSort.NONE;
+
+    if (!this._data || !this._displayColumns)
       return;
+
     for (const col of this._displayColumns) {
       // Reset sort state for all other rows
       if (col.name === columnName) {
-        // toggle through sort modes. 
-        col.sort = col.sort === undefined ? ColumnSort.ASC : ++col.sort % n_sort_modes;
+        spec = col;
       } else {
         col.sort = ColumnSort.NONE;
       }
     }
+
+    // Found column to sort on
+    if (spec !== null) {
+      spec.sort = spec.sort === undefined ? ColumnSort.ASC : ++spec.sort % n_sort_modes;
+      mode = spec.sort;
+    }
+
+    // If column is unknown or we revert to not sort on the given column...
+    if (spec === null || mode == ColumnSort.NONE) {
+      // Just return to sorting the data based on how we originally have gotten it.
+      mode = ColumnSort.ASC;
+      columnName = "__index";
+    }
+
+    this.sortTable(columnName, mode);
+  }
+
+  /**
+   * Sort our table based on the column name and direction
+   * @param columnName name of column to sort on
+   * @param mode sort mode - either ColumnSort.ASC or ColumnSort.DESC 
+   */
+  sortTable(columnName: string, mode: ColumnSort) {
+    if (!this._data)
+      return;
+    this._data.sort(TableUtils.sortTableFn(columnName, mode));
+    this._data = [...this._data];
   }
 }

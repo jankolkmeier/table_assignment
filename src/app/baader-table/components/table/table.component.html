@@ -3,8 +3,10 @@
     <table class="baader-table" cdk-table [dataSource]="_data" [trackBy]="trackTableIndex" width="100%">
         @for (colspec of _displayColumns; track $index) {
         <ng-container [cdkColumnDef]="colspec.name">
-            <th cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">{{colspec.displayName}}
-                {{colspec.sort}}</th>
+            <th cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">
+                {{colspec.displayName}}
+                {{ ['▤', '▼', '▲'][colspec.sort !== undefined ? colspec.sort : 0 ] }}
+            </th>
             <td cdk-cell *cdkCellDef="let row">{{row[colspec.name]}}</td>
         </ng-container>
         }

@@ -57,4 +57,26 @@ export class TableUtils {
     }
     return columns;
   }
+
+  /**
+   * Generate a sort function that compares TableRows based on property columnName.
+   * @param columnName Name of the column to compare in the sort fn
+   * @param sortMode Sort direction, either ColumnSort.ASC or ColumnSort.DESC
+   * @returns a sort function
+   */
+  static sortTableFn(columnName: string, sortMode: ColumnSort): (a: TableRow, b: TableRow) => number {
+    return (a, b) => {
+      const aval = a[columnName];
+      const bval = b[columnName];
+      let cval = 0;
+      if (bval === null && aval === null) {
+        cval = 0;
+      } else if (aval !== null && bval !== null && aval > bval || aval === null && bval !== null) {
+        cval = 1;
+      } else if (aval !== null && bval !== null && aval < bval || aval !== null && bval === null) {
+        cval = -1;
+      }
+      return sortMode === ColumnSort.ASC ? cval : -cval;
+    }
+  }
 }
