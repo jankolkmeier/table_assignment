@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { TableComponent } from '../../baader-table/components/table/table.component';
-import { ColumnSpec } from '../../baader-table/shared/table.model';
 
 /**
  * Product Page component. Shows a table of products.
@@ -21,6 +20,6 @@ export class ProductsPageComponent {
     { name: "title", displayName: "Title" },
     { name: "category", displayName: "Category" },
     { name: "price", displayName: "Price" },
-  ] as ColumnSpec[];
+  ];
 
 }

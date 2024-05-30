@@ -50,9 +50,9 @@ export class TableComponent {
    * Sets the objects required for rendering the table based on the selected columns to Display.
    * @param columns Columns to display as list of column specifications (holding the 'name' of column and 'displayName' for the header).
    */
-  setDisplayColumns(columns: ColumnSpec[]) {
-    this._displayColumns = columns;
-    this._displayColumnNames = columns.map((col) => col.name);
+  setDisplayColumns(columns: object[]) {
+    this._displayColumns = columns as ColumnSpec[];
+    this._displayColumnNames = this._displayColumns.map((col) => col.name);
   }
 
   /**

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TableComponent } from '../../baader-table/components/table/table.component';
-import { ColumnSpec } from '../../baader-table/shared/table.model';
 
 /**
  * User Page component. Shows a table of users.
@@ -22,5 +21,5 @@ export class UsersPageComponent {
     { name: "location.state", displayName: "State" },
     { name: "location.street.name", displayName: "Street Name" },
     { name: "location.street.number", displayName: "Street Number" }
-  ] as ColumnSpec[];
+  ];
 }
