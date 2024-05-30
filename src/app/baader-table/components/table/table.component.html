@@ -1,9 +1,10 @@
 <div class="baader-table-root">
-    @if (!_error && _data && _tableSpec && _displayColumns) {
+    @if (!_error && _data && _displayColumns) {
     <table class="baader-table" cdk-table [dataSource]="_data" [trackBy]="trackTableIndex" width="100%">
         @for (colspec of _displayColumns; track $index) {
         <ng-container [cdkColumnDef]="colspec.name">
-            <th cdk-header-cell *cdkHeaderCellDef>{{colspec.displayName}}</th>
+            <th cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">{{colspec.displayName}}
+                {{colspec.sort}}</th>
             <td cdk-cell *cdkCellDef="let row">{{row[colspec.name]}}</td>
         </ng-container>
         }

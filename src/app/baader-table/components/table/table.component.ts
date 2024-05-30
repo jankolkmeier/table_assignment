@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { KeyValuePipe } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { TableDataService } from '../../services/table-data.service';
-import { TableSpec, ColumnSpec, TableRow } from '../../shared/table.model';
+import { ColumnSpec, TableRow, ColumnSort } from '../../shared/table.model';
 import { TableUtils } from '../../shared/table-utils'
 
 /**
@@ -32,7 +32,6 @@ export class TableComponent {
     if (columns) {
       this.setDisplayColumns(columns);
     }
-
   }
 
   _url?: string;
@@ -40,8 +39,6 @@ export class TableComponent {
   _displayColumnNames?: string[]
 
   _data: TableRow[] | null = null;
-  _tableSpec: TableSpec | null = null;
-
   _error: string | null = null;
 
   constructor(private dataService: TableDataService) { }
@@ -99,11 +96,17 @@ export class TableComponent {
    */
   prepareTable(data: object[]): void {
     this._data = data.map(TableUtils.flattenObjectToRow);
-    this._tableSpec = TableUtils.inferColumnTypes(this._data);
+    const tableSpec = TableUtils.inferColumnTypes(this._data);
 
-    if (!this._displayColumns && this._tableSpec) {
+    if (!this._displayColumns) {
       // Display all columns if none selected
-      this.setDisplayColumns(Object.values(this._tableSpec));
+      this.setDisplayColumns(Object.values(tableSpec));
+    } else {
+      // Merge user configured column settings with inferred column specs
+      this._displayColumns = this._displayColumns.map((colspec: ColumnSpec) => {
+        Object.assign(tableSpec[colspec.name], colspec);
+        return tableSpec[colspec.name];
+      });
     }
 
     for (let idx = 0; idx < this._data.length; idx++) {
@@ -111,4 +114,22 @@ export class TableComponent {
     }
   }
 
+  /**
+   * 
+   */
+  toggleSortMode(columnName: string) {
+    // Get total number of sort modes (used for modulo operation when toggling)
+    const n_sort_modes = Object.keys(ColumnSort).length / 2;
+    if (!this._displayColumns)
+      return;
+    for (const col of this._displayColumns) {
+      // Reset sort state for all other rows
+      if (col.name === columnName) {
+        // toggle through sort modes. 
+        col.sort = col.sort === undefined ? ColumnSort.ASC : ++col.sort % n_sort_modes;
+      } else {
+        col.sort = ColumnSort.NONE;
+      }
+    }
+  }
 }

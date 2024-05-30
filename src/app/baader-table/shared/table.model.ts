@@ -1,10 +1,21 @@
 /**
+ * Describe sorting state of a column
+ */
+export enum ColumnSort {
+    NONE = 0,
+    DESC = 1,
+    ASC = 2
+}
+
+/**
  * Used to describe columns, preferred display names in header column, and to describe the dataType in the column.
  */
 export interface ColumnSpec {
     name: string;
     displayName: string;
     dataType?: string;
+    sort?: ColumnSort;
+    filter?: string;
 }
 
 /**

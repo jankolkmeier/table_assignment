@@ -1,4 +1,4 @@
-import { ColumnSpec, TableSpec, TableRow } from "./table.model";
+import { ColumnSpec, TableSpec, TableRow, ColumnSort } from "./table.model";
 
 
 /**
@@ -48,6 +48,7 @@ export class TableUtils {
             name: key,
             displayName: key,
             dataType: dataType,
+            sort: ColumnSort.NONE
           } as ColumnSpec;
         } else if (columns[key].dataType !== dataType) {
           columns[key].dataType = "mixed";
