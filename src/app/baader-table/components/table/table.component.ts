@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { TableDataService } from '../../services/table-data.service';
-import { TableSpec, TableRow } from '../../shared/table.model';
 import { KeyValuePipe } from '@angular/common';
+import { CdkTableModule } from '@angular/cdk/table';
+import { TableDataService } from '../../services/table-data.service';
+import { TableSpec, ColumnSpec, TableRow } from '../../shared/table.model';
 import { TableUtils } from '../../shared/table-utils'
 
 /**
@@ -10,7 +11,7 @@ import { TableUtils } from '../../shared/table-utils'
 @Component({
   selector: 'baader-table',
   standalone: true,
-  imports: [KeyValuePipe],
+  imports: [KeyValuePipe, CdkTableModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -28,12 +29,16 @@ export class TableComponent {
   }
 
   @Input()
-  set columns(columns: string[]) {
-    this._displayColumns = columns;
+  set columns(columns: ColumnSpec[]) {
+    if (columns) {
+      this.setDisplayColumns(columns);
+    }
+
   }
 
   _url?: string;
-  _displayColumns?: string[];
+  _displayColumns?: ColumnSpec[];
+  _displayColumnNames?: string[]
 
   _data: TableRow[] | null = null;
   _tableSpec: TableSpec | null = null;
@@ -41,6 +46,11 @@ export class TableComponent {
   _error: string | null = null;
 
   constructor(private dataService: TableDataService) { }
+
+  setDisplayColumns(columns: ColumnSpec[]) {
+    this._displayColumns = columns;
+    this._displayColumnNames = columns.map((col) => col.name);
+  }
 
   setDataSource(url: string) {
     this._url = url;
@@ -70,8 +80,9 @@ export class TableComponent {
     this._data = data.map(TableUtils.flattenObjectToRow);
     this._tableSpec = TableUtils.inferColumnTypes(this._data);
 
-    if (this._displayColumns === undefined) {
-      this._displayColumns = Object.keys(this._tableSpec);
+    if (!this._displayColumns && this._tableSpec) {
+      // Display all columns if none selected
+      this.setDisplayColumns(Object.values(this._tableSpec));
     }
   }
 

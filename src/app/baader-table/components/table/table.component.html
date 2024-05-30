@@ -1,5 +1,25 @@
 <div class="baader-table-root">
     @if (!_error && _data && _tableSpec && _displayColumns) {
+    <table class="baader-table" cdk-table [dataSource]="_data" width="100%">
+        @for (colspec of _displayColumns; track $index) {
+        <ng-container [cdkColumnDef]="colspec.name">
+            <th cdk-header-cell *cdkHeaderCellDef>{{colspec.displayName}}</th>
+            <td cdk-cell *cdkCellDef="let row">{{row[colspec.name]}}</td>
+        </ng-container>
+        }
+
+        <tr cdk-header-row *cdkHeaderRowDef="_displayColumnNames"></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: _displayColumnNames"></tr>
+    </table>
+    } @else if (_error) {
+    <div class="error">Error: {{_error}}</div>
+    } @else {
+    <div class="loading">Initializing table</div>
+    }
+</div>
+<!--
+<div cdk-table class="baader-table-root">
+    @if (!_error && _data && _tableSpec && _displayColumns) {
     <table class="baader-table" width="100%">
         <thead>
             <tr>
@@ -24,3 +44,4 @@
     <div class="loading">Initializing table</div>
     }
 </div>
+-->

@@ -46,7 +46,8 @@ export class TableUtils {
         if (columns[key] === undefined) {
           columns[key] = {
             name: key,
-            dataType: dataType
+            displayName: key,
+            dataType: dataType,
           } as ColumnSpec;
         } else if (columns[key].dataType !== dataType) {
           columns[key].dataType = "mixed";

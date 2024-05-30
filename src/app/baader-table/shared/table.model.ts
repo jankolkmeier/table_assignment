@@ -1,7 +1,8 @@
 
 export interface ColumnSpec {
     name: string;
-    dataType: string;
+    displayName: string;
+    dataType?: string;
 }
 
 export type TableSpec = Record<string, ColumnSpec>
