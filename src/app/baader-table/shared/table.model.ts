@@ -19,6 +19,25 @@ export interface ColumnSpec {
 }
 
 /**
+ * The following interfaces represent the state of the data viewed,
+ * I.e. by which column they are sorted or filtered, what range of the data is looked at (i.e. based on pagination).
+ */
+export interface SortState {
+    column: string;
+    sort: ColumnSort;
+}
+
+export interface FilterState {
+    column: string;
+    filter: string;
+}
+
+export interface RangeState {
+    start: number;
+    length: number;
+}
+
+/**
  * A table is described by a TableSpec, i.e. a set of ColumnSpecs 
  */
 export type TableSpec = Record<string, ColumnSpec>

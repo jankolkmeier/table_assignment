@@ -1,6 +1,8 @@
 <div class="baader-table-root">
-    @if (!_error && _data && _displayColumns) {
-    <table class="baader-table" cdk-table [dataSource]="_data" [trackBy]="trackTableIndex" width="100%">
+    @if (!_error && _data && _dataFiltered && _displayColumns) {
+    <baader-pagination [pageItems]="_paginationItems" [totalItems]="_data.length"
+        (pageChanged)="setPage($event)"></baader-pagination>
+    <table class="baader-table" cdk-table [dataSource]="_dataFiltered" [trackBy]="trackTableIndex" width="100%">
         @for (colspec of _displayColumns; track $index) {
         <ng-container [cdkColumnDef]="colspec.name">
             <th cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">
@@ -19,4 +21,5 @@
     } @else {
     <div class="loading">Initializing table</div>
     }
+
 </div>
