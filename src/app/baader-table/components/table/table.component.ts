@@ -72,6 +72,10 @@ export class TableComponent {
     });
   }
 
+  trackTableIndex(index: number, row: TableRow) {
+    return row["__index"];
+  }
+
   /**
    * Given new table data, infer columnTypes and set up default columns to display.
    * @param data Table data
@@ -83,6 +87,10 @@ export class TableComponent {
     if (!this._displayColumns && this._tableSpec) {
       // Display all columns if none selected
       this.setDisplayColumns(Object.values(this._tableSpec));
+    }
+
+    for (let idx = 0; idx < this._data.length; idx++) {
+      this._data[idx]["__index"] = idx;
     }
   }
 
