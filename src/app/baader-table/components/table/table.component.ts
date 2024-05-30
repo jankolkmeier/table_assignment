@@ -19,8 +19,7 @@ export class TableComponent {
 
   @Input()
   set url(url: string) {
-    this.setDataSource(url);
-    this.fetchData();
+    this.updateDataSource(url);
   }
 
   @Input()
@@ -47,15 +46,27 @@ export class TableComponent {
 
   constructor(private dataService: TableDataService) { }
 
+  /**
+   * Sets the objects required for rendering the table based on the selected columns to Display.
+   * @param columns Columns to display as list of column specifications (holding the 'name' of column and 'displayName' for the header).
+   */
   setDisplayColumns(columns: ColumnSpec[]) {
     this._displayColumns = columns;
     this._displayColumnNames = columns.map((col) => col.name);
   }
 
-  setDataSource(url: string) {
+  /**
+   * Set the data source of the table and fetch the data.
+   * @param url 
+   */
+  updateDataSource(url: string) {
     this._url = url;
+    this.fetchData();
   }
 
+  /**
+   * Fetches the data from url & updates the table.
+   */
   fetchData() {
     if (!this._url) {
       console.warn("Data source not set, not fetching data.");
@@ -71,13 +82,19 @@ export class TableComponent {
       }
     });
   }
-
+  /**
+   * TrackBy function for data. Good practice with large datasets to help with performance.
+   * @param index index in data
+   * @param row element
+   * @returns the unique __index property set in prepareTable
+   */
   trackTableIndex(index: number, row: TableRow) {
     return row["__index"];
   }
 
   /**
    * Given new table data, infer columnTypes and set up default columns to display.
+   * Also sets up a unique index for tracking.
    * @param data Table data
    */
   prepareTable(data: object[]): void {

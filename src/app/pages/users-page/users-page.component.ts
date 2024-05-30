@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { TableComponent } from '../../baader-table/components/table/table.component';
 import { ColumnSpec } from '../../baader-table/shared/table.model';
 
+/**
+ * User Page component. Shows a table of users.
+ */
 @Component({
   selector: 'app-users-page',
   standalone: true,
