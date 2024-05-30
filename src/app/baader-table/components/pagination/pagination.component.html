@@ -1,0 +1,12 @@
+<div class="baader-pagination-root">
+    <div class="controls">
+        <!--
+            TODO: the keyup event needs to be implemented properly to make the paginator more accessible
+        -->
+        <div tabindex="5" class="nav prev {{ _currentPage === 0 ? 'disabled' : '' }}" (keyup)="navButtonKbd(-1, $event)"
+            (click)="changePage(-1)">Prev</div>
+        <div class="current">Page {{_currentPage+1}} of {{totalPages()}}</div>
+        <div tabindex="6" class="nav next {{ _currentPage+1 === totalPages() ? 'disabled' : '' }}"
+            (keyup)="navButtonKbd(1, $event)" (click)="changePage(1)">Next</div>
+    </div>
+</div>

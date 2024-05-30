@@ -1,0 +1,29 @@
+.baader-pagination-root {
+    user-select: none;
+    width: 100%;
+    text-align: center;
+    background-color: #27679b;
+    color: #ffffff;
+}
+
+.baader-pagination-root .controls>div {
+    display: inline-block;
+    padding: 1em 2em;
+}
+
+.baader-pagination-root .controls .nav.disabled {
+    background-color: #27679b;
+    color: #eee;
+    /*
+    visibility: hidden;
+    */
+}
+
+.baader-pagination-root .controls .nav {
+    background-color: #3071a7;
+}
+
+.baader-pagination-root .controls .nav:hover {
+    cursor: pointer;
+    background-color: #4d85b3;
+}
