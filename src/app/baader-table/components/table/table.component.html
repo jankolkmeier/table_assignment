@@ -1,0 +1,26 @@
+<div class="baader-table-root">
+    @if (!_error && _data && _tableSpec && _displayColumns) {
+    <table class="baader-table" width="100%">
+        <thead>
+            <tr>
+                @for (colname of _displayColumns; track $index) {
+                <th>{{colname}}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (row of _data; track $index) {
+            <tr>
+                @for (colname of _displayColumns; track $index) {
+                <td>{{row[colname]}}</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+    } @else if (_error) {
+    <div class="error">Error: {{_error}}</div>
+    } @else {
+    <div class="loading">Initializing table</div>
+    }
+</div>
