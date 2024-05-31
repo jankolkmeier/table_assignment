@@ -5,6 +5,7 @@ import { TableDataService } from '../../services/table-data.service';
 import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState } from '../../shared/table.model';
 import { TableUtils } from '../../shared/table-utils'
 import { PaginationComponent } from '../pagination/pagination.component'
+import { FilterInputComponent } from '../filter-input/filter-input.component';
 import { Observable, merge, of, switchMap } from 'rxjs';
 
 /**
@@ -13,7 +14,7 @@ import { Observable, merge, of, switchMap } from 'rxjs';
 @Component({
   selector: 'baader-table',
   standalone: true,
-  imports: [PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
+  imports: [FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -52,8 +53,8 @@ export class TableComponent implements AfterViewInit {
   @ViewChild(PaginationComponent) pagination!: PaginationComponent;
 
   _url?: string;
-  _displayColumns?: ColumnSpec[];
-  _displayColumnNames?: string[]
+  _displayColumns: ColumnSpec[] | null = null;
+  _displayColumnNames: string[] | null = null;
   _data: TableRow[] | null = null;
 
   _dataFiltered: TableRow[] | null = null;
@@ -67,7 +68,10 @@ export class TableComponent implements AfterViewInit {
 
   sort: SortState | null = null;
   range: RangeState | null = null;
-  filter: FilterState | null = null;
+  filter: FilterState = {
+    filter: "",
+    column: ""
+  };
 
   constructor(private dataService: TableDataService) {
   }
@@ -77,13 +81,12 @@ export class TableComponent implements AfterViewInit {
    * in AfterViewInit before wiring the events, as some depend on children.
    */
   ngAfterViewInit() {
-    // TODO: check which ones make sense to reset the page on:
     /*
-    this.sortChanged.subscribe(() => (this.pagination?.setPage(0)));
-    this.filterChanged.subscribe(() => (this.pagination?.setPage(0)));
+    // TODO: check which ones make sense to reset the page on:
     this.dataChanged.subscribe(() => (this.pagination?.setPage(0)))
     */
-
+    this.sortChanged.subscribe(() => (this.pagination?.setPage(0)));
+    this.filterChanged.subscribe(() => (this.pagination?.setPage(0)));
 
     // When any of these events happen, we need to re-filter the data based on the 
     // current page, sort and filter settings.
@@ -111,16 +114,18 @@ export class TableComponent implements AfterViewInit {
     if (this._data !== null) {
       let filtered = this._data;
 
-      // Filter first
-      if (this.filter !== null && this.filter.column) {
-        // TODO: Filter rows 
-        filtered = filtered.filter((row: TableRow) => {
-          if (this.filter && row[this.filter.column]?.toString()) {
-            return row[this.filter.column]?.toString().includes(this.filter.filter)
-          }
-          return false;
-        })
-      }
+      // Filter rows by looking at all rows containing a field that includes the search string
+      filtered = filtered.filter((row: TableRow) => {
+        return Object.keys(row)
+          .filter(key => {
+            // Search only through displayed columns.
+            // If column name is configured in filter state, only search that column.
+            return this._displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
+          })
+          .some(key => { // Check if any of the search columns in this row contain the search string.
+            return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
+          });
+      });
 
       // Then sort remainder
       if (this.sort != null) {

@@ -15,7 +15,6 @@ export interface ColumnSpec {
     displayName: string;
     dataType?: string;
     sort?: ColumnSort;
-    filter?: string;
 }
 
 /**

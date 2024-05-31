@@ -1,5 +1,9 @@
 <div class="baader-table-root">
     @if (!_error && _data && _dataFiltered && _displayColumns) {
+    <baader-filter-input [filter]="filter.filter" [category]="filter.column" filterLabel="Search Table:"
+        categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
+        (filterChange)="filter.filter = $event; filterChanged.emit()"
+        [categorySelect]="_displayColumnNames"></baader-filter-input>
     <baader-pagination [pageItems]="_paginationItems" [totalItems]="_data.length"
         (pageChanged)="setPage($event)"></baader-pagination>
     <table class="baader-table" cdk-table [dataSource]="_dataFiltered" [trackBy]="trackTableIndex" width="100%">
@@ -21,5 +25,4 @@
     } @else {
     <div class="loading">Initializing table</div>
     }
-
 </div>
