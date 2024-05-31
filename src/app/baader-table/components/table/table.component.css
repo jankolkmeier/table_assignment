@@ -1,18 +1,25 @@
-.baader-table-root {
-    overflow-x: auto;
+.baader-table-root {}
+
+.table-scroll {
+    width: 100%;
+    overflow-x: scroll;
 }
 
 .baader-table {
     border-collapse: collapse;
     margin: 0;
-    min-width: 400px;
+    min-width: 100%;
     font-size: 0.9em;
 }
 
 .baader-table th {
+    white-space: nowrap;
     background-color: #083d69;
     color: #ffffff;
     text-align: left;
+    position: relative;
+    resize: horizontal;
+    overflow-y: auto;
 }
 
 .baader-table th,
@@ -21,7 +28,62 @@
     padding: 12px 15px;
 }
 
-.baader-table th.sortable {
+.baader-table td,
+.baader-table th {
+    min-width: 2em;
+}
+
+.edit-inplace,
+.edit-inplace:disabled {
+    width: 100%;
+    padding: 4px;
+    margin: 0;
+    background-color: #e3f1f5;
+    border: 1px solid #083d69;
+    border-radius: 3px;
+}
+
+.edit-inplace:disabled {
+    background-color: transparent;
+    padding: 5px;
+    border: 0;
+}
+
+.baader-table td.edit-button-cell,
+.baader-table th.edit-header {
+    width: 2em;
+    overflow: hidden;
+    padding: 0.1em;
+    margin: 0;
+}
+
+.baader-table th.edit-header {
+    resize: none;
+    width: 10px;
+}
+
+.cdk-drag-preview .edit-options {
+    display: none;
+}
+
+.baader-table th .sort-icon {
+    margin: 0 0.5em 0 0;
+}
+
+.baader-table th div {
+    display: inline-block;
+}
+
+.baader-table th div.column-resize {
+    background-color: red;
+    height: 100%;
+    padding: 5px;
+    margin: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.baader-table .sortable {
     cursor: pointer;
 }
 
@@ -41,17 +103,6 @@
     border: 1px solid black;
     border-width: 1px 0;
 }
-
-/*
-.baader-table tr:nth-of-type(even),
-.cdk-drag-preview {
-    background-color: #f8fbfd;
-}
-
-.baader-table tr:last-of-type {
-    border-bottom: 2px solid #083d69;
-}
-*/
 
 .baader-table .edit-button-cell .edit-options div,
 .cdk-drag-preview .edit-button-cell .edit-options div {
@@ -95,6 +146,6 @@ cdk-drop-list {
     opacity: 0;
 }
 
-.cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+.column-resize {
+    cursor: col-resize;
 }

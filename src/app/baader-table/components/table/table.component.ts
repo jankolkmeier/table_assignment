@@ -255,7 +255,6 @@ export class TableComponent implements AfterViewInit {
   }
 
   toggleEditRow(rowIndex: number) {
-    console.log("edit ", rowIndex);
     if (this.editingRowIndex == rowIndex) {
       this.editingRowIndex = -1;
     } else {
@@ -264,23 +263,27 @@ export class TableComponent implements AfterViewInit {
   }
 
   /**
-   * Make the edit buttons accessible by keyboard events.
-   * @param rowIndex row to edit 
+   * Make the column header sorting functionality accessible by keyboard events.
    * @param keyEvent check if key event is a "confirm-like" button.
+   * @param columnName column to sort 
+   */
+  sortColumnKbd(keyEvent: KeyboardEvent, columnName: string) {
+    if (keyEvent.code === "Space" || keyEvent.code === "Enter") {
+      this.toggleSortMode(columnName);
+    }
+  }
+
+  /**
+   * Make the edit buttons accessible by keyboard events.
+   * @param keyEvent check if key event is a "confirm-like" button.
+   * @param fn function pointer to row edit operation
+   * @param param row to edit
    */
   editRowKbd(keyEvent: KeyboardEvent, fn: (p: number) => void, param: number) {
     if (keyEvent.code === "Space" || keyEvent.code === "Enter") {
       fn.bind(this, param)();
     }
   }
-
-  /**
-   * TODO: 
-   *  - Refactor the sorting functions to be able to either toggle or set the sorting setting 
-   *    of a given column
-   *  - Then make function that sorts the table based on the current sorting state (no parameters)
-   *    to allow users of the component to provide a default sorting direction in the columns parameter.
-   */
 
   /**
    * Update sorting state by going through column specifications and toggling the current 
@@ -355,4 +358,5 @@ export class TableComponent implements AfterViewInit {
       this._data = [...this._data!];
     }
   }
+
 }

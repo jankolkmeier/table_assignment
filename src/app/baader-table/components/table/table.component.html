@@ -6,24 +6,22 @@
         [categorySelect]="displayColumnNames"></baader-filter-input>
     <baader-pagination [totalItems]="_data.length" (pageChanged)="setRange($event)"></baader-pagination>
 
-    <div class="baader-table-droplist" (cdkDropListDropped)="dropRow($event)" cdkDropList
+    <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList
         [cdkDropListDisabled]="editingRowIndex >= 0">
-        <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex" width="100%">
+        <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex">
 
             <ng-container [cdkColumnDef]="editColumnName">
-                <th cdk-header-cell *cdkHeaderCellDef>✎</th>
-                <td class="edit-button-cell" cdk-cell *cdkCellDef="let row">
+                <th class="edit-header" cdk-header-cell *cdkHeaderCellDef></th>
+                <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">
                     <div class="edit-options">
                         @if (row[indexColumnName] === editingRowIndex) {
-                        <div tabindex="{{1000+row[indexColumnName]}}" class="edit-save"
-                            (click)="stopEditRow(row[indexColumnName])"
-                            (keyup)="editRowKbd($event, stopEditRow, row[indexColumnName])">
+                        <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[indexColumnName])"
+                            (keydown)="editRowKbd($event, stopEditRow, row[indexColumnName])">
                             🖫
                         </div>
                         } @else {
-                        <div tabindex="{{1000+row[indexColumnName]}}" class="edit-edit"
-                            (click)="toggleEditRow(row[indexColumnName])"
-                            (keyup)="editRowKbd($event, toggleEditRow, row[indexColumnName])">
+                        <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[indexColumnName])"
+                            (keydown)="editRowKbd($event, toggleEditRow, row[indexColumnName])">
                             ✎
                         </div>
                         }
@@ -33,16 +31,31 @@
 
             @for (colspec of displayColumns; track $index) {
             <ng-container [cdkColumnDef]="colspec.name">
-                <th class="sortable" cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">
-                    {{colspec.displayName}}
-                    {{ ['▤', '▼', '▲'][colspec.sort !== undefined ? colspec.sort : 0 ] }}
+                <th ccdk-header-cell *cdkHeaderCellDef>
+                    <div tabindex="100" class="sortable" (click)="toggleSortMode(colspec.name)"
+                        (keydown)="sortColumnKbd($event, colspec.name)">
+                        <div class="sort-icon">
+                            {{ ['▤', '▼', '▲'][colspec.sort !== undefined ? colspec.sort : 0 ] }}
+                        </div>
+                        <div class="column-label">
+                            {{colspec.displayName}}
+                        </div>
+                    </div>
                 </th>
-                <td cdk-cell *cdkCellDef="let row">
+                <td cdk-cell *cdkCellDef="let row; let i = index;">
+                    <!--
+                        Switching to inline editing breaks the layout due to the input element not playing 
+                        nice with resizable rows. Perhaps a script-driven solution for resizing could solve this.
+
+                        Another alternative I've explored was showing cell content in a styled, disabled input element.
+                        This allows for a nice UX as it doesn't cause the layout to jump when using
+                        to inline editing, however it is poor web semantics.
+                    -->
                     @if (row[indexColumnName] !== editingRowIndex) {
-                    {{row[colspec.name]}}
+                    <div class="cell-content">{{row[colspec.name]}}</div>
                     } @else {
-                    <input tabindex="{{1000+row[indexColumnName]}}" class="edit-cell" type="text"
-                        [(ngModel)]="row[colspec.name]" />
+                    <input tabindex="{{1000+i}}" class="edit-inplace" type="text" [(ngModel)]="row[colspec.name]"
+                        [disabled]="row[indexColumnName] !== editingRowIndex" />
                     }
                 </td>
             </ng-container>

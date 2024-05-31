@@ -1,8 +1,12 @@
 .baader-filter-root {
     padding: 0.5em 0;
+    font-size: 0.9em;
+    background-color: #3b83be;
+    color: white;
+    text-align: center;
 }
 
 .baader-filter-root div {
     display: inline-block;
-    padding: 0 0.5em
+    padding: 0.3em
 }
