@@ -1,0 +1,8 @@
+.baader-filter-root {
+    padding: 0.5em 0;
+}
+
+.baader-filter-root div {
+    display: inline-block;
+    padding: 0 0.5em
+}

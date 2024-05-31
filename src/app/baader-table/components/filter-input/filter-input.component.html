@@ -1,0 +1,26 @@
+<div class="baader-filter-root">
+    <div class="filter-label">
+        {{filterLabel}}
+    </div>
+    <div class="filter-parent">
+        <input class="filter-text" type="text" [value]="filter" (input)="filterValueChanged($event)" />
+    </div>
+    @if (_categories) {
+    <div class="category-label">
+        {{categoryLabel}}
+    </div>
+    <div class="category-parent">
+        <select class="category-select" [value]="category" (change)="selectedCategoryChanged($event)">
+            @if (_categories.indexOf(categoryDefaultValue) === -1) {
+            <option value="{{categoryDefaultValue}}"></option>
+            }
+            @for (category of _categories; track $index) {
+            <option [ngValue]="category">{{category}}</option>
+            }
+        </select>
+    </div>
+    }
+    <div class="reset-parent">
+        <button (click)="resetFilter()">{{resetLabel}}</button>
+    </div>
+</div>
