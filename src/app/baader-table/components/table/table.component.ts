@@ -40,8 +40,14 @@ export class TableComponent implements AfterViewInit {
     }
   }
 
-  @Input()
-  paginate = false;
+  @Input() paginate = false;
+
+  /* View Customization */
+  @Input() sortIcons = ['▤', '▼', '▲'];
+  @Input() editRowLabel = '🖫';
+  @Input() saveRowLabel = '✎';
+  @Input() showErrors = true;
+  @Input() loadingText = "Initializing table...";
 
   @ViewChild(PaginationComponent, { static: true }) paginator!: PaginationComponent;
 

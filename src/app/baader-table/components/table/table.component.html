@@ -16,14 +16,10 @@
                     <div class="edit-options">
                         @if (row[indexColumnName] === editingRowIndex) {
                         <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[indexColumnName])"
-                            (keydown)="editRowKbd($event, stopEditRow, row[indexColumnName])">
-                            🖫
-                        </div>
+                            (keydown)="editRowKbd($event, stopEditRow, row[indexColumnName])">{{editRowLabel}}</div>
                         } @else {
                         <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[indexColumnName])"
-                            (keydown)="editRowKbd($event, toggleEditRow, row[indexColumnName])">
-                            ✎
-                        </div>
+                            (keydown)="editRowKbd($event, toggleEditRow, row[indexColumnName])">{{saveRowLabel}}</div>
                         }
                     </div>
                 </td>
@@ -35,7 +31,7 @@
                     <div tabindex="100" class="sortable" (click)="toggleSortMode(colspec.name)"
                         (keydown)="sortColumnKbd($event, colspec.name)">
                         <div class="sort-icon">
-                            {{ ['▤', '▼', '▲'][sort.column !== colspec.name ? 0 : sort.mode] }}
+                            {{ sortIcons[sort.column !== colspec.name ? 0 : sort.mode] }}
                         </div>
                         <div class="column-label">
                             {{colspec.displayName}}
@@ -67,9 +63,9 @@
             </tr>
         </table>
     </div>
-    } @else if (error) {
+    } @else if (showErrors && error) {
     <div class="error">Error: {{error}}</div>
     } @else {
-    <div class="loading">Initializing table</div>
+    <div class="loading">{{loadingText}}</div>
     }
 </div>
