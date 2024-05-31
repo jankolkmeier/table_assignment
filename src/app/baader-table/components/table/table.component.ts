@@ -39,7 +39,7 @@ export class TableComponent implements AfterViewInit {
 
   @Input()
   set paginate(n_items: number | null) {
-    this._paginationItems = n_items;
+    this.pageItems = n_items;
     // Set default range:
     if (n_items !== null) {
       this.range = {
@@ -49,17 +49,17 @@ export class TableComponent implements AfterViewInit {
     }
   }
 
-  _paginationItems: number | null = null;
   @ViewChild(PaginationComponent) pagination!: PaginationComponent;
+  pageItems: number | null = null;
 
   _url?: string;
-  _displayColumns: ColumnSpec[] | null = null;
-  _displayColumnNames: string[] | null = null;
   _data: TableRow[] | null = null;
 
-  _dataFiltered: TableRow[] | null = null;
+  displayColumns: ColumnSpec[] | null = null;
+  displayColumnNames: string[] | null = null;
+  dataFiltered: TableRow[] | null = null;
 
-  _error: string | null = null;
+  error: string | null = null;
 
   dataChanged: EventEmitter<TableRow[]> = new EventEmitter<TableRow[]>();
   rangeChanged: EventEmitter<RangeState> = new EventEmitter<RangeState>();
@@ -101,7 +101,7 @@ export class TableComponent implements AfterViewInit {
           return this.filterData();
         })
       ).subscribe(data => {
-        this._dataFiltered = data;
+        this.dataFiltered = data;
       });
   }
 
@@ -120,7 +120,7 @@ export class TableComponent implements AfterViewInit {
           .filter(key => {
             // Search only through displayed columns.
             // If column name is configured in filter state, only search that column.
-            return this._displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
+            return this.displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
           })
           .some(key => { // Check if any of the search columns in this row contain the search string.
             return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
@@ -148,10 +148,10 @@ export class TableComponent implements AfterViewInit {
    * @param page page number to look at.
    */
   setPage(page: number) {
-    if (this._paginationItems !== null) {
+    if (this.pageItems !== null) {
       this.range = {
-        start: page * this._paginationItems,
-        length: this._paginationItems
+        start: page * this.pageItems,
+        length: this.pageItems
       };
     } else {
       this.range = {
@@ -167,8 +167,8 @@ export class TableComponent implements AfterViewInit {
    * @param columns Columns to display as list of column specifications (holding the 'name' of column and 'displayName' for the header).
    */
   setDisplayColumns(columns: object[]) {
-    this._displayColumns = columns as ColumnSpec[];
-    this._displayColumnNames = this._displayColumns.map((col) => col.name);
+    this.displayColumns = columns as ColumnSpec[];
+    this.displayColumnNames = this.displayColumns.map((col) => col.name);
   }
 
   /**
@@ -193,7 +193,7 @@ export class TableComponent implements AfterViewInit {
         this.prepareTable(data);
       },
       error: (e) => {
-        this._error = `Failed to fetch data from url ${this.url}`;
+        this.error = `Failed to fetch data from url ${this.url}`;
         console.error(e);
       }
     });
@@ -221,12 +221,12 @@ export class TableComponent implements AfterViewInit {
 
     const tableSpec = TableUtils.inferColumnTypes(newData);
 
-    if (!this._displayColumns) {
+    if (!this.displayColumns) {
       // Display all columns if none selected
       this.setDisplayColumns(Object.values(tableSpec));
     } else {
       // Merge user configured column settings with inferred column specs
-      this._displayColumns = this._displayColumns.map((colspec: ColumnSpec) => {
+      this.displayColumns = this.displayColumns.map((colspec: ColumnSpec) => {
         Object.assign(tableSpec[colspec.name], colspec);
         return tableSpec[colspec.name];
       });
@@ -255,10 +255,10 @@ export class TableComponent implements AfterViewInit {
     let spec: ColumnSpec | null = null;
     let mode: ColumnSort = ColumnSort.NONE;
 
-    if (!this._data || !this._displayColumns)
+    if (!this._data || !this.displayColumns)
       return;
 
-    for (const col of this._displayColumns) {
+    for (const col of this.displayColumns) {
       // Reset sort state for all other rows
       if (col.name === columnName) {
         spec = col;

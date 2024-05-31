@@ -1,13 +1,13 @@
 <div class="baader-table-root">
-    @if (!_error && _data && _dataFiltered && _displayColumns) {
+    @if (!error && _data && dataFiltered && displayColumns) {
     <baader-filter-input [filter]="filter.filter" [category]="filter.column" filterLabel="Search Table:"
         categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
         (filterChange)="filter.filter = $event; filterChanged.emit()"
-        [categorySelect]="_displayColumnNames"></baader-filter-input>
-    <baader-pagination [pageItems]="_paginationItems" [totalItems]="_data.length"
+        [categorySelect]="displayColumnNames"></baader-filter-input>
+    <baader-pagination [pageItems]="pageItems" [totalItems]="_data.length"
         (pageChanged)="setPage($event)"></baader-pagination>
-    <table class="baader-table" cdk-table [dataSource]="_dataFiltered" [trackBy]="trackTableIndex" width="100%">
-        @for (colspec of _displayColumns; track $index) {
+    <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex" width="100%">
+        @for (colspec of displayColumns; track $index) {
         <ng-container [cdkColumnDef]="colspec.name">
             <th cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">
                 {{colspec.displayName}}
@@ -17,11 +17,11 @@
         </ng-container>
         }
 
-        <tr cdk-header-row *cdkHeaderRowDef="_displayColumnNames"></tr>
-        <tr cdk-row *cdkRowDef="let row; columns: _displayColumnNames"></tr>
+        <tr cdk-header-row *cdkHeaderRowDef="displayColumnNames"></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: displayColumnNames"></tr>
     </table>
-    } @else if (_error) {
-    <div class="error">Error: {{_error}}</div>
+    } @else if (error) {
+    <div class="error">Error: {{error}}</div>
     } @else {
     <div class="loading">Initializing table</div>
     }
