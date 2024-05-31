@@ -252,18 +252,24 @@ export class TableComponent implements AfterViewInit {
   }
 
   /**
-   * 
-   * @param rowIndex 
+   * Complete editing row.
+   * @param rowIndex of the edited row
    */
   stopEditRow(rowIndex: number) {
     console.log(`Finished editing row ${rowIndex}. New data: `, this._data?.filter((r) => (r[this.indexColumnName] === rowIndex)));
     this.editingRowIndex = -1;
   }
 
+  /**
+   * Start/stop editing a row. If another one was edited, stop it first, then start editing the new row.
+   * @param rowIndex of the row to start/stop editing row
+   */
   toggleEditRow(rowIndex: number) {
     if (this.editingRowIndex == rowIndex) {
-      this.editingRowIndex = -1;
+      this.stopEditRow(rowIndex);
     } else {
+      if (this.editingRowIndex >= 0)
+        this.stopEditRow(this.editingRowIndex);
       this.editingRowIndex = rowIndex;
     }
   }
