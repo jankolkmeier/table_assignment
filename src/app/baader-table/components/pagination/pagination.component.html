@@ -4,9 +4,19 @@
             TODO: the keyup event needs to be implemented properly to make the paginator more accessible
         -->
         <div tabindex="5" class="nav prev {{ _currentPage === 0 ? 'disabled' : '' }}" (keyup)="navButtonKbd(-1, $event)"
-            (click)="changePage(-1)">Prev</div>
-        <div class="current">Page {{_currentPage+1}} of {{totalPages()}}</div>
+            (click)="changePage(-1)">{{previousLabel}}</div>
+        <div class="current">{{pageLabel}} {{_currentPage+1}} / {{totalPages()}}</div>
         <div tabindex="6" class="nav next {{ _currentPage+1 === totalPages() ? 'disabled' : '' }}"
-            (keyup)="navButtonKbd(1, $event)" (click)="changePage(1)">Next</div>
+            (keyup)="navButtonKbd(1, $event)" (click)="changePage(1)">{{nextLabel}}</div>
+        <div class="page-items-parent">
+            <div class="page-items-label">
+                {{pageItemsLabel}}
+            </div>
+            <select class="page-items-select" [value]="pageItems" (change)="pageItemsChanged($event)">
+                @for (n of pageItemOptions; track $index) {
+                <option [ngValue]="n" [selected]="n === pageItems">{{n}}</option>
+                }
+            </select>
+        </div>
     </div>
 </div>

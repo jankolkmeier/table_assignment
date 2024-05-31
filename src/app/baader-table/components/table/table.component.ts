@@ -38,19 +38,9 @@ export class TableComponent implements AfterViewInit {
   }
 
   @Input()
-  set paginate(n_items: number | null) {
-    this.pageItems = n_items;
-    // Set default range:
-    if (n_items !== null) {
-      this.range = {
-        start: 0,
-        length: n_items
-      }
-    }
-  }
+  paginate = false;
 
-  @ViewChild(PaginationComponent) pagination!: PaginationComponent;
-  pageItems: number | null = null;
+  @ViewChild(PaginationComponent, { static: true }) paginator!: PaginationComponent;
 
   _url?: string;
   _data: TableRow[] | null = null;
@@ -67,7 +57,10 @@ export class TableComponent implements AfterViewInit {
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
 
   sort: SortState | null = null;
-  range: RangeState | null = null;
+  range: RangeState = {
+    start: 0,
+    length: Number.POSITIVE_INFINITY
+  };
   filter: FilterState = {
     filter: "",
     column: ""
@@ -83,10 +76,10 @@ export class TableComponent implements AfterViewInit {
   ngAfterViewInit() {
     /*
     // TODO: check which ones make sense to reset the page on:
-    this.dataChanged.subscribe(() => (this.pagination?.setPage(0)))
+    this.dataChanged.subscribe(() => (this.paginator?.setPage(0)))
     */
-    this.sortChanged.subscribe(() => (this.pagination?.setPage(0)));
-    this.filterChanged.subscribe(() => (this.pagination?.setPage(0)));
+    this.sortChanged.subscribe(() => (this.paginator?.setPage(0)));
+    this.filterChanged.subscribe(() => (this.paginator?.setPage(0)));
 
     // When any of these events happen, we need to re-filter the data based on the 
     // current page, sort and filter settings.
@@ -133,7 +126,7 @@ export class TableComponent implements AfterViewInit {
       }
 
       // Then Slice
-      if (this.range !== null) {
+      if (this.paginate && this.range !== null) {
         filtered = filtered.slice(this.range.start, this.range.start + this.range.length);
       }
       return of([...filtered]);
@@ -147,18 +140,8 @@ export class TableComponent implements AfterViewInit {
    * This has no effect if pagination is disabled.
    * @param page page number to look at.
    */
-  setPage(page: number) {
-    if (this.pageItems !== null) {
-      this.range = {
-        start: page * this.pageItems,
-        length: this.pageItems
-      };
-    } else {
-      this.range = {
-        start: 0,
-        length: Number.POSITIVE_INFINITY
-      };
-    }
+  setRange(range: RangeState) {
+    this.range = range;
     this.rangeChanged.emit(this.range);
   }
 

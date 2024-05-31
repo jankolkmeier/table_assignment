@@ -27,3 +27,12 @@
     cursor: pointer;
     background-color: #4d85b3;
 }
+
+.baader-pagination-root .page-items-parent {
+    padding: 0.5em 0;
+}
+
+.baader-pagination-root .page-items-parent div {
+    display: inline-block;
+    margin: 0 0.5em;
+}

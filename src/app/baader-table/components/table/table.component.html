@@ -4,8 +4,7 @@
         categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
         (filterChange)="filter.filter = $event; filterChanged.emit()"
         [categorySelect]="displayColumnNames"></baader-filter-input>
-    <baader-pagination [pageItems]="pageItems" [totalItems]="_data.length"
-        (pageChanged)="setPage($event)"></baader-pagination>
+    <baader-pagination [totalItems]="_data.length" (pageChanged)="setRange($event)"></baader-pagination>
     <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex" width="100%">
         @for (colspec of displayColumns; track $index) {
         <ng-container [cdkColumnDef]="colspec.name">
