@@ -7,6 +7,7 @@ import { TableUtils } from '../../shared/table-utils'
 import { PaginationComponent } from '../pagination/pagination.component'
 import { FilterInputComponent } from '../filter-input/filter-input.component';
 import { Observable, merge, of, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 /**
  * Table Component for displaying, searching and sorting tables.
@@ -14,7 +15,7 @@ import { Observable, merge, of, switchMap } from 'rxjs';
 @Component({
   selector: 'baader-table',
   standalone: true,
-  imports: [FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
+  imports: [FormsModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -55,6 +56,11 @@ export class TableComponent implements AfterViewInit {
   rangeChanged: EventEmitter<RangeState> = new EventEmitter<RangeState>();
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
+
+  editColumnName = '__edit';
+  indexColumnName = "__index";
+
+  editingRowIndex = -1;
 
   sort: SortState | null = null;
   range: RangeState = {
@@ -135,6 +141,7 @@ export class TableComponent implements AfterViewInit {
     }
   }
 
+
   /**
    * Set the range of data to be displayed based on the page number.
    * This has no effect if pagination is disabled.
@@ -147,11 +154,14 @@ export class TableComponent implements AfterViewInit {
 
   /**
    * Sets the objects required for rendering the table based on the selected columns to Display.
+   * Adds the column(s) for additional features of this table component, such as:
+   *   - Column for editing a given row.
    * @param columns Columns to display as list of column specifications (holding the 'name' of column and 'displayName' for the header).
    */
   setDisplayColumns(columns: object[]) {
     this.displayColumns = columns as ColumnSpec[];
     this.displayColumnNames = this.displayColumns.map((col) => col.name);
+    this.displayColumnNames.unshift(this.editColumnName);
   }
 
   /**
@@ -188,7 +198,7 @@ export class TableComponent implements AfterViewInit {
    * @returns the unique __index property set in prepareTable
    */
   trackTableIndex(index: number, row: TableRow) {
-    return row["__index"];
+    return row[this.indexColumnName];
   }
 
   /**
@@ -199,7 +209,7 @@ export class TableComponent implements AfterViewInit {
   prepareTable(data: object[]): void {
     const newData = data.map(TableUtils.flattenObjectToRow);
     for (let idx = 0; idx < newData.length; idx++) {
-      newData[idx]["__index"] = idx;
+      newData[idx][this.indexColumnName] = idx;
     }
 
     const tableSpec = TableUtils.inferColumnTypes(newData);
@@ -217,6 +227,35 @@ export class TableComponent implements AfterViewInit {
 
     this._data = newData;
     this.dataChanged.emit(this._data);
+  }
+
+  /**
+   * 
+   * @param rowIndex 
+   */
+  stopEditRow(rowIndex: number) {
+    console.log(`Finished editing row ${rowIndex}. New data: `, this._data?.filter((r) => (r[this.indexColumnName] === rowIndex)));
+    this.editingRowIndex = -1;
+  }
+
+  toggleEditRow(rowIndex: number) {
+    console.log("edit ", rowIndex);
+    if (this.editingRowIndex == rowIndex) {
+      this.editingRowIndex = -1;
+    } else {
+      this.editingRowIndex = rowIndex;
+    }
+  }
+
+  /**
+   * Make the edit buttons accessible by keyboard events.
+   * @param rowIndex row to edit 
+   * @param keyEvent check if key event is a "confirm-like" button.
+   */
+  editRowKbd(keyEvent: KeyboardEvent, fn: (p: number) => void, param: number) {
+    if (keyEvent.code === "Space" || keyEvent.code === "Enter") {
+      fn.bind(this, param)();
+    }
   }
 
   /**

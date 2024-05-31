@@ -36,3 +36,9 @@
 .baader-table tr:last-of-type {
     border-bottom: 2px solid #083d69;
 }
+
+.baader-table .edit-button-cell .edit-options div {
+    display: inline-block;
+    margin: 0.2em;
+    font-size: 1.5em;
+}
