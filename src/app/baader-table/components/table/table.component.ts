@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, EventEmitter, ViewChild } from '@angular/core';
-import { KeyValuePipe, AsyncPipe } from '@angular/common';
+import { KeyValuePipe, AsyncPipe, CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -8,7 +8,7 @@ import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState } 
 import { TableUtils } from '../../shared/table-utils'
 import { PaginationComponent } from '../pagination/pagination.component'
 import { FilterInputComponent } from '../filter-input/filter-input.component';
-import { Observable, merge, of, switchMap } from 'rxjs';
+import { debounce, interval, merge } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 /**
@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'baader-table',
   standalone: true,
-  imports: [FormsModule, DragDropModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
+  imports: [FormsModule, DragDropModule, CommonModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -40,7 +40,11 @@ export class TableComponent implements AfterViewInit {
     }
   }
 
-  @Input() paginate = false;
+  @Input() showPaginator = true;
+  @Input() showFilter = true;
+
+  @Input() paginatorPosition = 'bottom';
+  @Input() filterInputPosition = 'top';
 
   /* View Customization */
   @Input() sortIcons = ['▤', '▼', '▲'];
@@ -49,7 +53,7 @@ export class TableComponent implements AfterViewInit {
   @Input() showErrors = true;
   @Input() loadingText = "Initializing table...";
 
-  @ViewChild(PaginationComponent, { static: true }) paginator!: PaginationComponent;
+  @ViewChild(PaginationComponent) paginator!: PaginationComponent;
 
   _url?: string;
   _data: TableRow[] | null = null;
@@ -57,6 +61,7 @@ export class TableComponent implements AfterViewInit {
   displayColumns: ColumnSpec[] | null = null;
   displayColumnNames: string[] | null = null;
   dataFiltered: TableRow[] | null = null;
+  dataFilteredForPaginator = 0;
 
   error: string | null = null;
 
@@ -77,7 +82,7 @@ export class TableComponent implements AfterViewInit {
   };
   range: RangeState = {
     start: 0,
-    length: Number.POSITIVE_INFINITY
+    length: 0
   };
   filter: FilterState = {
     filter: "",
@@ -88,16 +93,13 @@ export class TableComponent implements AfterViewInit {
   }
 
   /**
-   * We wait for all child views (such as pagination) to be resolved
+   * We wait for all child views (such as pagination) to be resolved   
    * in AfterViewInit before wiring the events, as some depend on children.
    */
   ngAfterViewInit() {
-    /*
-    // TODO: check which ones make sense to reset the page on:
-    this.dataChanged.subscribe(() => (this.paginator?.setPage(0)))
-    */
-    this.sortChanged.subscribe(() => (this.paginator?.setPage(0)));
-    this.filterChanged.subscribe(() => (this.paginator?.setPage(0)));
+    // Jump back to first page when we change sort or filter
+    this.sortChanged.subscribe(() => (this.paginator.setPage(0)));
+    this.filterChanged.subscribe(() => (this.paginator.setPage(0)));
 
     // When any of these events happen, we need to re-filter the data based on the 
     // current page, sort and filter settings.
@@ -106,61 +108,74 @@ export class TableComponent implements AfterViewInit {
       this.rangeChanged,
       this.filterChanged,
       this.dataChanged
-    )
-      .pipe(
-        switchMap(() => {
-          return this.filterData();
-        })
-      ).subscribe(data => {
-        this.dataFiltered = data;
-      });
+    ).pipe(
+      // Debounce these events slightly in case many get triggered quickly
+      debounce(() => interval(10))
+    ).subscribe(() => {
+      if (this._data !== null)
+        this.dataFiltered = this.filterData(this._data);
+    });
   }
 
+  /**
+   * Is the current output filtered by a search term?
+   * @returns true if filtered
+   */
   isFiltered() {
     return this.filter.filter !== "";
   }
 
+  /**
+   * Is the current view sorting the data by anything else than the default sort order?
+   * @returns true if not in default sort order
+   */
   isCustomSorted() {
     return this.sort.column !== this.indexColumnName;
   }
 
   /**
+   * Get the number of items that match the filter (the filtered data before it is subset for pagination).
+   * @returns number of items
+   */
+  currentFilteredItems() {
+    return this.dataFilteredForPaginator;
+  }
+
+  /**
    * Apply the configured filters. This is implemented as an async operation as
    * I figured we might 
-   * @returns 
+   * @returns the filtered set
    */
-  filterData(): Observable<TableRow[]> {
-    if (this._data !== null) {
-      let filtered = this._data;
+  filterData(d: TableRow[]): TableRow[] {
+    let filtered = d;
 
-      // Filter rows by looking at all rows containing a field that includes the search string
-      if (this.isFiltered()) {
-        filtered = filtered.filter((row: TableRow) => {
-          return Object.keys(row)
-            .filter(key => {
-              // Search only through displayed columns.
-              // If column name is configured in filter state, only search that column.
-              return this.displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
-            })
-            .some(key => { // Check if any of the search columns in this row contain the search string.
-              return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
-            });
-        });
-      }
-
-      // Then sort remainder
-      if (this.isCustomSorted()) {
-        filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.mode));
-      }
-
-      // Then Slice
-      if (this.paginate && this.range !== null) {
-        filtered = filtered.slice(this.range.start, this.range.start + this.range.length);
-      }
-      return of([...filtered]);
-    } else {
-      return of([]); //
+    // Filter rows by looking at all rows containing a field that includes the search string
+    if (this.isFiltered()) {
+      filtered = filtered.filter((row: TableRow) => {
+        return Object.keys(row)
+          .filter(key => {
+            // Search only through displayed columns.
+            // If column name is configured in filter state, only search that column.
+            return this.displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
+          })
+          .some(key => { // Check if any of the search columns in this row contain the search string.
+            return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
+          });
+      });
     }
+
+    this.dataFilteredForPaginator = filtered.length;
+
+    // Then sort remainder
+    if (this.isCustomSorted()) {
+      filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.mode));
+    }
+
+    // Then Slice
+    if (this.showPaginator && this.range !== null) {
+      filtered = filtered.slice(this.range.start, this.range.start + this.range.length);
+    }
+    return filtered; // [...filtered?]
   }
 
   /**
@@ -213,6 +228,7 @@ export class TableComponent implements AfterViewInit {
       }
     });
   }
+
   /**
    * TrackBy function for data. Good practice with large datasets to help with performance.
    * @param index index in data
@@ -247,7 +263,9 @@ export class TableComponent implements AfterViewInit {
       });
     }
 
+    //this._data = newData;
     this._data = newData;
+    //this.dataFiltered = this.filterData(newData);
     this.dataChanged.emit(this._data);
   }
 
@@ -340,10 +358,12 @@ export class TableComponent implements AfterViewInit {
     const dragged_index = event.item.data[this.indexColumnName];
     const move_to_index = this.dataFiltered![event.currentIndex][this.indexColumnName];
 
+    // Update view only first
     moveItemInArray(this.dataFiltered!, event.previousIndex, event.currentIndex);
     this.dataFiltered = [...this.dataFiltered!];
 
     if (!this.isFiltered() && !this.isCustomSorted()) {
+      // If no finter is applied, we can meaningfully change the order in the source data
       const data_dragged_pos = this._data!.findIndex((row) => (row[this.indexColumnName] === dragged_index));
       const data_move_to_pos = this._data!.findIndex((row) => (row[this.indexColumnName] === move_to_index));
       moveItemInArray(this._data!, data_dragged_pos, data_move_to_pos);

@@ -1,10 +1,29 @@
+<ng-template #filterInputTemplate>
+    <div class="filter-parent" [hidden]="!showFilter">
+        <baader-filter-input [filter]="filter.filter" [category]="filter.column" filterLabel="Search Table:"
+            categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
+            (filterChange)="filter.filter = $event; filterChanged.emit()"
+            [categorySelect]="displayColumnNames"></baader-filter-input>
+    </div>
+</ng-template>
+
+<ng-template #paginatorTemplate>
+    <div class="paginator-parent" [hidden]="!showPaginator">
+        <baader-pagination [totalItems]="currentFilteredItems()" (pageChanged)="setRange($event)"></baader-pagination>
+    </div>
+</ng-template>
+
 <div class="baader-table-root">
-    @if (!error && _data && dataFiltered && displayColumns) {
-    <baader-filter-input [filter]="filter.filter" [category]="filter.column" filterLabel="Search Table:"
-        categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
-        (filterChange)="filter.filter = $event; filterChanged.emit()"
-        [categorySelect]="displayColumnNames"></baader-filter-input>
-    <baader-pagination [totalItems]="_data.length" (pageChanged)="setRange($event)"></baader-pagination>
+
+    @if (!error && dataFiltered && displayColumns) {
+
+    @if (filterInputPosition === 'top') {
+    <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
+    }
+
+    @if (paginatorPosition === 'top') {
+    <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>
+    }
 
     <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList
         [cdkDropListDisabled]="editingRowIndex >= 0">
@@ -63,9 +82,19 @@
             </tr>
         </table>
     </div>
+
+    @if (paginatorPosition === 'bottom') {
+    <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>
+    }
+
+    @if (filterInputPosition === 'bottom') {
+    <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
+    }
+
     } @else if (showErrors && error) {
     <div class="error">Error: {{error}}</div>
     } @else {
     <div class="loading">{{loadingText}}</div>
     }
+
 </div>
