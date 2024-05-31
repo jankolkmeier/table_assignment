@@ -35,7 +35,7 @@
                     <div tabindex="100" class="sortable" (click)="toggleSortMode(colspec.name)"
                         (keydown)="sortColumnKbd($event, colspec.name)">
                         <div class="sort-icon">
-                            {{ ['▤', '▼', '▲'][colspec.sort !== undefined ? colspec.sort : 0 ] }}
+                            {{ ['▤', '▼', '▲'][sort.column !== colspec.name ? 0 : sort.mode] }}
                         </div>
                         <div class="column-label">
                             {{colspec.displayName}}

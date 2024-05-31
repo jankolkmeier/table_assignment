@@ -66,7 +66,7 @@ export class TableComponent implements AfterViewInit {
   editingRowIndex = -1;
 
   sort: SortState = {
-    sort: ColumnSort.ASC,
+    mode: ColumnSort.ASC,
     column: this.indexColumnName
   };
   range: RangeState = {
@@ -144,7 +144,7 @@ export class TableComponent implements AfterViewInit {
 
       // Then sort remainder
       if (this.isCustomSorted()) {
-        filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.sort));
+        filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.mode));
       }
 
       // Then Slice
@@ -293,38 +293,22 @@ export class TableComponent implements AfterViewInit {
   toggleSortMode(columnName: string) {
     // Get total number of sort modes (used for modulo operation when toggling)
     const n_sort_modes = Object.keys(ColumnSort).length / 2;
-    let spec: ColumnSpec | null = null;
-    let mode: ColumnSort = ColumnSort.NONE;
-
-    if (!this._data || !this.displayColumns)
-      return;
-
-    for (const col of this.displayColumns) {
-      // Reset sort state for all other rows
-      if (col.name === columnName) {
-        spec = col;
-      } else {
-        col.sort = ColumnSort.NONE;
-      }
+    if (this.sort.column != columnName) {
+      // Sorting a different column, start with ASC
+      this.sort.mode = ColumnSort.ASC;
+    } else {
+      this.sort.mode = --this.sort.mode % n_sort_modes;
     }
 
-    // Found column to sort on
-    if (spec !== null) {
-      spec.sort = spec.sort === undefined ? ColumnSort.ASC : ++spec.sort % n_sort_modes;
-      mode = spec.sort;
+    this.sort.column = columnName;
+
+    // If back to default, sort by __index column instead.
+    if (this.sort.mode == ColumnSort.NONE) {
+      this.sort.column = this.indexColumnName;
+      this.sort.mode = ColumnSort.ASC;
     }
 
-    // If column is unknown or we revert to not sort on the given column...
-    if (spec === null || mode == ColumnSort.NONE) {
-      // Just return to sorting the data based on how we originally have gotten it.
-      mode = ColumnSort.ASC;
-      columnName = this.indexColumnName;
-    }
-
-    this.sort = {
-      column: columnName,
-      sort: mode
-    };
+    // Trigger re-filter data
     this.sortChanged.emit(this.sort);
   }
 

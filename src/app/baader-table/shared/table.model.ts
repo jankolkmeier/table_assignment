@@ -14,7 +14,6 @@ export interface ColumnSpec {
     name: string;
     displayName: string;
     dataType?: string;
-    sort?: ColumnSort;
 }
 
 /**
@@ -23,7 +22,7 @@ export interface ColumnSpec {
  */
 export interface SortState {
     column: string;
-    sort: ColumnSort;
+    mode: ColumnSort;
 }
 
 export interface FilterState {
