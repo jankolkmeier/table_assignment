@@ -49,8 +49,8 @@ export class PaginationComponent implements OnInit {
    */
   totalPages(): number {
     if (this._totalItems === null)
-      return 0;
-    return Math.ceil(this._totalItems / this.pageItems);
+      return 1;
+    return Math.max(1, Math.ceil(this._totalItems / this.pageItems));
   }
 
   /**
