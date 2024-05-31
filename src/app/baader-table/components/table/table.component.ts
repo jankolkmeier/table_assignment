@@ -1,6 +1,8 @@
 import { Component, Input, AfterViewInit, EventEmitter, ViewChild } from '@angular/core';
 import { KeyValuePipe, AsyncPipe } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableDataService } from '../../services/table-data.service';
 import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState } from '../../shared/table.model';
 import { TableUtils } from '../../shared/table-utils'
@@ -15,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'baader-table',
   standalone: true,
-  imports: [FormsModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
+  imports: [FormsModule, DragDropModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -57,12 +59,16 @@ export class TableComponent implements AfterViewInit {
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
 
+  dragColumnName = "__drag";
   editColumnName = '__edit';
   indexColumnName = "__index";
 
   editingRowIndex = -1;
 
-  sort: SortState | null = null;
+  sort: SortState = {
+    sort: ColumnSort.ASC,
+    column: this.indexColumnName
+  };
   range: RangeState = {
     start: 0,
     length: Number.POSITIVE_INFINITY
@@ -104,6 +110,14 @@ export class TableComponent implements AfterViewInit {
       });
   }
 
+  isFiltered() {
+    return this.filter.filter !== "";
+  }
+
+  isCustomSorted() {
+    return this.sort.column !== this.indexColumnName;
+  }
+
   /**
    * Apply the configured filters. This is implemented as an async operation as
    * I figured we might 
@@ -114,20 +128,22 @@ export class TableComponent implements AfterViewInit {
       let filtered = this._data;
 
       // Filter rows by looking at all rows containing a field that includes the search string
-      filtered = filtered.filter((row: TableRow) => {
-        return Object.keys(row)
-          .filter(key => {
-            // Search only through displayed columns.
-            // If column name is configured in filter state, only search that column.
-            return this.displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
-          })
-          .some(key => { // Check if any of the search columns in this row contain the search string.
-            return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
-          });
-      });
+      if (this.isFiltered()) {
+        filtered = filtered.filter((row: TableRow) => {
+          return Object.keys(row)
+            .filter(key => {
+              // Search only through displayed columns.
+              // If column name is configured in filter state, only search that column.
+              return this.displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
+            })
+            .some(key => { // Check if any of the search columns in this row contain the search string.
+              return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
+            });
+        });
+      }
 
       // Then sort remainder
-      if (this.sort != null) {
+      if (this.isCustomSorted()) {
         filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.sort));
       }
 
@@ -140,7 +156,6 @@ export class TableComponent implements AfterViewInit {
       return of([]); //
     }
   }
-
 
   /**
    * Set the range of data to be displayed based on the page number.
@@ -156,6 +171,7 @@ export class TableComponent implements AfterViewInit {
    * Sets the objects required for rendering the table based on the selected columns to Display.
    * Adds the column(s) for additional features of this table component, such as:
    *   - Column for editing a given row.
+   *   - Column for reordering / drag & dropping rows.
    * @param columns Columns to display as list of column specifications (holding the 'name' of column and 'displayName' for the header).
    */
   setDisplayColumns(columns: object[]) {
@@ -299,7 +315,7 @@ export class TableComponent implements AfterViewInit {
     if (spec === null || mode == ColumnSort.NONE) {
       // Just return to sorting the data based on how we originally have gotten it.
       mode = ColumnSort.ASC;
-      columnName = "__index";
+      columnName = this.indexColumnName;
     }
 
     this.sort = {
@@ -307,5 +323,36 @@ export class TableComponent implements AfterViewInit {
       sort: mode
     };
     this.sortChanged.emit(this.sort);
+  }
+
+  /**
+   * Handle Drop event from Cdk's DragDropModule.
+   * @param event CdkDragDrop event describing the drag and drop operation.
+   */
+  dropRow(event: CdkDragDrop<TableRow>) {
+    /*
+    Note that there are some oddities with how drag & drop should/could behave when working with a sorted or filtered table.
+     - I propose that we update only the filtered view order when any kind of filter or sorting is applied. 
+     - That means once a filter is applied again or changed, the effect of the reordering is voided.
+     - However if there is no other filter applied, we can change the order of the base dataset by changing the __index value.
+    This is still not a perfect solution without also making this transparent to the user.
+    But how to do this would require knowing more context of how this table is used. Ideally of course, this behaviour is configurable. 
+    */
+    const dragged_index = event.item.data[this.indexColumnName];
+    const move_to_index = this.dataFiltered![event.currentIndex][this.indexColumnName];
+
+    moveItemInArray(this.dataFiltered!, event.previousIndex, event.currentIndex);
+    this.dataFiltered = [...this.dataFiltered!];
+
+    if (!this.isFiltered() && !this.isCustomSorted()) {
+      const data_dragged_pos = this._data!.findIndex((row) => (row[this.indexColumnName] === dragged_index));
+      const data_move_to_pos = this._data!.findIndex((row) => (row[this.indexColumnName] === move_to_index));
+      moveItemInArray(this._data!, data_dragged_pos, data_move_to_pos);
+      // Re-index 
+      for (let idx = 0; idx < this._data!.length; idx++) {
+        this._data![idx][this.indexColumnName] = idx;
+      }
+      this._data = [...this._data!];
+    }
   }
 }

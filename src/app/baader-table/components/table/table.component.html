@@ -5,48 +5,55 @@
         (filterChange)="filter.filter = $event; filterChanged.emit()"
         [categorySelect]="displayColumnNames"></baader-filter-input>
     <baader-pagination [totalItems]="_data.length" (pageChanged)="setRange($event)"></baader-pagination>
-    <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex" width="100%">
-        <ng-container [cdkColumnDef]="editColumnName">
-            <th cdk-header-cell *cdkHeaderCellDef>✎</th>
-            <td class="edit-button-cell" cdk-cell *cdkCellDef="let row">
-                <div class="edit-options">
-                    @if (row[indexColumnName] === editingRowIndex) {
-                    <div tabindex="{{1000+row[indexColumnName]}}" class="edit-save"
-                        (click)="stopEditRow(row[indexColumnName])"
-                        (keyup)="editRowKbd($event, stopEditRow, row[indexColumnName])">
-                        🖫
+
+    <div class="baader-table-droplist" (cdkDropListDropped)="dropRow($event)" cdkDropList
+        [cdkDropListDisabled]="editingRowIndex >= 0">
+        <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex" width="100%">
+
+            <ng-container [cdkColumnDef]="editColumnName">
+                <th cdk-header-cell *cdkHeaderCellDef>✎</th>
+                <td class="edit-button-cell" cdk-cell *cdkCellDef="let row">
+                    <div class="edit-options">
+                        @if (row[indexColumnName] === editingRowIndex) {
+                        <div tabindex="{{1000+row[indexColumnName]}}" class="edit-save"
+                            (click)="stopEditRow(row[indexColumnName])"
+                            (keyup)="editRowKbd($event, stopEditRow, row[indexColumnName])">
+                            🖫
+                        </div>
+                        } @else {
+                        <div tabindex="{{1000+row[indexColumnName]}}" class="edit-edit"
+                            (click)="toggleEditRow(row[indexColumnName])"
+                            (keyup)="editRowKbd($event, toggleEditRow, row[indexColumnName])">
+                            ✎
+                        </div>
+                        }
                     </div>
+                </td>
+            </ng-container>
+
+            @for (colspec of displayColumns; track $index) {
+            <ng-container [cdkColumnDef]="colspec.name">
+                <th class="sortable" cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">
+                    {{colspec.displayName}}
+                    {{ ['▤', '▼', '▲'][colspec.sort !== undefined ? colspec.sort : 0 ] }}
+                </th>
+                <td cdk-cell *cdkCellDef="let row">
+                    @if (row[indexColumnName] !== editingRowIndex) {
+                    {{row[colspec.name]}}
                     } @else {
-                    <div tabindex="{{1000+row[indexColumnName]}}" class="edit-edit"
-                        (click)="toggleEditRow(row[indexColumnName])"
-                        (keyup)="editRowKbd($event, toggleEditRow, row[indexColumnName])">
-                        ✎
-                    </div>
+                    <input tabindex="{{1000+row[indexColumnName]}}" class="edit-cell" type="text"
+                        [(ngModel)]="row[colspec.name]" />
                     }
-                </div>
-            </td>
-        </ng-container>
+                </td>
+            </ng-container>
+            }
 
-        @for (colspec of displayColumns; track $index) {
-        <ng-container [cdkColumnDef]="colspec.name">
-            <th cdk-header-cell *cdkHeaderCellDef (click)="toggleSortMode(colspec.name)">
-                {{colspec.displayName}}
-                {{ ['▤', '▼', '▲'][colspec.sort !== undefined ? colspec.sort : 0 ] }}
-            </th>
-            <td cdk-cell *cdkCellDef="let row">
-                @if (row[indexColumnName] !== editingRowIndex) {
-                {{row[colspec.name]}}
-                } @else {
-                <input tabindex="{{1000+row[indexColumnName]}}" class="edit-cell" type="text"
-                    [(ngModel)]="row[colspec.name]" />
-                }
-            </td>
-        </ng-container>
-        }
-
-        <tr cdk-header-row *cdkHeaderRowDef="displayColumnNames"></tr>
-        <tr cdk-row *cdkRowDef="let row; columns: displayColumnNames"></tr>
-    </table>
+            <tr cdk-header-row *cdkHeaderRowDef="displayColumnNames"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns: displayColumnNames" cdkDrag cdkDragLockAxis="y"
+                [cdkDragData]="row">
+            </tr>
+        </table>
+    </div>
     } @else if (error) {
     <div class="error">Error: {{error}}</div>
     } @else {

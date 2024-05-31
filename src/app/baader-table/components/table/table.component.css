@@ -16,29 +16,85 @@
 }
 
 .baader-table th,
-.baader-table td {
+.baader-table td,
+.cdk-drag-preview td {
     padding: 12px 15px;
 }
 
-.baader-table {
+.baader-table th.sortable {
+    cursor: pointer;
+}
+
+.baader-table,
+.cdk-drag-preview {
     font-size: 0.8em;
 }
 
-.baader-table tr {
+.baader-table tr,
+.cdk-drag-preview tr {
     border-bottom: 1px solid #dddddd;
     background-color: #ffffff;
 }
 
-.baader-table tr:nth-of-type(even) {
+.cdk-drag-preview {
+    background-color: #fffdf8;
+    border: 1px solid black;
+    border-width: 1px 0;
+}
+
+/*
+.baader-table tr:nth-of-type(even),
+.cdk-drag-preview {
     background-color: #f8fbfd;
 }
 
 .baader-table tr:last-of-type {
     border-bottom: 2px solid #083d69;
 }
+*/
 
-.baader-table .edit-button-cell .edit-options div {
+.baader-table .edit-button-cell .edit-options div,
+.cdk-drag-preview .edit-button-cell .edit-options div {
     display: inline-block;
     margin: 0.2em;
     font-size: 1.5em;
+}
+
+.baader-table .edit-edit,
+.baader-table .edit-save {
+    cursor: pointer;
+}
+
+.drag-cell div,
+.drag-header div {
+    padding: 0;
+    margin: 0;
+    width: 10px;
+}
+
+.drag-cell {
+    background-color: #25567e;
+    cursor: grab;
+}
+
+.baader-table cdkDragHandle:active {
+    cursor: grabbing;
+}
+
+cdk-drop-list {
+    display: block;
+    width: 100%;
+}
+
+.cdk-drag-preview {
+    display: table;
+    text-align: center;
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
