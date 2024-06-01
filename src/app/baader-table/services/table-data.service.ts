@@ -46,7 +46,6 @@ export class TableDataService {
    * @returns An Observable of the table being fetched and processed
    */
   getTable$(url: string, cached = true): Observable<Table> {
-    console.log('get table');
     const cachedResponse = this.cache.get(url);
     if (cached && cachedResponse) {
       return of(cachedResponse);
