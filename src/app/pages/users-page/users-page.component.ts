@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TableComponent } from '../../baader-table/components/table/table.component';
+import { TableViewComponent } from '../../baader-table/components/table-view/table-view.component';
 
 /**
  * User Page component. Shows a table of users.
@@ -7,7 +7,7 @@ import { TableComponent } from '../../baader-table/components/table/table.compon
 @Component({
   selector: 'app-users-page',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableViewComponent],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.css'
 })

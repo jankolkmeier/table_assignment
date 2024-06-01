@@ -1,8 +1,8 @@
 <h3>Test Page</h3>
 
 @for (t of tables; track $index) {
-<baader-table [columns]="t.columns" [url]="t.url"></baader-table>
+<baader-table-view [columns]="t.columns" [url]="t.url"></baader-table-view>
 }
 
 <button (click)="cycleThirdTable()">{{tables[1].url}}</button>
-<baader-table [columns]="tables[thirdTableIdx].columns" [url]="tables[thirdTableIdx].url"></baader-table>
+<baader-table-view [columns]="tables[thirdTableIdx].columns" [url]="tables[thirdTableIdx].url"></baader-table-view>

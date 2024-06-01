@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { TableComponent } from '../../baader-table/components/table/table.component';
+import { TableViewComponent } from '../../baader-table/components/table-view/table-view.component';
 
 /**
  * Product Page component. Shows a table of products.
@@ -8,7 +8,7 @@ import { TableComponent } from '../../baader-table/components/table/table.compon
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableViewComponent],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.css'
 })

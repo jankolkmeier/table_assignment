@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TableComponent } from '../../baader-table/components/table/table.component';
+import { TableViewComponent } from '../../baader-table/components/table-view/table-view.component';
 import { ColumnSpec } from '../../baader-table/shared/table.model';
 
 interface TableSettings {
@@ -10,7 +10,7 @@ interface TableSettings {
 @Component({
   selector: 'app-test-page',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableViewComponent],
   templateUrl: './test-page.component.html',
   styleUrl: './test-page.component.css'
 })

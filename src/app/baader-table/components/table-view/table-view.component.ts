@@ -15,13 +15,13 @@ import { FormsModule } from '@angular/forms';
  * Table Component for displaying, searching and sorting tables.
  */
 @Component({
-  selector: 'baader-table',
+  selector: 'baader-table-view',
   standalone: true,
   imports: [FormsModule, DragDropModule, CommonModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
-  templateUrl: './table.component.html',
-  styleUrl: './table.component.css'
+  templateUrl: './table-view.component.html',
+  styleUrl: './table-view.component.css'
 })
-export class TableComponent implements AfterViewInit {
+export class TableViewComponent implements AfterViewInit {
 
   @Input()
   set url(url: string) {
