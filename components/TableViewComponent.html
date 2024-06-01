@@ -1,0 +1,3978 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>table-assignment documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">table-assignment documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TableViewComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/baader-table/components/table-view/table-view.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Table Component for displaying, searching and sorting tables.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>AfterViewInit</code>
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>baader-table-view</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>FormsModule</code>
+                            <code>DragDropModule</code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/FilterInputComponent.html" target="_self" >FilterInputComponent</a></code>
+                                <code><a href="../components/PaginationComponent.html" target="_self" >PaginationComponent</a></code>
+                            <code>KeyValuePipe</code>
+                            <code>AsyncPipe</code>
+                                <code><a href="../interfaces/Table.html" target="_self" >CdkTableModule</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./table-view.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./table-view.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dataChanged" >dataChanged</a>
+                            </li>
+                            <li>
+                                <a href="#dataFilteredForPaginator" >dataFilteredForPaginator</a>
+                            </li>
+                            <li>
+                                <a href="#dataSource$" >dataSource$</a>
+                            </li>
+                            <li>
+                                <a href="#dataView" >dataView</a>
+                            </li>
+                            <li>
+                                <a href="#displayColumns" >displayColumns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#EDIT_NAME" >EDIT_NAME</a>
+                            </li>
+                            <li>
+                                <a href="#editingRowIndex" >editingRowIndex</a>
+                            </li>
+                            <li>
+                                <a href="#editRowCopy" >editRowCopy</a>
+                            </li>
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                <a href="#filter" >filter</a>
+                            </li>
+                            <li>
+                                <a href="#filterChanged" >filterChanged</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#INDEX_NAME" >INDEX_NAME</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#paginator" >paginator</a>
+                            </li>
+                            <li>
+                                <a href="#range" >range</a>
+                            </li>
+                            <li>
+                                <a href="#rangeChanged" >rangeChanged</a>
+                            </li>
+                            <li>
+                                <a href="#sort" >sort</a>
+                            </li>
+                            <li>
+                                <a href="#sortChanged" >sortChanged</a>
+                            </li>
+                            <li>
+                                <a href="#table" >table</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createDataView" >createDataView</a>
+                            </li>
+                            <li>
+                                <a href="#createRowCopy" >createRowCopy</a>
+                            </li>
+                            <li>
+                                <a href="#currentFilteredItems" >currentFilteredItems</a>
+                            </li>
+                            <li>
+                                <a href="#dropRow" >dropRow</a>
+                            </li>
+                            <li>
+                                <a href="#editRowKbd" >editRowKbd</a>
+                            </li>
+                            <li>
+                                <a href="#fetchData" >fetchData</a>
+                            </li>
+                            <li>
+                                <a href="#getDisplayColumnNames" >getDisplayColumnNames</a>
+                            </li>
+                            <li>
+                                <a href="#getFilterColumnNames" >getFilterColumnNames</a>
+                            </li>
+                            <li>
+                                <a href="#isCustomSorted" >isCustomSorted</a>
+                            </li>
+                            <li>
+                                <a href="#isFiltered" >isFiltered</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#saveEditRow" >saveEditRow</a>
+                            </li>
+                            <li>
+                                <a href="#setDataSource" >setDataSource</a>
+                            </li>
+                            <li>
+                                <a href="#setDisplayColumns" >setDisplayColumns</a>
+                            </li>
+                            <li>
+                                <a href="#setRange" >setRange</a>
+                            </li>
+                            <li>
+                                <a href="#setTableView" >setTableView</a>
+                            </li>
+                            <li>
+                                <a href="#sortColumnKbd" >sortColumnKbd</a>
+                            </li>
+                            <li>
+                                <a href="#startEditRow" >startEditRow</a>
+                            </li>
+                            <li>
+                                <a href="#stopEditRow" >stopEditRow</a>
+                            </li>
+                            <li>
+                                <a href="#toggleEditRow" >toggleEditRow</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSortMode" >toggleSortMode</a>
+                            </li>
+                            <li>
+                                <a href="#trackTableIndex" >trackTableIndex</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cancelEditRowLabel" >cancelEditRowLabel</a>
+                            </li>
+                            <li>
+                                <a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                <a href="#data" >data</a>
+                            </li>
+                            <li>
+                                <a href="#data$" >data$</a>
+                            </li>
+                            <li>
+                                <a href="#editRowLabel" >editRowLabel</a>
+                            </li>
+                            <li>
+                                <a href="#filterInputPosition" >filterInputPosition</a>
+                            </li>
+                            <li>
+                                <a href="#loadingText" >loadingText</a>
+                            </li>
+                            <li>
+                                <a href="#pageItems" >pageItems</a>
+                            </li>
+                            <li>
+                                <a href="#paginatorPosition" >paginatorPosition</a>
+                            </li>
+                            <li>
+                                <a href="#saveRowLabel" >saveRowLabel</a>
+                            </li>
+                            <li>
+                                <a href="#showCategoryFilter" >showCategoryFilter</a>
+                            </li>
+                            <li>
+                                <a href="#showErrorDetails" >showErrorDetails</a>
+                            </li>
+                            <li>
+                                <a href="#showFilter" >showFilter</a>
+                            </li>
+                            <li>
+                                <a href="#showPageItemsSelection" >showPageItemsSelection</a>
+                            </li>
+                            <li>
+                                <a href="#showPaginator" >showPaginator</a>
+                            </li>
+                            <li>
+                                <a href="#sortIcons" >sortIcons</a>
+                            </li>
+                            <li>
+                                <a href="#url" >url</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#url" >url</a>
+                                </li>
+                                <li>
+                                    <a href="#data" >data</a>
+                                </li>
+                                <li>
+                                    <a href="#data$" >data$</a>
+                                </li>
+                                <li>
+                                    <a href="#columns" >columns</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(dataService: <a href="../injectables/TableDataService.html" target="_self">TableDataService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:99</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TableDataService.html" target="_self" >TableDataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cancelEditRowLabel"></a>
+                        <b>cancelEditRowLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;🗙&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:61</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="columns"></a>
+                        <b>columns</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[] | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <b>data</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >Table</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data$"></a>
+                        <b>data$</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >Observable&lt;Table&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:38</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="editRowLabel"></a>
+                        <b>editRowLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;✎&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:60</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterInputPosition"></a>
+                        <b>filterInputPosition</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;top&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:57</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadingText"></a>
+                        <b>loadingText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;Initializing table...&quot;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:63</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageItems"></a>
+                        <b>pageItems</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:53</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginatorPosition"></a>
+                        <b>paginatorPosition</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;top&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:56</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="saveRowLabel"></a>
+                        <b>saveRowLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;🖫&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:59</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showCategoryFilter"></a>
+                        <b>showCategoryFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showErrorDetails"></a>
+                        <b>showErrorDetails</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:62</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showFilter"></a>
+                        <b>showFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:50</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showPageItemsSelection"></a>
+                        <b>showPageItemsSelection</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showPaginator"></a>
+                        <b>showPaginator</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:48</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sortIcons"></a>
+                        <b>sortIcons</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>{}</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;▤&#x27;, &#x27;▼&#x27;, &#x27;▲&#x27;]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:58</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="url"></a>
+                        <b>url</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createDataView"></a>
+                    <span class="name">
+                        <span ><b>createDataView</b></span>
+                        <a href="#createDataView"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createDataView(d: <a href="../interfaces/Table.html" target="_self">TableRow[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Apply the configured filters. This is implemented as an async operation as
+I figured we might</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>d</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Table.html" target="_self" >TableRow[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Table.html" target="_self" >TableRow[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>the filtered set</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createRowCopy"></a>
+                    <span class="name">
+                        <span ><b>createRowCopy</b></span>
+                        <a href="#createRowCopy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createRowCopy(rowIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="380"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:380</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Create a copy of the data in a row based on it&#39;s tracking index (__index)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>index of the row to copy</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#TableRow" target="_self" >TableRow</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentFilteredItems"></a>
+                    <span class="name">
+                        <span ><b>currentFilteredItems</b></span>
+                        <a href="#currentFilteredItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>currentFilteredItems()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get the number of items that match the filter (the filtered data before it is subset for pagination).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>number of items</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dropRow"></a>
+                    <span class="name">
+                        <span ><b>dropRow</b></span>
+                        <a href="#dropRow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>dropRow(event: <a href="../interfaces/Table.html" target="_self">CdkDragDrop&lt;TableRow&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="439"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:439</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle Drop event from Cdk&#39;s DragDropModule.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Table.html" target="_self" >CdkDragDrop&lt;TableRow&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>CdkDragDrop event describing the drag and drop operation.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editRowKbd"></a>
+                    <span class="name">
+                        <span ><b>editRowKbd</b></span>
+                        <a href="#editRowKbd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editRowKbd(keyEvent: KeyboardEvent, fn: (p: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>) => void, param: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="402"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:402</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Make the edit buttons accessible by keyboard events.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>keyEvent</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>check if key event is a &quot;confirm-like&quot; button.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>function pointer to row edit operation</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>param</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>row to edit</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchData"></a>
+                    <span class="name">
+                        <span ><b>fetchData</b></span>
+                        <a href="#fetchData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="266"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:266</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Fetches the data from url &amp; updates the table.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDisplayColumnNames"></a>
+                    <span class="name">
+                        <span ><b>getDisplayColumnNames</b></span>
+                        <a href="#getDisplayColumnNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDisplayColumnNames()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="247"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:247</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get the array of column names that should be displayed in the table (in order).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Return an array of columns names</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFilterColumnNames"></a>
+                    <span class="name">
+                        <span ><b>getFilterColumnNames</b></span>
+                        <a href="#getFilterColumnNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFilterColumnNames()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Return a list of content column names that are displayed and part of the data.
+This should not return columns like __index or __edit.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>a list of column names</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCustomSorted"></a>
+                    <span class="name">
+                        <span ><b>isCustomSorted</b></span>
+                        <a href="#isCustomSorted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isCustomSorted()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Is the current view sorting the data by anything else than the default sort order?</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true if not in default sort order</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFiltered"></a>
+                    <span class="name">
+                        <span ><b>isFiltered</b></span>
+                        <a href="#isFiltered"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isFiltered()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Is the current output filtered by a search term?</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true if filtered</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>We wait for all child views (such as pagination) to be resolved
+in AfterViewInit before wiring the events.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveEditRow"></a>
+                    <span class="name">
+                        <span ><b>saveEditRow</b></span>
+                        <a href="#saveEditRow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveEditRow(rowIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="331"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:331</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Stop editing row and save changes.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>save the current row</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDataSource"></a>
+                    <span class="name">
+                        <span ><b>setDataSource</b></span>
+                        <a href="#setDataSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setDataSource(t: <a href="../interfaces/Table.html" target="_self">Observable&lt;Table&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="255"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:255</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set the data source. If there already is other data, fetch the new data to replace view.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>t</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Table.html" target="_self" >Observable&lt;Table&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>observable of a table object</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDisplayColumns"></a>
+                    <span class="name">
+                        <span ><b>setDisplayColumns</b></span>
+                        <a href="#setDisplayColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setDisplayColumns(columns: <a href="../interfaces/ColumnSpec.html" target="_self">ColumnSpec[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:239</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the objects required for rendering the table based on the selected columns to Display.
+Adds the column(s) for additional features of this table component, such as:</p>
+<ul>
+<li>Column for editing a given row.</li>
+<li>Column for reordering / drag &amp; dropping rows.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>columns</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ColumnSpec.html" target="_self" >ColumnSpec[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Columns to display as list of column specifications (holding the &#39;name&#39; of column and &#39;displayName&#39; for the header).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setRange"></a>
+                    <span class="name">
+                        <span ><b>setRange</b></span>
+                        <a href="#setRange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setRange(range: <a href="../interfaces/RangeState.html" target="_self">RangeState</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set the range of data to be displayed based on the page number.
+This has no effect if pagination is disabled.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>range</td>
+                                            <td>
+                                                            <code><a href="../interfaces/RangeState.html" target="_self" >RangeState</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setTableView"></a>
+                    <span class="name">
+                        <span ><b>setTableView</b></span>
+                        <a href="#setTableView"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setTableView(table: <a href="../interfaces/Table.html" target="_self">Table</a>, viewSpec: <a href="../interfaces/ColumnSpec.html" target="_self">ColumnSpec[] | null</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:301</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set up the table view based on an optional view configuration</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>table</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Table.html" target="_self" >Table</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>viewSpec</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ColumnSpec.html" target="_self" >ColumnSpec[] | null</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortColumnKbd"></a>
+                    <span class="name">
+                        <span ><b>sortColumnKbd</b></span>
+                        <a href="#sortColumnKbd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortColumnKbd(keyEvent: KeyboardEvent, columnName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="390"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:390</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Make the column header sorting functionality accessible by keyboard events.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>keyEvent</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>check if key event is a &quot;confirm-like&quot; button.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>columnName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>column to sort</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startEditRow"></a>
+                    <span class="name">
+                        <span ><b>startEditRow</b></span>
+                        <a href="#startEditRow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>startEditRow(rowIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="368"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:368</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Start editing a row.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>of the row to start editing</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stopEditRow"></a>
+                    <span class="name">
+                        <span ><b>stopEditRow</b></span>
+                        <a href="#stopEditRow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>stopEditRow(rowIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="318"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:318</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cancel editing row (i.e don&#39;t save changes).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>of the edited row</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleEditRow"></a>
+                    <span class="name">
+                        <span ><b>toggleEditRow</b></span>
+                        <a href="#toggleEditRow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleEditRow(rowIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="356"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:356</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Start/stop editing a row. If another one was edited, stop it first, then start editing the new row.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rowIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>of the row to start/stop editing</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSortMode"></a>
+                    <span class="name">
+                        <span ><b>toggleSortMode</b></span>
+                        <a href="#toggleSortMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSortMode(columnName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="413"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:413</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Update sorting state by going through column specifications and toggling the current
+sorting mode of the column provided</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>columnName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>name of column to change sort mode on</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackTableIndex"></a>
+                    <span class="name">
+                        <span ><b>trackTableIndex</b></span>
+                        <a href="#trackTableIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trackTableIndex(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, row: <a href="../undefineds/TableRow.html" target="_self">TableRow</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="293"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:293</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>TrackBy function for data. Good practice with large datasets to help with performance.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>index in data</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>row</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#TableRow" target="_self" >TableRow</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>element</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#TableRow" target="_self" >TableRow</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>the unique __index property set in prepareTable</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataChanged"></a>
+                    <span class="name">
+                        <span ><b>dataChanged</b></span>
+                        <a href="#dataChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >EventEmitter&lt;TableRow[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new EventEmitter&lt;TableRow[]&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataFilteredForPaginator"></a>
+                    <span class="name">
+                        <span ><b>dataFilteredForPaginator</b></span>
+                        <a href="#dataFilteredForPaginator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataSource$"></a>
+                    <span class="name">
+                        <span ><b>dataSource$</b></span>
+                        <a href="#dataSource$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >Observable&lt;Table&gt; | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataView"></a>
+                    <span class="name">
+                        <span ><b>dataView</b></span>
+                        <a href="#dataView"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >TableRow[] | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayColumns"></a>
+                    <span class="name">
+                        <span ><b>displayColumns</b></span>
+                        <a href="#displayColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ColumnSpec.html" target="_self" >ColumnSpec[] | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EDIT_NAME"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>EDIT_NAME</b></span>
+                        <a href="#EDIT_NAME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;__edit&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editingRowIndex"></a>
+                    <span class="name">
+                        <span ><b>editingRowIndex</b></span>
+                        <a href="#editingRowIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>-1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editRowCopy"></a>
+                    <span class="name">
+                        <span ><b>editRowCopy</b></span>
+                        <a href="#editRowCopy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >TableRow | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filter"></a>
+                    <span class="name">
+                        <span ><b>filter</b></span>
+                        <a href="#filter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FilterState.html" target="_self" >FilterState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    filter: &quot;&quot;,
+    column: &quot;&quot;
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterChanged"></a>
+                    <span class="name">
+                        <span ><b>filterChanged</b></span>
+                        <a href="#filterChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FilterState.html" target="_self" >EventEmitter&lt;FilterState&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new EventEmitter&lt;FilterState&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INDEX_NAME"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>INDEX_NAME</b></span>
+                        <a href="#INDEX_NAME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>TABLE_INDEX_COLUMN_NAME</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginator"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>paginator</b></span>
+                        <a href="#paginator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/PaginationComponent.html" target="_self" >PaginationComponent</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(PaginationComponent)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="range"></a>
+                    <span class="name">
+                        <span ><b>range</b></span>
+                        <a href="#range"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/RangeState.html" target="_self" >RangeState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    start: 0,
+    length: 0
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rangeChanged"></a>
+                    <span class="name">
+                        <span ><b>rangeChanged</b></span>
+                        <a href="#rangeChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/RangeState.html" target="_self" >EventEmitter&lt;RangeState&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new EventEmitter&lt;RangeState&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sort"></a>
+                    <span class="name">
+                        <span ><b>sort</b></span>
+                        <a href="#sort"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SortState.html" target="_self" >SortState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    mode: ColumnSort.ASC,
+    column: this.INDEX_NAME
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortChanged"></a>
+                    <span class="name">
+                        <span ><b>sortChanged</b></span>
+                        <a href="#sortChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SortState.html" target="_self" >EventEmitter&lt;SortState&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new EventEmitter&lt;SortState&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="table"></a>
+                    <span class="name">
+                        <span ><b>table</b></span>
+                        <a href="#table"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Table.html" target="_self" >Table | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="url"></a>
+                        <span class="name"><b>url</b><a href="#url"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>url(url: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:28</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>url</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <span class="name"><b>data</b><a href="#data"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>data(table: <a href="../interfaces/Table.html" target="_self">Table</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:33</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>table</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../interfaces/Table.html" target="_self" >Table</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data$"></a>
+                        <span class="name"><b>data$</b><a href="#data$"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>data$(table$: <a href="../interfaces/Table.html" target="_self">Observable&lt;Table&gt;</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:38</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>table$</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../interfaces/Table.html" target="_self" >Observable&lt;Table&gt;</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="columns"></a>
+                        <span class="name"><b>columns</b><a href="#columns"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>columns(columns: <a href="../interfaces/ColumnSpec.html" target="_self">ColumnSpec[] | null</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:43</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>columns</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../interfaces/ColumnSpec.html" target="_self" >ColumnSpec[] | null</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, AfterViewInit, EventEmitter, ViewChild, OnInit } from &#x27;@angular/core&#x27;;
+import { KeyValuePipe, AsyncPipe, CommonModule } from &#x27;@angular/common&#x27;;
+import { CdkTableModule } from &#x27;@angular/cdk/table&#x27;;
+import { CdkDragDrop, moveItemInArray } from &#x27;@angular/cdk/drag-drop&#x27;;
+import { DragDropModule } from &#x27;@angular/cdk/drag-drop&#x27;;
+import { TableDataService } from &#x27;../../services/table-data.service&#x27;;
+import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState, TABLE_INDEX_COLUMN_NAME, Table } from &#x27;../../shared/table.model&#x27;;
+import { TableUtils } from &#x27;../../shared/table-utils&#x27;
+import { PaginationComponent } from &#x27;../pagination/pagination.component&#x27;
+import { FilterInputComponent } from &#x27;../filter-input/filter-input.component&#x27;;
+import { Observable, debounce, interval, map, merge, of, tap } from &#x27;rxjs&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { environment } from &#x27;../../../../environments/environment&#x27;;
+
+/**
+ * Table Component for displaying, searching and sorting tables.
+ */
+@Component({
+  selector: &#x27;baader-table-view&#x27;,
+  standalone: true,
+  imports: [FormsModule, DragDropModule, CommonModule, FilterInputComponent, PaginationComponent, KeyValuePipe, AsyncPipe, CdkTableModule],
+  templateUrl: &#x27;./table-view.component.html&#x27;,
+  styleUrl: &#x27;./table-view.component.css&#x27;
+})
+export class TableViewComponent implements AfterViewInit, OnInit {
+
+  @Input()
+  set url(url: string) {
+    this.setDataSource(this.dataService.getTable$(url));
+  }
+
+  @Input()
+  set data(table: Table) {
+    this.setDataSource(of(table));
+  }
+
+  @Input()
+  set data$(table$: Observable&lt;Table&gt;) {
+    this.setDataSource(table$);
+  }
+
+  @Input()
+  set columns(columns: ColumnSpec[] | null) {
+    this.displayColumns &#x3D; columns;
+  }
+
+
+  @Input() showPaginator &#x3D; true;
+  @Input() showPageItemsSelection &#x3D; false;
+  @Input() showFilter &#x3D; true;
+  @Input() showCategoryFilter &#x3D; false;
+
+  @Input() pageItems &#x3D; 10;
+
+  /* View Customization */
+  @Input() paginatorPosition &#x3D; &#x27;top&#x27;;
+  @Input() filterInputPosition &#x3D; &#x27;top&#x27;;
+  @Input() sortIcons &#x3D; [&#x27;▤&#x27;, &#x27;▼&#x27;, &#x27;▲&#x27;];
+  @Input() saveRowLabel &#x3D; &#x27;🖫&#x27;;
+  @Input() editRowLabel &#x3D; &#x27;✎&#x27;;
+  @Input() cancelEditRowLabel &#x3D; &#x27;🗙&#x27;;
+  @Input() showErrorDetails &#x3D; true;
+  @Input() loadingText &#x3D; &quot;Initializing table...&quot;;
+
+  @ViewChild(PaginationComponent) paginator!: PaginationComponent;
+
+  dataSource$: Observable&lt;Table&gt; | null &#x3D; null;
+
+  table: Table | null &#x3D; null;
+
+  displayColumns: ColumnSpec[] | null &#x3D; null;
+  dataView: TableRow[] | null &#x3D; null;
+  dataFilteredForPaginator &#x3D; 0;
+
+  error: string | null &#x3D; null;
+
+  readonly INDEX_NAME &#x3D; TABLE_INDEX_COLUMN_NAME;
+  readonly EDIT_NAME &#x3D; &#x27;__edit&#x27;;
+
+  dataChanged: EventEmitter&lt;TableRow[]&gt; &#x3D; new EventEmitter&lt;TableRow[]&gt;();
+  rangeChanged: EventEmitter&lt;RangeState&gt; &#x3D; new EventEmitter&lt;RangeState&gt;();
+  sortChanged: EventEmitter&lt;SortState&gt; &#x3D; new EventEmitter&lt;SortState&gt;();
+  filterChanged: EventEmitter&lt;FilterState&gt; &#x3D; new EventEmitter&lt;FilterState&gt;();
+
+  editingRowIndex &#x3D; -1;
+  editRowCopy: TableRow | null &#x3D; null;
+
+  sort: SortState &#x3D; {
+    mode: ColumnSort.ASC,
+    column: this.INDEX_NAME
+  };
+  range: RangeState &#x3D; {
+    start: 0,
+    length: 0
+  };
+  filter: FilterState &#x3D; {
+    filter: &quot;&quot;,
+    column: &quot;&quot;
+  };
+
+  constructor(private dataService: TableDataService) {
+  }
+
+  ngOnInit() {
+    // At this point either url or data inputs are configured and we can start getting the data.
+
+    // When any of these events happen, we need to re-filter the data based on the 
+    // current page, sort and filter settings.
+    merge(
+      this.sortChanged,
+      this.rangeChanged,
+      this.filterChanged,
+      this.dataChanged
+    ).pipe(
+      // Debounce these events slightly in case many get triggered in quick succession
+      debounce(() &#x3D;&gt; interval(10))
+    ).subscribe(() &#x3D;&gt; {
+      if (this.table !&#x3D;&#x3D; null) {
+        this.dataView &#x3D; this.createDataView(this.table.data);
+      }
+    });
+
+    // Watch data service for changes in our table - i.e. if multiple tables are being edited at the same time.
+    merge(
+      this.dataService.dataSourceChanged
+    ).pipe(
+      tap((url) &#x3D;&gt; {
+        if (this.table &amp;&amp; this.table.url &#x3D;&#x3D;&#x3D; url) {
+          this.dataChanged.emit();
+        }
+      })
+    ).subscribe();
+
+    // Fetch the prepared data. When completed, this will trigger the dataChanged event,
+    // which will cause the above pipe to trigger and update the view.
+    this.fetchData();
+  }
+
+  /**
+   * We wait for all child views (such as pagination) to be resolved   
+   * in AfterViewInit before wiring the events.
+   */
+  ngAfterViewInit() {
+    // Jump back to first page when we change sort or filter
+    this.sortChanged.subscribe(() &#x3D;&gt; (this.paginator?.setPage(0)));
+    this.filterChanged.subscribe(() &#x3D;&gt; (this.paginator?.setPage(0)));
+    this.dataChanged.subscribe(() &#x3D;&gt; (this.paginator?.setPage(0)));
+  }
+
+  /**
+   * Is the current output filtered by a search term?
+   * @returns true if filtered
+   */
+  isFiltered() {
+    return this.filter.filter !&#x3D;&#x3D; &quot;&quot;;
+  }
+
+  /**
+   * Is the current view sorting the data by anything else than the default sort order?
+   * @returns true if not in default sort order
+   */
+  isCustomSorted() {
+    return this.sort.column !&#x3D;&#x3D; this.INDEX_NAME;
+  }
+
+  /**
+   * Get the number of items that match the filter (the filtered data before it is subset for pagination).
+   * @returns number of items
+   */
+  currentFilteredItems() {
+    return this.dataFilteredForPaginator;
+  }
+
+  /**
+   * Return a list of content column names that are displayed and part of the data.
+   * This should not return columns like __index or __edit.
+   * @returns a list of column names
+   */
+  getFilterColumnNames(): string[] {
+    return this.getDisplayColumnNames().filter((n) &#x3D;&gt; {
+      return this.displayColumns?.some((colspec) &#x3D;&gt; (colspec.name &#x3D;&#x3D; n));
+    });
+  }
+
+  /**
+   * Apply the configured filters. This is implemented as an async operation as
+   * I figured we might 
+   * @returns the filtered set
+   */
+  createDataView(d: TableRow[]): TableRow[] {
+    let filtered &#x3D; d;
+
+    // Filter rows by looking at all rows containing a field that includes the search string
+    if (this.isFiltered()) {
+      filtered &#x3D; filtered.filter((row: TableRow) &#x3D;&gt; {
+        return Object.keys(row)
+          .filter(key &#x3D;&gt; {
+            // Search only through displayed columns.
+            // If column name is configured in filter state, only search that column.
+            return this.getFilterColumnNames().indexOf(key) &gt; -1 &amp;&amp; (this.filter.column &#x3D;&#x3D; &quot;&quot; || key &#x3D;&#x3D;&#x3D; this.filter.column);
+          })
+          .some(key &#x3D;&gt; { // Check if any of the search columns in this row contain the search string.
+            return this.filter.filter &#x3D;&#x3D;&#x3D; &quot;&quot; || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
+          });
+      });
+    }
+
+    this.dataFilteredForPaginator &#x3D; filtered.length;
+
+    // Then sort remainder
+    if (this.isCustomSorted()) {
+      filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.mode));
+    }
+
+    // Then Slice
+    if (this.showPaginator &amp;&amp; this.range !&#x3D;&#x3D; null) {
+      filtered &#x3D; filtered.slice(this.range.start, this.range.start + this.range.length);
+    }
+    return filtered; // [...filtered?]
+  }
+
+  /**
+   * Set the range of data to be displayed based on the page number.
+   * This has no effect if pagination is disabled.
+   * @param page page number to look at.
+   */
+  setRange(range: RangeState) {
+    this.range &#x3D; range;
+    this.rangeChanged.emit(this.range);
+  }
+
+  /**
+   * Sets the objects required for rendering the table based on the selected columns to Display.
+   * Adds the column(s) for additional features of this table component, such as:
+   *   - Column for editing a given row.
+   *   - Column for reordering / drag &amp; dropping rows.
+   * @param columns Columns to display as list of column specifications (holding the &#x27;name&#x27; of column and &#x27;displayName&#x27; for the header).
+   */
+  setDisplayColumns(columns: ColumnSpec[]) {
+    this.displayColumns &#x3D; columns;
+  }
+
+  /**
+   * Get the array of column names that should be displayed in the table (in order). 
+   * @returns Return an array of columns names
+   */
+  getDisplayColumnNames(): string[] {
+    return [... this.displayColumns ? this.displayColumns.map((col) &#x3D;&gt; col.name) : [], this.EDIT_NAME];
+  }
+
+  /**
+   * Set the data source. If there already is other data, fetch the new data to replace view.
+   * @param t observable of a table object
+   */
+  setDataSource(t: Observable&lt;Table&gt;) {
+    this.dataSource$ &#x3D; t;
+    if (this.table !&#x3D;&#x3D; null) {
+      // Only fetch if table isn&#x27;t set yet (otherwise fetch is called in ngOnInit)
+      this.fetchData();
+    }
+  }
+
+  /**
+   * Fetches the data from url &amp; updates the table.
+   */
+  fetchData() {
+    if (this.dataSource$ &#x3D;&#x3D;&#x3D; null) {
+      this.error &#x3D; &quot;No data source configured. Set either url or data property.&quot;;
+      return;
+    }
+
+    this.dataSource$.pipe(
+      map((table) &#x3D;&gt; {
+        this.setTableView(table, this.displayColumns);
+        this.table &#x3D; table;
+        this.dataChanged.emit(this.table.data);
+      })
+    ).subscribe({
+      error: (e) &#x3D;&gt; {
+        this.error &#x3D; &#x60;Failed to get data from configured source.\nError: ${e?.message}&#x60;;
+        if (!environment.prod)
+          console.error(e);
+      }
+    });
+  }
+
+  /**
+   * TrackBy function for data. Good practice with large datasets to help with performance.
+   * @param index index in data
+   * @param row element
+   * @returns the unique __index property set in prepareTable
+   */
+  trackTableIndex(index: number, row: TableRow) {
+    return row[this.INDEX_NAME];
+  }
+
+  /**
+   * Set up the table view based on an optional view configuration 
+   * @param data Table data
+   */
+  setTableView(table: Table, viewSpec: ColumnSpec[] | null): void {
+    if (viewSpec &#x3D;&#x3D;&#x3D; null) {
+      // Display all columns if view configuration is specified
+      this.setDisplayColumns(Object.values(table.spec));
+    } else {
+      // Merge user configured column settings with inferred column specs
+      this.setDisplayColumns(viewSpec.map((colspec: ColumnSpec) &#x3D;&gt; {
+        Object.assign(table.spec[colspec.name], colspec);
+        return table.spec[colspec.name];
+      }));
+    }
+  }
+
+  /**
+   * Cancel editing row (i.e don&#x27;t save changes).
+   * @param rowIndex of the edited row
+   */
+  stopEditRow(rowIndex: number) {
+    if (this.editRowCopy &#x3D;&#x3D;&#x3D; null || rowIndex !&#x3D;&#x3D; this.editRowCopy[this.INDEX_NAME]) {
+      if (!environment.prod)
+        console.warn(&#x60;Failed to stop editing, was not editing row ${rowIndex}&#x60;)
+    }
+    this.editingRowIndex &#x3D; -1;
+    this.editRowCopy &#x3D; null;
+  }
+
+  /**
+   * Stop editing row and save changes.
+   * @param rowIndex save the current row
+   */
+  saveEditRow(rowIndex: number) {
+    if (this.editRowCopy &#x3D;&#x3D;&#x3D; null || rowIndex !&#x3D;&#x3D; this.editRowCopy[this.INDEX_NAME]) {
+      if (!environment.prod)
+        console.warn(&#x60;Not saving changes - not currently editing a copy of this row&#x60;);
+      return;
+    } else if (this.editRowCopy !&#x3D;&#x3D; null &amp;&amp; !this.dataService.isCached(this.table?.url)) {
+      // Not managed by TableDataService - edit directly in memory
+      const editIndex &#x3D; this.table!.data.findIndex((r) &#x3D;&gt; (r[this.INDEX_NAME] &#x3D;&#x3D;&#x3D; this.editRowCopy![this.INDEX_NAME]));
+      this.table!.data[editIndex] &#x3D; this.editRowCopy;
+      this.dataChanged.emit();
+    } else {
+      // Managed by TableDataService - use save function
+      this.dataService.saveTableChages(
+        this.table!.url!,
+        this.editRowCopy
+      );
+    }
+
+    this.stopEditRow(rowIndex);
+  }
+
+  /**
+   * Start/stop editing a row. If another one was edited, stop it first, then start editing the new row.
+   * @param rowIndex of the row to start/stop editing
+   */
+  toggleEditRow(rowIndex: number) {
+    if (this.editingRowIndex &#x3D;&#x3D; rowIndex) {
+      this.stopEditRow(rowIndex);
+    } else {
+      this.startEditRow(rowIndex);
+    }
+  }
+
+  /**
+   * Start editing a row.
+   * @param rowIndex of the row to start editing
+   */
+  startEditRow(rowIndex: number) {
+    if (this.editingRowIndex &gt;&#x3D; 0)
+      this.stopEditRow(this.editingRowIndex);
+    this.editRowCopy &#x3D; this.createRowCopy(rowIndex);
+    this.editingRowIndex &#x3D; rowIndex;
+  }
+
+
+  /**
+   * Create a copy of the data in a row based on it&#x27;s tracking index (__index)
+   * @param rowIndex index of the row to copy
+   */
+  createRowCopy(rowIndex: number): TableRow {
+    const row &#x3D; this.table!.data.filter((r) &#x3D;&gt; (r[this.INDEX_NAME] &#x3D;&#x3D;&#x3D; rowIndex))[0];
+    return Object.assign({} as TableRow, row);
+  }
+
+  /**
+   * Make the column header sorting functionality accessible by keyboard events.
+   * @param keyEvent check if key event is a &quot;confirm-like&quot; button.
+   * @param columnName column to sort 
+   */
+  sortColumnKbd(keyEvent: KeyboardEvent, columnName: string) {
+    if (keyEvent.code &#x3D;&#x3D;&#x3D; &quot;Space&quot; || keyEvent.code &#x3D;&#x3D;&#x3D; &quot;Enter&quot;) {
+      this.toggleSortMode(columnName);
+    }
+  }
+
+  /**
+   * Make the edit buttons accessible by keyboard events.
+   * @param keyEvent check if key event is a &quot;confirm-like&quot; button.
+   * @param fn function pointer to row edit operation
+   * @param param row to edit
+   */
+  editRowKbd(keyEvent: KeyboardEvent, fn: (p: number) &#x3D;&gt; void, param: number) {
+    if (keyEvent.code &#x3D;&#x3D;&#x3D; &quot;Space&quot; || keyEvent.code &#x3D;&#x3D;&#x3D; &quot;Enter&quot;) {
+      fn.bind(this, param)();
+    }
+  }
+
+  /**
+   * Update sorting state by going through column specifications and toggling the current 
+   * sorting mode of the column provided
+   * @param columnName name of column to change sort mode on
+   */
+  toggleSortMode(columnName: string) {
+    // Get total number of sort modes (used for modulo operation when toggling)
+    const n_sort_modes &#x3D; Object.keys(ColumnSort).length / 2;
+    if (this.sort.column !&#x3D; columnName) {
+      // Sorting a different column, start with ASC
+      this.sort.mode &#x3D; ColumnSort.ASC;
+    } else {
+      this.sort.mode &#x3D; --this.sort.mode % n_sort_modes;
+    }
+
+    this.sort.column &#x3D; columnName;
+
+    // If back to default, sort by __index column instead.
+    if (this.sort.mode &#x3D;&#x3D; ColumnSort.NONE) {
+      this.sort.column &#x3D; this.INDEX_NAME;
+      this.sort.mode &#x3D; ColumnSort.ASC;
+    }
+
+    // Trigger re-filter data
+    this.sortChanged.emit(this.sort);
+  }
+
+  /**
+   * Handle Drop event from Cdk&#x27;s DragDropModule.
+   * @param event CdkDragDrop event describing the drag and drop operation.
+   */
+  dropRow(event: CdkDragDrop&lt;TableRow&gt;) {
+    /*
+    Note that there are some oddities with how drag &amp; drop should/could behave when working with a sorted or filtered table.
+     - I propose that we update only the filtered view order when any kind of filter or sorting is applied. 
+     - That means once a filter is applied again or changed, the effect of the reordering is voided.
+     - However if there is no other filter applied, we can change the order of the base dataset by changing the __index value.
+    This is still not a perfect solution without also making this transparent to the user.
+    But how to do this would require knowing more context of how this table is used. Ideally of course, this behaviour is configurable. 
+    */
+    const dragged_index &#x3D; event.item.data[this.INDEX_NAME];
+    const move_to_index &#x3D; this.dataView![event.currentIndex][this.INDEX_NAME];
+
+    // Update view only first
+    moveItemInArray(this.dataView!, event.previousIndex, event.currentIndex);
+    this.dataView &#x3D; [...this.dataView!];
+
+    if (!this.isFiltered() &amp;&amp; !this.isCustomSorted()) {
+      // If no finter is applied, we can meaningfully change the order in the source data
+      const data_dragged_pos &#x3D; this.table!.data.findIndex((row) &#x3D;&gt; (row[this.INDEX_NAME] &#x3D;&#x3D;&#x3D; dragged_index));
+      const data_move_to_pos &#x3D; this.table!.data.findIndex((row) &#x3D;&gt; (row[this.INDEX_NAME] &#x3D;&#x3D;&#x3D; move_to_index));
+      moveItemInArray(this.table!.data, data_dragged_pos, data_move_to_pos);
+      // Re-index 
+      for (let idx &#x3D; 0; idx &lt; this.table!.data.length; idx++) {
+        this.table!.data[idx][this.INDEX_NAME] &#x3D; idx;
+      }
+
+      if (this.dataService.isCached(this.table!.url)) {
+        this.dataService.dataSourceChanged.emit(this.table!.url)
+      } else {
+        this.dataChanged.emit();
+      }
+    }
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ng-template #filterInputTemplate&gt;
+    &lt;baader-filter-input [hidden]&#x3D;&quot;error || !showFilter&quot; [filter]&#x3D;&quot;filter.filter&quot; [category]&#x3D;&quot;filter.column&quot;
+        categoryLabel&#x3D;&quot;Column:&quot; (categoryChange)&#x3D;&quot;filter.column &#x3D; $event; filterChanged.emit();&quot;
+        (filterChange)&#x3D;&quot;filter.filter &#x3D; $event; filterChanged.emit()&quot;
+        [categorySelect]&#x3D;&quot;showCategoryFilter ? getFilterColumnNames() : null&quot;&gt;&lt;/baader-filter-input&gt;
+&lt;/ng-template&gt;
+
+&lt;ng-template #paginatorTemplate&gt;
+    &lt;baader-pagination [hidden]&#x3D;&quot;error || !showPaginator&quot; [pageItems]&#x3D;&quot;pageItems&quot; [totalItems]&#x3D;&quot;currentFilteredItems()&quot;
+        (pageChanged)&#x3D;&quot;setRange($event)&quot; [showPageItemsSelection]&#x3D;&quot;showPageItemsSelection&quot;&gt;&lt;/baader-pagination&gt;
+&lt;/ng-template&gt;
+
+&lt;div class&#x3D;&quot;baader-table-root&quot;&gt;
+    &lt;div class&#x3D;&quot;top-parent&quot;&gt;
+        @if (filterInputPosition &#x3D;&#x3D;&#x3D; &#x27;top&#x27;) {
+        &lt;ng-container *ngTemplateOutlet&#x3D;&quot;filterInputTemplate&quot;&gt;&lt;/ng-container&gt;
+        }
+
+        @if (paginatorPosition &#x3D;&#x3D;&#x3D; &#x27;top&#x27;) {
+        &lt;ng-container *ngTemplateOutlet&#x3D;&quot;paginatorTemplate&quot;&gt;&lt;/ng-container&gt;
+        }
+    &lt;/div&gt;
+
+    @if (!error &amp;&amp; dataView &amp;&amp; displayColumns) {
+    &lt;div class&#x3D;&quot;table-droplist table-scroll&quot; (cdkDropListDropped)&#x3D;&quot;dropRow($event)&quot; cdkDropList
+        [cdkDropListDisabled]&#x3D;&quot;editingRowIndex &gt;&#x3D; 0&quot;&gt;
+        &lt;table class&#x3D;&quot;baader-table&quot; cdk-table [dataSource]&#x3D;&quot;dataView&quot; [trackBy]&#x3D;&quot;trackTableIndex&quot;&gt;
+
+            &lt;ng-container [cdkColumnDef]&#x3D;&quot;EDIT_NAME&quot;&gt;
+                &lt;th class&#x3D;&quot;edit-header&quot; cdk-header-cell *cdkHeaderCellDef&gt;&lt;/th&gt;
+                &lt;td class&#x3D;&quot;edit-button-cell&quot; cdk-cell *cdkCellDef&#x3D;&quot;let row; let i &#x3D; index;&quot;&gt;
+                    &lt;div class&#x3D;&quot;edit-options&quot;&gt;
+                        @if (row[INDEX_NAME] &#x3D;&#x3D;&#x3D; editingRowIndex) {
+                        &lt;div tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-save&quot; (click)&#x3D;&quot;saveEditRow(row[INDEX_NAME])&quot;
+                            (keydown)&#x3D;&quot;editRowKbd($event, saveEditRow, row[INDEX_NAME])&quot;&gt;{{saveRowLabel}}&lt;/div&gt;
+                        &lt;div tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-save&quot; (click)&#x3D;&quot;stopEditRow(row[INDEX_NAME])&quot;
+                            (keydown)&#x3D;&quot;editRowKbd($event, stopEditRow, row[INDEX_NAME])&quot;&gt;{{cancelEditRowLabel}}&lt;/div&gt;
+                        } @else {
+                        &lt;div tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-edit&quot; (click)&#x3D;&quot;toggleEditRow(row[INDEX_NAME])&quot;
+                            (keydown)&#x3D;&quot;editRowKbd($event, toggleEditRow, row[INDEX_NAME])&quot;&gt;{{editRowLabel}}&lt;/div&gt;
+                        }
+                    &lt;/div&gt;
+                &lt;/td&gt;
+            &lt;/ng-container&gt;
+
+            @for (colspec of displayColumns; track $index) {
+            &lt;ng-container [cdkColumnDef]&#x3D;&quot;colspec.name&quot;&gt;
+                &lt;th ccdk-header-cell *cdkHeaderCellDef&gt;
+                    &lt;div tabindex&#x3D;&quot;100&quot; class&#x3D;&quot;sortable&quot; (click)&#x3D;&quot;toggleSortMode(colspec.name)&quot;
+                        (keydown)&#x3D;&quot;sortColumnKbd($event, colspec.name)&quot;&gt;
+                        &lt;div class&#x3D;&quot;sort-icon&quot;&gt;
+                            {{ sortIcons[sort.column !&#x3D;&#x3D; colspec.name ? 0 : sort.mode] }}
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;column-label&quot;&gt;
+                            {{colspec.displayName}}
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/th&gt;
+                &lt;td cdk-cell *cdkCellDef&#x3D;&quot;let row; let i &#x3D; index;&quot;&gt;
+                    &lt;!--
+                        Switching to inline editing breaks the layout due to the input element not playing 
+                        nice with resizable rows. Perhaps a script-driven solution for resizing could solve this.
+
+                        Another alternative I&#x27;ve explored was showing cell content in a styled, disabled input element.
+                        This allows for a nice UX as it doesn&#x27;t cause the layout to jump when using
+                        to inline editing, however it is poor web semantics.
+                    --&gt;
+                    @if (row[INDEX_NAME] !&#x3D;&#x3D; editingRowIndex) {
+                    &lt;div class&#x3D;&quot;cell-content&quot;&gt;{{row[colspec.name]}}&lt;/div&gt;
+                    } @else if (editRowCopy) {
+                    &lt;input tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-inplace&quot; type&#x3D;&quot;text&quot;
+                        [(ngModel)]&#x3D;&quot;editRowCopy[colspec.name]&quot;
+                        [disabled]&#x3D;&quot;editRowCopy[INDEX_NAME] !&#x3D;&#x3D; editingRowIndex&quot; /&gt;
+                    } @else {
+                    &lt;div&gt;ERR&lt;/div&gt;
+                    }
+                &lt;/td&gt;
+            &lt;/ng-container&gt;
+            }
+
+            &lt;tr cdk-header-row *cdkHeaderRowDef&#x3D;&quot;getDisplayColumnNames()&quot;&gt;&lt;/tr&gt;
+            &lt;tr cdk-row *cdkRowDef&#x3D;&quot;let row; columns: getDisplayColumnNames()&quot; [cdkDragStartDelay]&#x3D;&quot;400&quot; cdkDrag
+                cdkDragLockAxis&#x3D;&quot;y&quot; [cdkDragData]&#x3D;&quot;row&quot;&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+    } @else if (showErrorDetails &amp;&amp; error) {
+    &lt;div class&#x3D;&quot;table-info error&quot;&gt;
+        &lt;div class&#x3D;&quot;table-info-content&quot;&gt;
+            &lt;h4 class&#x3D;&quot;table-info-header&quot;&gt;Table Error:&lt;/h4&gt;
+            &lt;div class&#x3D;&quot;table-info-text&quot;&gt;{{error}}&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    } @else {
+    &lt;div class&#x3D;&quot;table-info loading&quot;&gt;
+        &lt;div class&#x3D;&quot;table-info-content&quot;&gt;
+            @if (!error) {
+            &lt;h4 class&#x3D;&quot;table-info-header&quot;&gt;Table Info:&lt;/h4&gt;
+            &lt;div class&#x3D;&quot;table-info-text&quot;&gt;{{loadingText}}&lt;/div&gt;
+            } @else {
+            &lt;h4 class&#x3D;&quot;table-info-header&quot;&gt;Table Info:&lt;/h4&gt;
+            &lt;div class&#x3D;&quot;table-info-text&quot;&gt;No Data.&lt;/div&gt;
+            }
+        &lt;/div&gt;
+    &lt;/div&gt;
+    }
+
+    &lt;div class&#x3D;&quot;bottom-parent&quot;&gt;
+        @if (paginatorPosition &#x3D;&#x3D;&#x3D; &#x27;bottom&#x27;) {
+        &lt;ng-container *ngTemplateOutlet&#x3D;&quot;paginatorTemplate&quot;&gt;&lt;/ng-container&gt;
+        }
+
+        @if (filterInputPosition &#x3D;&#x3D;&#x3D; &#x27;bottom&#x27;) {
+        &lt;ng-container *ngTemplateOutlet&#x3D;&quot;filterInputTemplate&quot;&gt;&lt;/ng-container&gt;
+        }
+    &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ng-template #filterInputTemplate>    <baader-filter-input [hidden]="error || !showFilter" [filter]="filter.filter" [category]="filter.column"        categoryLabel="Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"        (filterChange)="filter.filter = $event; filterChanged.emit()"        [categorySelect]="showCategoryFilter ? getFilterColumnNames() : null"></baader-filter-input></ng-template><ng-template #paginatorTemplate>    <baader-pagination [hidden]="error || !showPaginator" [pageItems]="pageItems" [totalItems]="currentFilteredItems()"        (pageChanged)="setRange($event)" [showPageItemsSelection]="showPageItemsSelection"></baader-pagination></ng-template><div class="baader-table-root">    <div class="top-parent">        @if (filterInputPosition === \'top\') {        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>        }        @if (paginatorPosition === \'top\') {        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>        }    </div>    @if (!error && dataView && displayColumns) {    <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList        [cdkDropListDisabled]="editingRowIndex >= 0">        <table class="baader-table" cdk-table [dataSource]="dataView" [trackBy]="trackTableIndex">            <ng-container [cdkColumnDef]="EDIT_NAME">                <th class="edit-header" cdk-header-cell *cdkHeaderCellDef></th>                <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">                    <div class="edit-options">                        @if (row[INDEX_NAME] === editingRowIndex) {                        <div tabindex="{{1000+i}}" class="edit-save" (click)="saveEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, saveEditRow, row[INDEX_NAME])">{{saveRowLabel}}</div>                        <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, stopEditRow, row[INDEX_NAME])">{{cancelEditRowLabel}}</div>                        } @else {                        <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, toggleEditRow, row[INDEX_NAME])">{{editRowLabel}}</div>                        }                    </div>                </td>            </ng-container>            @for (colspec of displayColumns; track $index) {            <ng-container [cdkColumnDef]="colspec.name">                <th ccdk-header-cell *cdkHeaderCellDef>                    <div tabindex="100" class="sortable" (click)="toggleSortMode(colspec.name)"                        (keydown)="sortColumnKbd($event, colspec.name)">                        <div class="sort-icon">                            {{ sortIcons[sort.column !== colspec.name ? 0 : sort.mode] }}                        </div>                        <div class="column-label">                            {{colspec.displayName}}                        </div>                    </div>                </th>                <td cdk-cell *cdkCellDef="let row; let i = index;">                    <!--                        Switching to inline editing breaks the layout due to the input element not playing                         nice with resizable rows. Perhaps a script-driven solution for resizing could solve this.                        Another alternative I\'ve explored was showing cell content in a styled, disabled input element.                        This allows for a nice UX as it doesn\'t cause the layout to jump when using                        to inline editing, however it is poor web semantics.                    -->                    @if (row[INDEX_NAME] !== editingRowIndex) {                    <div class="cell-content">{{row[colspec.name]}}</div>                    } @else if (editRowCopy) {                    <input tabindex="{{1000+i}}" class="edit-inplace" type="text"                        [(ngModel)]="editRowCopy[colspec.name]"                        [disabled]="editRowCopy[INDEX_NAME] !== editingRowIndex" />                    } @else {                    <div>ERR</div>                    }                </td>            </ng-container>            }            <tr cdk-header-row *cdkHeaderRowDef="getDisplayColumnNames()"></tr>            <tr cdk-row *cdkRowDef="let row; columns: getDisplayColumnNames()" [cdkDragStartDelay]="400" cdkDrag                cdkDragLockAxis="y" [cdkDragData]="row">            </tr>        </table>    </div>    } @else if (showErrorDetails && error) {    <div class="table-info error">        <div class="table-info-content">            <h4 class="table-info-header">Table Error:</h4>            <div class="table-info-text">{{error}}</div>        </div>    </div>    } @else {    <div class="table-info loading">        <div class="table-info-content">            @if (!error) {            <h4 class="table-info-header">Table Info:</h4>            <div class="table-info-text">{{loadingText}}</div>            } @else {            <h4 class="table-info-header">Table Info:</h4>            <div class="table-info-text">No Data.</div>            }        </div>    </div>    }    <div class="bottom-parent">        @if (paginatorPosition === \'bottom\') {        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>        }        @if (filterInputPosition === \'bottom\') {        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>        }    </div></div></div>'
+    var COMPONENTS = [{'name': 'FilterInputComponent', 'selector': 'baader-filter-input'},{'name': 'PaginationComponent', 'selector': 'baader-pagination'},{'name': 'TableViewComponent', 'selector': 'baader-table-view'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TableViewComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TableViewComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
