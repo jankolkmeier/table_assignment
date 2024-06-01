@@ -4,11 +4,11 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableDataService } from '../../services/table-data.service';
-import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState } from '../../shared/table.model';
+import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState, TABLE_INDEX_COLUMN_NAME, Table } from '../../shared/table.model';
 import { TableUtils } from '../../shared/table-utils'
 import { PaginationComponent } from '../pagination/pagination.component'
 import { FilterInputComponent } from '../filter-input/filter-input.component';
-import { debounce, interval, merge } from 'rxjs';
+import { Observable, debounce, interval, map, merge, of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 /**
@@ -25,19 +25,20 @@ export class TableComponent implements AfterViewInit {
 
   @Input()
   set url(url: string) {
-    this.updateDataSource(url);
-  }
-
-  @Input()
-  set data(data: object[]) {
-    this.prepareTable(data);
-  }
-
-  @Input()
-  set columns(columns: ColumnSpec[]) {
-    if (columns) {
-      this.setDisplayColumns(columns);
+    if (this.dataSource$ === null || (this.table !== null && this.table.url !== url)) {
+      this.dataSource$ = this.dataService.getTable$(url);
+      this.fetchData();
     }
+  }
+
+  @Input()
+  set data(table: Table) {
+    this.dataSource$ = of(table);
+  }
+
+  @Input()
+  set columns(columns: ColumnSpec[] | null) {
+    this.displayColumns = columns;
   }
 
   @Input() showPaginator = true;
@@ -55,30 +56,32 @@ export class TableComponent implements AfterViewInit {
 
   @ViewChild(PaginationComponent) paginator!: PaginationComponent;
 
-  _url?: string;
-  _data: TableRow[] | null = null;
+  dataSource$: Observable<Table> | null = null;
+
+  table: Table | null = null;
+  //_data: TableRow[] | null = null;
 
   displayColumns: ColumnSpec[] | null = null;
   displayColumnNames: string[] | null = null;
-  dataFiltered: TableRow[] | null = null;
+  dataView: TableRow[] | null = null;
   dataFilteredForPaginator = 0;
 
   error: string | null = null;
+
+  readonly INDEX = TABLE_INDEX_COLUMN_NAME;
 
   dataChanged: EventEmitter<TableRow[]> = new EventEmitter<TableRow[]>();
   rangeChanged: EventEmitter<RangeState> = new EventEmitter<RangeState>();
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
 
-  dragColumnName = "__drag";
   editColumnName = '__edit';
-  indexColumnName = "__index";
 
   editingRowIndex = -1;
 
   sort: SortState = {
     mode: ColumnSort.ASC,
-    column: this.indexColumnName
+    column: this.INDEX
   };
   range: RangeState = {
     start: 0,
@@ -97,9 +100,16 @@ export class TableComponent implements AfterViewInit {
    * in AfterViewInit before wiring the events, as some depend on children.
    */
   ngAfterViewInit() {
+
     // Jump back to first page when we change sort or filter
     this.sortChanged.subscribe(() => (this.paginator.setPage(0)));
     this.filterChanged.subscribe(() => (this.paginator.setPage(0)));
+    this.dataChanged.subscribe(() => (this.paginator?.setPage(0)));
+
+
+    // Get data - at this point in the component lifecycle the dataSource$ should be configured...
+    // Either through the data or url property.
+    this.fetchData();
 
     // When any of these events happen, we need to re-filter the data based on the 
     // current page, sort and filter settings.
@@ -112,8 +122,9 @@ export class TableComponent implements AfterViewInit {
       // Debounce these events slightly in case many get triggered quickly
       debounce(() => interval(10))
     ).subscribe(() => {
-      if (this._data !== null)
-        this.dataFiltered = this.filterData(this._data);
+      if (this.table != null) {
+        this.dataView = this.createDataView(this.table.data);
+      }
     });
   }
 
@@ -130,7 +141,7 @@ export class TableComponent implements AfterViewInit {
    * @returns true if not in default sort order
    */
   isCustomSorted() {
-    return this.sort.column !== this.indexColumnName;
+    return this.sort.column !== this.INDEX;
   }
 
   /**
@@ -146,7 +157,7 @@ export class TableComponent implements AfterViewInit {
    * I figured we might 
    * @returns the filtered set
    */
-  filterData(d: TableRow[]): TableRow[] {
+  createDataView(d: TableRow[]): TableRow[] {
     let filtered = d;
 
     // Filter rows by looking at all rows containing a field that includes the search string
@@ -195,33 +206,28 @@ export class TableComponent implements AfterViewInit {
    *   - Column for reordering / drag & dropping rows.
    * @param columns Columns to display as list of column specifications (holding the 'name' of column and 'displayName' for the header).
    */
-  setDisplayColumns(columns: object[]) {
-    this.displayColumns = columns as ColumnSpec[];
+  setDisplayColumns(columns: ColumnSpec[]) {
+    this.displayColumns = columns;
     this.displayColumnNames = this.displayColumns.map((col) => col.name);
     this.displayColumnNames.unshift(this.editColumnName);
-  }
-
-  /**
-   * Set the data source of the table and fetch the data.
-   * @param url 
-   */
-  updateDataSource(url: string) {
-    this._url = url;
-    this.fetchData();
   }
 
   /**
    * Fetches the data from url & updates the table.
    */
   fetchData() {
-    if (!this._url) {
-      console.warn("Data source not set, not fetching data.");
+    if (this.dataSource$ === null) {
+      this.error = "No data source configured. Set either url or data property.";
       return;
     }
-    this.dataService.getTableData$(this._url).subscribe({
-      next: (data) => {
-        this.prepareTable(data);
-      },
+
+    this.dataSource$.pipe(
+      map((table) => {
+        this.setTableView(table, this.displayColumns);
+        this.table = table;
+        this.dataChanged.emit(this.table.data);
+      })
+    ).subscribe({
       error: (e) => {
         this.error = `Failed to fetch data from url ${this.url}`;
         console.error(e);
@@ -236,37 +242,24 @@ export class TableComponent implements AfterViewInit {
    * @returns the unique __index property set in prepareTable
    */
   trackTableIndex(index: number, row: TableRow) {
-    return row[this.indexColumnName];
+    return row[this.INDEX];
   }
 
   /**
-   * Given new table data, infer columnTypes and set up default columns to display.
-   * Also sets up a unique index for tracking.
+   * Set up the table view based on an optional view configuration 
    * @param data Table data
    */
-  prepareTable(data: object[]): void {
-    const newData = data.map(TableUtils.flattenObjectToRow);
-    for (let idx = 0; idx < newData.length; idx++) {
-      newData[idx][this.indexColumnName] = idx;
-    }
-
-    const tableSpec = TableUtils.inferColumnTypes(newData);
-
-    if (!this.displayColumns) {
-      // Display all columns if none selected
-      this.setDisplayColumns(Object.values(tableSpec));
+  setTableView(table: Table, viewSpec: ColumnSpec[] | null): void {
+    if (viewSpec === null) {
+      // Display all columns if view configuration is specified
+      this.setDisplayColumns(Object.values(table.spec));
     } else {
       // Merge user configured column settings with inferred column specs
-      this.displayColumns = this.displayColumns.map((colspec: ColumnSpec) => {
-        Object.assign(tableSpec[colspec.name], colspec);
-        return tableSpec[colspec.name];
-      });
+      this.setDisplayColumns(viewSpec.map((colspec: ColumnSpec) => {
+        Object.assign(table.spec[colspec.name], colspec);
+        return table.spec[colspec.name];
+      }));
     }
-
-    //this._data = newData;
-    this._data = newData;
-    //this.dataFiltered = this.filterData(newData);
-    this.dataChanged.emit(this._data);
   }
 
   /**
@@ -274,7 +267,7 @@ export class TableComponent implements AfterViewInit {
    * @param rowIndex of the edited row
    */
   stopEditRow(rowIndex: number) {
-    console.log(`Finished editing row ${rowIndex}. New data: `, this._data?.filter((r) => (r[this.indexColumnName] === rowIndex)));
+    console.log(`Finished editing row ${rowIndex}. New data: `, this.table!.data.filter((r) => (r[this.INDEX] === rowIndex)));
     this.editingRowIndex = -1;
   }
 
@@ -334,7 +327,7 @@ export class TableComponent implements AfterViewInit {
 
     // If back to default, sort by __index column instead.
     if (this.sort.mode == ColumnSort.NONE) {
-      this.sort.column = this.indexColumnName;
+      this.sort.column = this.INDEX;
       this.sort.mode = ColumnSort.ASC;
     }
 
@@ -355,23 +348,25 @@ export class TableComponent implements AfterViewInit {
     This is still not a perfect solution without also making this transparent to the user.
     But how to do this would require knowing more context of how this table is used. Ideally of course, this behaviour is configurable. 
     */
-    const dragged_index = event.item.data[this.indexColumnName];
-    const move_to_index = this.dataFiltered![event.currentIndex][this.indexColumnName];
+    const dragged_index = event.item.data[this.INDEX];
+    const move_to_index = this.dataView![event.currentIndex][this.INDEX];
 
     // Update view only first
-    moveItemInArray(this.dataFiltered!, event.previousIndex, event.currentIndex);
-    this.dataFiltered = [...this.dataFiltered!];
+    moveItemInArray(this.dataView!, event.previousIndex, event.currentIndex);
+    this.dataView = [...this.dataView!];
 
     if (!this.isFiltered() && !this.isCustomSorted()) {
       // If no finter is applied, we can meaningfully change the order in the source data
-      const data_dragged_pos = this._data!.findIndex((row) => (row[this.indexColumnName] === dragged_index));
-      const data_move_to_pos = this._data!.findIndex((row) => (row[this.indexColumnName] === move_to_index));
-      moveItemInArray(this._data!, data_dragged_pos, data_move_to_pos);
+      const data_dragged_pos = this.table!.data.findIndex((row) => (row[this.INDEX] === dragged_index));
+      const data_move_to_pos = this.table!.data.findIndex((row) => (row[this.INDEX] === move_to_index));
+      moveItemInArray(this.table!.data, data_dragged_pos, data_move_to_pos);
       // Re-index 
-      for (let idx = 0; idx < this._data!.length; idx++) {
-        this._data![idx][this.indexColumnName] = idx;
+      for (let idx = 0; idx < this.table!.data.length; idx++) {
+        this.table!.data[idx][this.INDEX] = idx;
       }
-      this._data = [...this._data!];
+
+      // Trigger change detection
+      this.table!.data = [...this.table!.data!];
     }
   }
 

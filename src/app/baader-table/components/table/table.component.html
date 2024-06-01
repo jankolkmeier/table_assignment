@@ -15,7 +15,7 @@
 
 <div class="baader-table-root">
 
-    @if (!error && dataFiltered && displayColumns) {
+    @if (!error && dataView && displayColumns) {
 
     @if (filterInputPosition === 'top') {
     <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
@@ -27,18 +27,18 @@
 
     <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList
         [cdkDropListDisabled]="editingRowIndex >= 0">
-        <table class="baader-table" cdk-table [dataSource]="dataFiltered" [trackBy]="trackTableIndex">
+        <table class="baader-table" cdk-table [dataSource]="dataView" [trackBy]="trackTableIndex">
 
             <ng-container [cdkColumnDef]="editColumnName">
                 <th class="edit-header" cdk-header-cell *cdkHeaderCellDef></th>
                 <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">
                     <div class="edit-options">
-                        @if (row[indexColumnName] === editingRowIndex) {
-                        <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[indexColumnName])"
-                            (keydown)="editRowKbd($event, stopEditRow, row[indexColumnName])">{{editRowLabel}}</div>
+                        @if (row[INDEX] === editingRowIndex) {
+                        <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[INDEX])"
+                            (keydown)="editRowKbd($event, stopEditRow, row[INDEX])">{{editRowLabel}}</div>
                         } @else {
-                        <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[indexColumnName])"
-                            (keydown)="editRowKbd($event, toggleEditRow, row[indexColumnName])">{{saveRowLabel}}</div>
+                        <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[INDEX])"
+                            (keydown)="editRowKbd($event, toggleEditRow, row[INDEX])">{{saveRowLabel}}</div>
                         }
                     </div>
                 </td>
@@ -66,11 +66,11 @@
                         This allows for a nice UX as it doesn't cause the layout to jump when using
                         to inline editing, however it is poor web semantics.
                     -->
-                    @if (row[indexColumnName] !== editingRowIndex) {
+                    @if (row[INDEX] !== editingRowIndex) {
                     <div class="cell-content">{{row[colspec.name]}}</div>
                     } @else {
                     <input tabindex="{{1000+i}}" class="edit-inplace" type="text" [(ngModel)]="row[colspec.name]"
-                        [disabled]="row[indexColumnName] !== editingRowIndex" />
+                        [disabled]="row[INDEX] !== editingRowIndex" />
                     }
                 </td>
             </ng-container>

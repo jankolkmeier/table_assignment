@@ -1,3 +1,9 @@
+
+/**
+ * Use this string to create a tracking entry for row data.
+ */
+export const TABLE_INDEX_COLUMN_NAME = '__index';
+
 /**
  * Describe sorting state of a column
  */
@@ -36,7 +42,7 @@ export interface RangeState {
 }
 
 /**
- * A table is described by a TableSpec, i.e. a set of ColumnSpecs 
+ * A TableSpect describes a table by it's columns i.e. a set of ColumnSpecs 
  */
 export type TableSpec = Record<string, ColumnSpec>
 
@@ -44,3 +50,12 @@ export type TableSpec = Record<string, ColumnSpec>
  * A table row is a set of key value pairs with these possible value types.
  */
 export type TableRow = Record<string, string | number | boolean | null>;
+
+/**
+ * A Table is the combination of row data data and description of it's columns
+ */
+export interface Table {
+    spec: TableSpec;
+    data: TableRow[];
+    url?: string;
+}
