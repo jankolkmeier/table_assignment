@@ -27,6 +27,8 @@
               }
             ],
             "styles": [
+              "./node_modules/primeflex/primeflex.css",
+              "./node_modules/primeflex/themes/primeone-light.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -95,8 +97,6 @@
               }
             ],
             "styles": [
-              "/node_modules/primeflex/primeflex.css",
-              "/node_modules/primeflex/themes/primeone-light.css",
               "src/styles.css"
             ],
             "scripts": []
