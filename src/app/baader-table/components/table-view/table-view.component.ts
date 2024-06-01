@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, EventEmitter, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, AfterViewInit, EventEmitter, ViewChild, OnInit, Output } from '@angular/core';
 import { KeyValuePipe, AsyncPipe, CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -378,7 +378,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       // Not managed by TableDataService - edit directly in memory
       const editIndex = this.table!.data.findIndex((r) => (r[this.INDEX_NAME] === this.editRowCopy![this.INDEX_NAME]));
       this.table!.data[editIndex] = this.editRowCopy;
-      this.dataChanged.emit();
+      this.dataChanged.emit(this.table!.data);
     } else {
       // Managed by TableDataService - use save function
       this.dataService.saveTableChages(
@@ -505,7 +505,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       if (this.dataService.isCached(this.table!.url)) {
         this.dataService.dataSourceChanged.emit(this.table!.url)
       } else {
-        this.dataChanged.emit();
+        this.dataChanged.emit(this.table!.data);
       }
     }
   }
