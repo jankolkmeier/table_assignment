@@ -125,9 +125,25 @@
     </p>
     <p class="comment">
         <p>Generic Pagination component.
-Configured by setting total items and items per page.
+Configured by setting totalItems and itemsPerPage.
 Triggers pageChanges event whenever the selected page changes.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// your.component.ts
 
+&#64;Component({
+  // ...
+  imports: [PaginationComponent],
+  templateUrl: &#39;./your.component.html&#39;,
+  // ...
+})
+export class YourComponent {
+  mydata : object[] = [];
+
+  setRage(range : RangeState) {
+    // Your logic here that causes the view of mydata to show only the range of data provided by the paginator.
+  }
+}</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- your.component.html --&gt;
+&lt;baader-pagination [totalItems]=&quot;mydata.length&quot; (pageChanged)=&quot;setRange($event)&quot;&gt;&lt;/baader-pagination&gt;
+&lt;!-- Your data view template here  --&gt;</code></pre></div>
     </p>
 
 
@@ -345,7 +361,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:63</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -371,7 +387,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:49</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -397,7 +413,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:44</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -423,7 +439,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:64</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -449,7 +465,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:61</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -475,7 +491,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:62</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -501,7 +517,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:52</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -522,7 +538,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:55</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -546,7 +562,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:59</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -567,7 +583,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:46</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -600,8 +616,8 @@ Triggers pageChanges event whenever the selected page changes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -674,8 +690,8 @@ Triggers pageChanges event whenever the selected page changes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -764,8 +780,8 @@ Triggers pageChanges event whenever the selected page changes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -801,8 +817,8 @@ Triggers pageChanges event whenever the selected page changes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -875,8 +891,8 @@ Triggers pageChanges event whenever the selected page changes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -949,8 +965,8 @@ Triggers pageChanges event whenever the selected page changes.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -1002,7 +1018,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -1033,7 +1049,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -1063,7 +1079,7 @@ Triggers pageChanges event whenever the selected page changes.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/baader-table/components/pagination/pagination.component.ts:55</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1116,8 +1132,32 @@ import { RangeState } from &#x27;../../shared/table.model&#x27;;
 
 /**
  * Generic Pagination component.
- * Configured by setting total items and items per page.
+ * Configured by setting totalItems and itemsPerPage.
  * Triggers pageChanges event whenever the selected page changes.
+ * 
+ * &#x60;&#x60;&#x60;typescript
+ * // your.component.ts
+ * 
+ * @Component({
+ *   // ...
+ *   imports: [PaginationComponent],
+ *   templateUrl: &#x27;./your.component.html&#x27;,
+ *   // ...
+ * })
+ * export class YourComponent {
+ *   mydata : object[] &#x3D; [];
+ * 
+ *   setRage(range : RangeState) {
+ *     // Your logic here that causes the view of mydata to show only the range of data provided by the paginator.
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ * 
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- your.component.html --&gt;
+ * &lt;baader-pagination [totalItems]&#x3D;&quot;mydata.length&quot; (pageChanged)&#x3D;&quot;setRange($event)&quot;&gt;&lt;/baader-pagination&gt;
+ * &lt;!-- Your data view template here  --&gt;
+ * &#x60;&#x60;&#x60;
  */
 @Component({
   selector: &#x27;baader-pagination&#x27;,
