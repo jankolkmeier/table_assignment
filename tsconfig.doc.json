@@ -1,0 +1,8 @@
+{
+    "include": [
+        "src/app/baader-table/**/*.ts"
+    ],
+    "exclude": [
+        "src/app/baader-table/**/*.spec.ts"
+    ]
+}

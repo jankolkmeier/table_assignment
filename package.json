@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadless",
     "lint": "ng lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docs": "npx compodoc -p tsconfig.doc.json"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "@angular-devkit/build-angular": "^18.0.1",
     "@angular/cli": "^18.0.1",
     "@angular/compiler-cli": "^18.0.0",
+    "@compodoc/compodoc": "^1.1.25",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "18.0.0-alpha.16",
     "eslint": "^9.3.0",
