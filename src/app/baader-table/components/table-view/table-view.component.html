@@ -33,11 +33,13 @@
                 <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">
                     <div class="edit-options">
                         @if (row[INDEX_NAME] === editingRowIndex) {
+                        <div tabindex="{{1000+i}}" class="edit-save" (click)="saveEditRow(row[INDEX_NAME])"
+                            (keydown)="editRowKbd($event, saveEditRow, row[INDEX_NAME])">{{saveRowLabel}}</div>
                         <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[INDEX_NAME])"
-                            (keydown)="editRowKbd($event, stopEditRow, row[INDEX_NAME])">{{editRowLabel}}</div>
+                            (keydown)="editRowKbd($event, stopEditRow, row[INDEX_NAME])">{{cancelEditRowLabel}}</div>
                         } @else {
                         <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[INDEX_NAME])"
-                            (keydown)="editRowKbd($event, toggleEditRow, row[INDEX_NAME])">{{saveRowLabel}}</div>
+                            (keydown)="editRowKbd($event, toggleEditRow, row[INDEX_NAME])">{{editRowLabel}}</div>
                         }
                     </div>
                 </td>
@@ -67,9 +69,12 @@
                     -->
                     @if (row[INDEX_NAME] !== editingRowIndex) {
                     <div class="cell-content">{{row[colspec.name]}}</div>
+                    } @else if (editRowCopy) {
+                    <input tabindex="{{1000+i}}" class="edit-inplace" type="text"
+                        [(ngModel)]="editRowCopy[colspec.name]"
+                        [disabled]="editRowCopy[INDEX_NAME] !== editingRowIndex" />
                     } @else {
-                    <input tabindex="{{1000+i}}" class="edit-inplace" type="text" [(ngModel)]="row[colspec.name]"
-                        [disabled]="row[INDEX_NAME] !== editingRowIndex" />
+                    <div>ERR</div>
                     }
                 </td>
             </ng-container>

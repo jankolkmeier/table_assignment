@@ -8,7 +8,7 @@ import { ColumnSpec, TableRow, ColumnSort, SortState, FilterState, RangeState, T
 import { TableUtils } from '../../shared/table-utils'
 import { PaginationComponent } from '../pagination/pagination.component'
 import { FilterInputComponent } from '../filter-input/filter-input.component';
-import { Observable, debounce, interval, map, merge, of } from 'rxjs';
+import { Observable, debounce, interval, map, merge, of, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 /**
@@ -43,16 +43,17 @@ export class TableViewComponent implements AfterViewInit, OnInit {
     this.displayColumns = columns;
   }
 
+
   @Input() showPaginator = true;
   @Input() showFilter = true;
 
+  /* View Customization */
   @Input() paginatorPosition = 'bottom';
   @Input() filterInputPosition = 'top';
-
-  /* View Customization */
   @Input() sortIcons = ['▤', '▼', '▲'];
-  @Input() editRowLabel = '🖫';
-  @Input() saveRowLabel = '✎';
+  @Input() saveRowLabel = '🖫';
+  @Input() editRowLabel = '✎';
+  @Input() cancelEditRowLabel = '🗙';
   @Input() showErrors = true;
   @Input() loadingText = "Initializing table...";
 
@@ -76,8 +77,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
 
-
   editingRowIndex = -1;
+  editRowCopy: TableRow | null = null;
 
   sort: SortState = {
     mode: ColumnSort.ASC,
@@ -113,6 +114,17 @@ export class TableViewComponent implements AfterViewInit, OnInit {
         this.dataView = this.createDataView(this.table.data);
       }
     });
+
+    // Watch data service for changes in our table - i.e. if multiple tables are being edited at the same time.
+    merge(
+      this.dataService.dataSourceChanged
+    ).pipe(
+      tap((url) => {
+        if (this.table && this.table.url === url) {
+          this.dataChanged.emit();
+        }
+      })
+    ).subscribe();
 
     // Fetch the prepared data. When completed, this will trigger the dataChanged event,
     // which will cause the above pipe to trigger and update the view.
@@ -294,26 +306,73 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   }
 
   /**
-   * Complete editing row.
+   * Cancel editing row (i.e don't save changes).
    * @param rowIndex of the edited row
    */
   stopEditRow(rowIndex: number) {
-    console.log(`Finished editing row ${rowIndex}. New data: `, this.table!.data.filter((r) => (r[this.INDEX_NAME] === rowIndex)));
+    if (this.editRowCopy === null || rowIndex !== this.editRowCopy[this.INDEX_NAME]) {
+      console.warn(`Failed to stop editing, was not editing row ${rowIndex}`)
+    }
     this.editingRowIndex = -1;
+    this.editRowCopy = null;
+  }
+
+  /**
+   * Stop editing row and save changes.
+   * @param rowIndex save the current row
+   */
+  saveEditRow(rowIndex: number) {
+    if (this.editRowCopy === null || rowIndex !== this.editRowCopy[this.INDEX_NAME]) {
+      console.warn(`Not saving changes - not currently editing a copy of this row`);
+      return;
+    } else if (this.editRowCopy !== null && !this.dataService.isCached(this.table?.url)) {
+      // Not managed by TableDataService - edit directly in memory
+      const editIndex = this.table!.data.findIndex((r) => (r[this.INDEX_NAME] === this.editRowCopy![this.INDEX_NAME]));
+      this.table!.data[editIndex] = this.editRowCopy;
+      this.dataChanged.emit();
+      return;
+    } else {
+      // Managed by TableDataService - use save function
+      this.dataService.saveTableChages(
+        this.table!.url!,
+        this.editRowCopy
+      );
+    }
+
+    this.stopEditRow(rowIndex);
   }
 
   /**
    * Start/stop editing a row. If another one was edited, stop it first, then start editing the new row.
-   * @param rowIndex of the row to start/stop editing row
+   * @param rowIndex of the row to start/stop editing
    */
   toggleEditRow(rowIndex: number) {
     if (this.editingRowIndex == rowIndex) {
       this.stopEditRow(rowIndex);
     } else {
-      if (this.editingRowIndex >= 0)
-        this.stopEditRow(this.editingRowIndex);
-      this.editingRowIndex = rowIndex;
+      this.startEditRow(rowIndex);
     }
+  }
+
+  /**
+   * Start editing a row.
+   * @param rowIndex of the row to start editing
+   */
+  startEditRow(rowIndex: number) {
+    if (this.editingRowIndex >= 0)
+      this.stopEditRow(this.editingRowIndex);
+    this.editRowCopy = this.createRowCopy(rowIndex);
+    this.editingRowIndex = rowIndex;
+  }
+
+
+  /**
+   * Create a copy of the data in a row based on it's tracking index (__index)
+   * @param rowIndex index of the row to copy
+   */
+  createRowCopy(rowIndex: number): TableRow {
+    const row = this.table!.data.filter((r) => (r[this.INDEX_NAME] === rowIndex))[0];
+    return Object.assign({} as TableRow, row);
   }
 
   /**
@@ -396,8 +455,11 @@ export class TableViewComponent implements AfterViewInit, OnInit {
         this.table!.data[idx][this.INDEX_NAME] = idx;
       }
 
-      // Trigger change detection
-      this.table!.data = [...this.table!.data!];
+      if (this.dataService.isCached(this.table!.url)) {
+        this.dataService.dataSourceChanged.emit(this.table!.url)
+      } else {
+        this.dataChanged.emit();
+      }
     }
   }
 

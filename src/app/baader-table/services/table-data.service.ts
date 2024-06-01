@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of, shareReplay, tap } from 'rxjs';
-import { TABLE_INDEX_COLUMN_NAME, Table } from '../shared/table.model';
+import { TABLE_INDEX_COLUMN_NAME, Table, TableRow } from '../shared/table.model';
 import { TableUtils } from '../shared/table-utils';
 
 /**
@@ -18,6 +18,8 @@ export class TableDataService {
 
   private cache = new Map<string, Table>();
   private ongoingRequests = new Map<string, Observable<Table>>();
+
+  dataSourceChanged = new EventEmitter<string>();
 
   /**
    * Fetch json table data from some url (such as an API endpoint)
@@ -94,16 +96,32 @@ export class TableDataService {
     } as Table;
   }
 
-
   /**
-   * TODO: To be implemented 
-   * @param src 
-   * @param index 
-   * @param newRowData 
+   * Save a changed row: implemented here as a simple replace operation on the cached memory.
+   * For a proper implementation this would need more context to properly update the data (i.e. a REST API definition).
+   * 
+   * Also beware that for a proper implementation, we would need to be able to undo the flattening process of nested objects
+   * i.e. by keeping track of a mapping when flattening, or by deriving it from the seperator used in the column name.  
+   * 
+   * @param src the url of the table in cache
+   * @param newRowData the new row data (will replace the row based on the __index field in newRowData)
    */
-  /*
-  saveTableChages(src: string, index: number, newRowData: TableRow) {
+  saveTableChages(src: string, newRowData: TableRow) {
+    if (!this.isCached(src)) {
+      console.warn(`Can't save data not managed by TableDataService`);
+      return;
+    }
+    const table = this.cache.get(src);
+    const replaceIndex = table!.data.findIndex((r) => (r[TABLE_INDEX_COLUMN_NAME] == newRowData[TABLE_INDEX_COLUMN_NAME]));
+    console.log(`Replacing row ${replaceIndex} Old Data / New Data:`, table!.data[replaceIndex], newRowData);
+    table!.data[replaceIndex] = newRowData;
+    this.dataSourceChanged.emit(src);
   }
-  */
+
+  isCached(url?: string): boolean {
+    if (!url)
+      return false;
+    return this.cache.has(url);
+  }
 
 }
