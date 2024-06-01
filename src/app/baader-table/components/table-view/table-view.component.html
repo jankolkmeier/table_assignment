@@ -23,14 +23,14 @@
 
     @if (!error && dataView && displayColumns) {
     <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList
-        [cdkDropListDisabled]="editingRowIndex >= 0">
+        [cdkDropListDisabled]="editRowCopy">
         <table class="baader-table" cdk-table [dataSource]="dataView" [trackBy]="trackTableIndex">
 
             <ng-container [cdkColumnDef]="EDIT_NAME">
                 <th class="edit-header" cdk-header-cell *cdkHeaderCellDef></th>
                 <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">
                     <div class="edit-options">
-                        @if (row[INDEX_NAME] === editingRowIndex) {
+                        @if (editRowCopy && row[INDEX_NAME] === editRowCopy[INDEX_NAME]) {
                         <div tabindex="{{1000+i}}" class="edit-save" (click)="saveEditRow(row[INDEX_NAME])"
                             (keydown)="editRowKbd($event, saveEditRow, row[INDEX_NAME])">{{saveRowLabel}}</div>
                         <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[INDEX_NAME])"
@@ -65,12 +65,11 @@
                         This allows for a nice UX as it doesn't cause the layout to jump when using
                         to inline editing, however it is poor web semantics.
                     -->
-                    @if (row[INDEX_NAME] !== editingRowIndex) {
+                    @if (!editRowCopy || row[INDEX_NAME] !== editRowCopy[INDEX_NAME]) {
                     <div class="cell-content">{{row[colspec.name]}}</div>
                     } @else if (editRowCopy) {
                     <input tabindex="{{1000+i}}" class="edit-inplace" type="text"
-                        [(ngModel)]="editRowCopy[colspec.name]"
-                        [disabled]="editRowCopy[INDEX_NAME] !== editingRowIndex" />
+                        [(ngModel)]="editRowCopy[colspec.name]" />
                     } @else {
                     <div>ERR</div>
                     }

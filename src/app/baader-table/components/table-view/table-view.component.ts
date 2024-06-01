@@ -125,7 +125,6 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
 
-  editingRowIndex = -1;
   editRowCopy: TableRow | null = null;
 
   sort: SortState = {
@@ -363,7 +362,6 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       if (!environment.prod)
         console.warn(`Failed to stop editing, was not editing row ${rowIndex}`)
     }
-    this.editingRowIndex = -1;
     this.editRowCopy = null;
   }
 
@@ -397,7 +395,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @param rowIndex of the row to start/stop editing
    */
   toggleEditRow(rowIndex: number) {
-    if (this.editingRowIndex == rowIndex) {
+    if (this.editRowCopy !== null && this.editRowCopy[this.INDEX_NAME] == rowIndex) {
       this.stopEditRow(rowIndex);
     } else {
       this.startEditRow(rowIndex);
@@ -409,10 +407,9 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @param rowIndex of the row to start editing
    */
   startEditRow(rowIndex: number) {
-    if (this.editingRowIndex >= 0)
-      this.stopEditRow(this.editingRowIndex);
+    if (this.editRowCopy !== null)
+      this.stopEditRow(this.editRowCopy[this.INDEX_NAME] as number);
     this.editRowCopy = this.createRowCopy(rowIndex);
-    this.editingRowIndex = rowIndex;
   }
 
 
