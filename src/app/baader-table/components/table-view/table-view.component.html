@@ -3,7 +3,7 @@
         <baader-filter-input [filter]="filter.filter" [category]="filter.column" filterLabel="Search Table:"
             categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
             (filterChange)="filter.filter = $event; filterChanged.emit()"
-            [categorySelect]="displayColumnNames"></baader-filter-input>
+            [categorySelect]="getFilterColumnNames()"></baader-filter-input>
     </div>
 </ng-template>
 

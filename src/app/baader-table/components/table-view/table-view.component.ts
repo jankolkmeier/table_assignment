@@ -153,6 +153,17 @@ export class TableViewComponent implements AfterViewInit {
   }
 
   /**
+   * Return a list of content column names that are displayed and part of the data.
+   * This should not return columns like __index or __edit.
+   * @returns a list of column names
+   */
+  getFilterColumnNames(): string[] {
+    return this.displayColumnNames == null ? [] : this.displayColumnNames?.filter((n) => {
+      return this.displayColumns?.some((colspec) => (colspec.name == n));
+    });
+  }
+
+  /**
    * Apply the configured filters. This is implemented as an async operation as
    * I figured we might 
    * @returns the filtered set
@@ -167,7 +178,7 @@ export class TableViewComponent implements AfterViewInit {
           .filter(key => {
             // Search only through displayed columns.
             // If column name is configured in filter state, only search that column.
-            return this.displayColumnNames!.indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
+            return this.getFilterColumnNames().indexOf(key) > -1 && (this.filter.column == "" || key === this.filter.column);
           })
           .some(key => { // Check if any of the search columns in this row contain the search string.
             return this.filter.filter === "" || row[key as string]?.toString().toLowerCase().includes(this.filter.filter.toLowerCase());
