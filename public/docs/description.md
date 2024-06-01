@@ -28,10 +28,10 @@ JSONPlaceholder, Fakestore API for the products list, and Random User API for th
 
 ## Deliverables:
 1. &#9745; A fully functional Angular application that implements the requirements listed above.
-2. &#9744; Code should be well organized, documented, and easy to maintain.
+2. &#9745; Code should be well organized, documented, and easy to maintain.
 3. &#9744; Provide a brief explanation of how you implemented each of the requirements listed
 above in the code.
-4. &#9744; Submit the code to a public Git repository (e.g., GitHub) with clear instructions on
+4. &#9745; Submit the code to a public Git repository (e.g., GitHub) with clear instructions on
 how to run the application.
 
 ## Evaluation Criteria:
