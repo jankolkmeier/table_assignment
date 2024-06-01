@@ -6,6 +6,38 @@ import { FormsModule } from '@angular/forms';
  * A generic component that can be used to create filter input fields.
  * Optional features are:
  *  - Provide a list of categories to select from for the filter
+ * 
+ * ```typescript
+ * // your.component.ts
+ * 
+ * @Component({
+ *   // ...
+ *   imports: [FilterInputComponent],
+ *   templateUrl: './your.component.html',
+ *   // ...
+ * })
+ * export class YourComponent {
+ *   filter: string = ""; // Search string to filter data on
+ *   category: string = ""; // Additional category to limit search to
+ *   categories: string[] = [ "products", "users" ];
+ *   
+ *   filterChanged(f : string) {
+ *     // update search results based on new filter string
+ *   }
+ * 
+ *   categoryChanged(c : string) {
+ *     // update search results based on new category
+ *   }
+ * }
+ * ```
+ * 
+ * ```html
+ * <!-- your.component.html -->
+ *     <baader-filter-input [category]="category" (categoryChange)="categoryChanged()" 
+ *                          [filter]="filter" (filterChange)="filterChanged()"
+ *                    [categorySelect]="categories"></baader-filter-input>
+ * <!-- Your data view template here  -->
+ * ```
  */
 @Component({
   selector: 'baader-filter-input',
@@ -34,7 +66,6 @@ export class FilterInputComponent {
   @Input() categoryDefaultValue = "";
 
   @Input() resetLabel = "Clear";
-
 
   /**
    * Input field for filter string changed

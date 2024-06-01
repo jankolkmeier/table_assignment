@@ -127,11 +127,12 @@
         <p>Table Component for displaying, searching and sorting tables.
 To render data, use exactly one of these Input properties:
   <code class="no-auto-link">url</code>, <code class="no-auto-link">data</code> or <code class="no-auto-link">data$</code></p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// ...
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// your.component.ts
 
 &#64;Component({
   // ...
   imports: [TableViewComponent],
+  templateUrl: &#39;./your.component.html&#39;,
   // ...
 })
 export class ProductsPageComponent {
@@ -142,7 +143,8 @@ export class ProductsPageComponent {
     { name: &quot;category&quot;, displayName: &quot;Category&quot; },
     { name: &quot;price&quot;, displayName: &quot;Price&quot; },
  ];
-}</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;baader-table-view [columns]=&quot;products_display_columns&quot; [url]=&quot;products_data_url&quot;&gt;&lt;/baader-table-view&gt;</code></pre></div>
+}</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- your.component.html --&gt;
+&lt;baader-table-view [columns]=&quot;products_display_columns&quot; [url]=&quot;products_data_url&quot;&gt;&lt;/baader-table-view&gt;</code></pre></div>
     </p>
 
 
@@ -248,9 +250,6 @@ export class ProductsPageComponent {
                             <li>
                                     <span class="modifier">Readonly</span>
                                 <a href="#EDIT_NAME" >EDIT_NAME</a>
-                            </li>
-                            <li>
-                                <a href="#editingRowIndex" >editingRowIndex</a>
                             </li>
                             <li>
                                 <a href="#editRowCopy" >editRowCopy</a>
@@ -476,7 +475,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:124</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:142</a></div>
                             </td>
                         </tr>
 
@@ -537,7 +536,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:86</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:104</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -558,9 +557,16 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:86</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Specify which columns to display in order, and how they are named in the header row.
+If not specified, all columns will be shown.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -579,9 +585,16 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:68</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>A Table object.
+Required if not using url or data$.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -600,9 +613,16 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:77</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>An Observable of a Table object.
+Required if not using url or data.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -626,7 +646,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:85</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:103</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -652,7 +672,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:82</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:100</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -678,7 +698,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:88</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:106</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -704,7 +724,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:78</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:96</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -730,7 +750,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:81</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:99</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -756,7 +776,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:102</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -782,7 +802,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:76</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:94</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -808,7 +828,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:87</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:105</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -834,7 +854,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:93</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -860,7 +880,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:74</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:92</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -886,7 +906,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:91</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -912,7 +932,7 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:83</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:101</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -933,9 +953,16 @@ export class ProductsPageComponent {
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:59</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>A url pointing to a .json containing table-like data. The data will be fetched using TableDataService and displayed.
+Required if not using data or data$</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -967,8 +994,8 @@ export class ProductsPageComponent {
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="215"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:215</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:233</a></div>
                         </td>
                     </tr>
 
@@ -1038,8 +1065,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="405"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:405</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="422"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:422</a></div>
                         </td>
                     </tr>
 
@@ -1112,8 +1139,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="213"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:213</a></div>
                         </td>
                     </tr>
 
@@ -1155,15 +1182,15 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="464"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:464</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="481"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:481</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handle Drop event from Cdk&#39;s DragDropModule.</p>
+                        <div class="io-description"><p>Handle Drop event from Cdk&#39;s DragDropModule. This will affect the source data order if in default sorting mode.</p>
 </div>
 
                             <div class="io-description">
@@ -1229,8 +1256,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="427"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:427</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="444"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:444</a></div>
                         </td>
                     </tr>
 
@@ -1335,15 +1362,16 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="291"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:291</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="310"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:310</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Fetches the data from url &amp; updates the table.</p>
+                        <div class="io-description"><p>Subscribe to the dataSource observable and store the result in this.table.
+New data will trigger a dataChanged event and cause the table view to update.</p>
 </div>
 
                         <div class="io-description">
@@ -1374,8 +1402,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="272"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:272</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:290</a></div>
                         </td>
                     </tr>
 
@@ -1417,8 +1445,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:222</a></div>
                         </td>
                     </tr>
 
@@ -1461,8 +1489,8 @@ This should not return columns like __index or __edit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="187"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:187</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:205</a></div>
                         </td>
                     </tr>
 
@@ -1504,8 +1532,8 @@ This should not return columns like __index or __edit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="179"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:179</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:197</a></div>
                         </td>
                     </tr>
 
@@ -1547,8 +1575,8 @@ This should not return columns like __index or __edit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="168"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:168</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:186</a></div>
                         </td>
                     </tr>
 
@@ -1587,8 +1615,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:147</a></div>
                         </td>
                     </tr>
 
@@ -1624,8 +1652,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="356"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:356</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="374"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:374</a></div>
                         </td>
                     </tr>
 
@@ -1698,8 +1726,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="280"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:280</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="298"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:298</a></div>
                         </td>
                     </tr>
 
@@ -1772,8 +1800,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="264"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:264</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:282</a></div>
                         </td>
                     </tr>
 
@@ -1851,8 +1879,8 @@ Adds the column(s) for additional features of this table component, such as:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="252"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:252</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:270</a></div>
                         </td>
                     </tr>
 
@@ -1921,8 +1949,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="326"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:326</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="345"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:345</a></div>
                         </td>
                     </tr>
 
@@ -2002,8 +2030,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="415"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:415</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="432"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:432</a></div>
                         </td>
                     </tr>
 
@@ -2092,8 +2120,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="393"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:393</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="411"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:411</a></div>
                         </td>
                     </tr>
 
@@ -2166,8 +2194,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="343"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:343</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="362"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:362</a></div>
                         </td>
                     </tr>
 
@@ -2240,8 +2268,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="381"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:381</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="399"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:399</a></div>
                         </td>
                     </tr>
 
@@ -2314,8 +2342,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="438"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:438</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="455"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:455</a></div>
                         </td>
                     </tr>
 
@@ -2389,8 +2417,8 @@ sorting mode of the column provided</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:318</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="337"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:337</a></div>
                         </td>
                     </tr>
 
@@ -2490,7 +2518,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:105</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -2521,7 +2549,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:98</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -2552,7 +2580,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -2583,7 +2611,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:97</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -2614,7 +2642,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:96</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -2646,32 +2674,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:103</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="editingRowIndex"></a>
-                    <span class="name">
-                        <span ><b>editingRowIndex</b></span>
-                        <a href="#editingRowIndex"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>-1</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:110</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -2702,7 +2705,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:111</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:129</a></div>
                         </td>
                     </tr>
 
@@ -2733,7 +2736,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:100</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -2767,7 +2770,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:121</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -2798,7 +2801,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:108</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:127</a></div>
                         </td>
                     </tr>
 
@@ -2824,7 +2827,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:102</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:120</a></div>
                         </td>
                     </tr>
 
@@ -2860,7 +2863,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:90</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -2894,7 +2897,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:117</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:135</a></div>
                         </td>
                     </tr>
 
@@ -2925,7 +2928,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:106</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -2959,7 +2962,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:113</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -2990,7 +2993,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:107</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -3021,7 +3024,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -3051,11 +3054,14 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:59</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>A url pointing to a .json containing table-like data. The data will be fetched using TableDataService and displayed.
+Required if not using data or data$</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -3110,11 +3116,14 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:68</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>A Table object.
+Required if not using url or data$.</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -3169,11 +3178,14 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:77</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>An Observable of a Table object.
+Required if not using url or data.</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -3228,11 +3240,14 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:86</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Specify which columns to display in order, and how they are named in the header row.
+If not specified, all columns will be shown.</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -3295,11 +3310,12 @@ import { environment } from &#x27;../../../../environments/environment&#x27;;
  *   &lt;code class&#x3D;&quot;no-auto-link&quot;&gt;url&lt;/code&gt;, &lt;code class&#x3D;&quot;no-auto-link&quot;&gt;data&lt;/code&gt; or &lt;code class&#x3D;&quot;no-auto-link&quot;&gt;data$&lt;/code&gt;
  * 
  * &#x60;&#x60;&#x60;typescript
- * // ...
+ * // your.component.ts
  * 
  * @Component({
  *   // ...
  *   imports: [TableViewComponent],
+ *   templateUrl: &#x27;./your.component.html&#x27;,
  *   // ...
  * })
  * export class ProductsPageComponent {
@@ -3314,6 +3330,7 @@ import { environment } from &#x27;../../../../environments/environment&#x27;;
  * &#x60;&#x60;&#x60;
  * 
  * &#x60;&#x60;&#x60;html
+ * &lt;!-- your.component.html --&gt;
  * &lt;baader-table-view [columns]&#x3D;&quot;products_display_columns&quot; [url]&#x3D;&quot;products_data_url&quot;&gt;&lt;/baader-table-view&gt;
  * &#x60;&#x60;&#x60;
  */
@@ -3326,21 +3343,37 @@ import { environment } from &#x27;../../../../environments/environment&#x27;;
 })
 export class TableViewComponent implements AfterViewInit, OnInit {
 
+  /**
+   * A url pointing to a .json containing table-like data. The data will be fetched using TableDataService and displayed. 
+   * Required if not using data or data$
+   */
   @Input()
   set url(url: string) {
     this.setDataSource(this.dataService.getTable$(url));
   }
 
+  /**
+   * A Table object.
+   * Required if not using url or data$.
+   */
   @Input()
   set data(table: Table) {
     this.setDataSource(of(table));
   }
 
+  /**
+   * An Observable of a Table object.
+   * Required if not using url or data.
+   */
   @Input()
   set data$(table$: Observable&lt;Table&gt;) {
     this.setDataSource(table$);
   }
 
+  /**
+   * Specify which columns to display in order, and how they are named in the header row.
+   * If not specified, all columns will be shown.
+   */
   @Input()
   set columns(columns: ColumnSpec[] | null) {
     this.displayColumns &#x3D; columns;
@@ -3379,12 +3412,12 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   readonly INDEX_NAME &#x3D; TABLE_INDEX_COLUMN_NAME;
   readonly EDIT_NAME &#x3D; &#x27;__edit&#x27;;
 
+  // TODO: consider making these Output()s?
   dataChanged: EventEmitter&lt;TableRow[]&gt; &#x3D; new EventEmitter&lt;TableRow[]&gt;();
   rangeChanged: EventEmitter&lt;RangeState&gt; &#x3D; new EventEmitter&lt;RangeState&gt;();
   sortChanged: EventEmitter&lt;SortState&gt; &#x3D; new EventEmitter&lt;SortState&gt;();
   filterChanged: EventEmitter&lt;FilterState&gt; &#x3D; new EventEmitter&lt;FilterState&gt;();
 
-  editingRowIndex &#x3D; -1;
   editRowCopy: TableRow | null &#x3D; null;
 
   sort: SortState &#x3D; {
@@ -3563,7 +3596,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   }
 
   /**
-   * Fetches the data from url &amp; updates the table.
+   * Subscribe to the dataSource observable and store the result in this.table.
+   * New data will trigger a dataChanged event and cause the table view to update.
    */
   fetchData() {
     if (this.dataSource$ &#x3D;&#x3D;&#x3D; null) {
@@ -3622,7 +3656,6 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       if (!environment.prod)
         console.warn(&#x60;Failed to stop editing, was not editing row ${rowIndex}&#x60;)
     }
-    this.editingRowIndex &#x3D; -1;
     this.editRowCopy &#x3D; null;
   }
 
@@ -3639,7 +3672,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       // Not managed by TableDataService - edit directly in memory
       const editIndex &#x3D; this.table!.data.findIndex((r) &#x3D;&gt; (r[this.INDEX_NAME] &#x3D;&#x3D;&#x3D; this.editRowCopy![this.INDEX_NAME]));
       this.table!.data[editIndex] &#x3D; this.editRowCopy;
-      this.dataChanged.emit();
+      this.dataChanged.emit(this.table!.data);
     } else {
       // Managed by TableDataService - use save function
       this.dataService.saveTableChages(
@@ -3656,7 +3689,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @param rowIndex of the row to start/stop editing
    */
   toggleEditRow(rowIndex: number) {
-    if (this.editingRowIndex &#x3D;&#x3D; rowIndex) {
+    if (this.editRowCopy !&#x3D;&#x3D; null &amp;&amp; this.editRowCopy[this.INDEX_NAME] &#x3D;&#x3D; rowIndex) {
       this.stopEditRow(rowIndex);
     } else {
       this.startEditRow(rowIndex);
@@ -3668,10 +3701,9 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @param rowIndex of the row to start editing
    */
   startEditRow(rowIndex: number) {
-    if (this.editingRowIndex &gt;&#x3D; 0)
-      this.stopEditRow(this.editingRowIndex);
+    if (this.editRowCopy !&#x3D;&#x3D; null)
+      this.stopEditRow(this.editRowCopy[this.INDEX_NAME] as number);
     this.editRowCopy &#x3D; this.createRowCopy(rowIndex);
-    this.editingRowIndex &#x3D; rowIndex;
   }
 
 
@@ -3735,18 +3767,11 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   }
 
   /**
-   * Handle Drop event from Cdk&#x27;s DragDropModule.
+   * Handle Drop event from Cdk&#x27;s DragDropModule. This will affect the source data order if in default sorting mode.
    * @param event CdkDragDrop event describing the drag and drop operation.
    */
   dropRow(event: CdkDragDrop&lt;TableRow&gt;) {
-    /*
-    Note that there are some oddities with how drag &amp; drop should/could behave when working with a sorted or filtered table.
-     - I propose that we update only the filtered view order when any kind of filter or sorting is applied. 
-     - That means once a filter is applied again or changed, the effect of the reordering is voided.
-     - However if there is no other filter applied, we can change the order of the base dataset by changing the __index value.
-    This is still not a perfect solution without also making this transparent to the user.
-    But how to do this would require knowing more context of how this table is used. Ideally of course, this behaviour is configurable. 
-    */
+    // See the report for a discussion on this feature 
     const dragged_index &#x3D; event.item.data[this.INDEX_NAME];
     const move_to_index &#x3D; this.dataView![event.currentIndex][this.INDEX_NAME];
 
@@ -3767,7 +3792,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       if (this.dataService.isCached(this.table!.url)) {
         this.dataService.dataSourceChanged.emit(this.table!.url)
       } else {
-        this.dataChanged.emit();
+        this.dataChanged.emit(this.table!.data);
       }
     }
   }
@@ -3802,14 +3827,14 @@ export class TableViewComponent implements AfterViewInit, OnInit {
 
     @if (!error &amp;&amp; dataView &amp;&amp; displayColumns) {
     &lt;div class&#x3D;&quot;table-droplist table-scroll&quot; (cdkDropListDropped)&#x3D;&quot;dropRow($event)&quot; cdkDropList
-        [cdkDropListDisabled]&#x3D;&quot;editingRowIndex &gt;&#x3D; 0&quot;&gt;
+        [cdkDropListDisabled]&#x3D;&quot;editRowCopy&quot;&gt;
         &lt;table class&#x3D;&quot;baader-table&quot; cdk-table [dataSource]&#x3D;&quot;dataView&quot; [trackBy]&#x3D;&quot;trackTableIndex&quot;&gt;
 
             &lt;ng-container [cdkColumnDef]&#x3D;&quot;EDIT_NAME&quot;&gt;
                 &lt;th class&#x3D;&quot;edit-header&quot; cdk-header-cell *cdkHeaderCellDef&gt;&lt;/th&gt;
                 &lt;td class&#x3D;&quot;edit-button-cell&quot; cdk-cell *cdkCellDef&#x3D;&quot;let row; let i &#x3D; index;&quot;&gt;
                     &lt;div class&#x3D;&quot;edit-options&quot;&gt;
-                        @if (row[INDEX_NAME] &#x3D;&#x3D;&#x3D; editingRowIndex) {
+                        @if (editRowCopy &amp;&amp; row[INDEX_NAME] &#x3D;&#x3D;&#x3D; editRowCopy[INDEX_NAME]) {
                         &lt;div tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-save&quot; (click)&#x3D;&quot;saveEditRow(row[INDEX_NAME])&quot;
                             (keydown)&#x3D;&quot;editRowKbd($event, saveEditRow, row[INDEX_NAME])&quot;&gt;{{saveRowLabel}}&lt;/div&gt;
                         &lt;div tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-save&quot; (click)&#x3D;&quot;stopEditRow(row[INDEX_NAME])&quot;
@@ -3844,12 +3869,11 @@ export class TableViewComponent implements AfterViewInit, OnInit {
                         This allows for a nice UX as it doesn&#x27;t cause the layout to jump when using
                         to inline editing, however it is poor web semantics.
                     --&gt;
-                    @if (row[INDEX_NAME] !&#x3D;&#x3D; editingRowIndex) {
+                    @if (!editRowCopy || row[INDEX_NAME] !&#x3D;&#x3D; editRowCopy[INDEX_NAME]) {
                     &lt;div class&#x3D;&quot;cell-content&quot;&gt;{{row[colspec.name]}}&lt;/div&gt;
                     } @else if (editRowCopy) {
                     &lt;input tabindex&#x3D;&quot;{{1000+i}}&quot; class&#x3D;&quot;edit-inplace&quot; type&#x3D;&quot;text&quot;
-                        [(ngModel)]&#x3D;&quot;editRowCopy[colspec.name]&quot;
-                        [disabled]&#x3D;&quot;editRowCopy[INDEX_NAME] !&#x3D;&#x3D; editingRowIndex&quot; /&gt;
+                        [(ngModel)]&#x3D;&quot;editRowCopy[colspec.name]&quot; /&gt;
                     } @else {
                     &lt;div&gt;ERR&lt;/div&gt;
                     }
@@ -3923,7 +3947,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-template #filterInputTemplate>    <baader-filter-input [hidden]="error || !showFilter" [filter]="filter.filter" [category]="filter.column"        categoryLabel="Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"        (filterChange)="filter.filter = $event; filterChanged.emit()"        [categorySelect]="showCategoryFilter ? getFilterColumnNames() : null"></baader-filter-input></ng-template><ng-template #paginatorTemplate>    <baader-pagination [hidden]="error || !showPaginator" [pageItems]="pageItems" [totalItems]="currentFilteredItems()"        (pageChanged)="setRange($event)" [showPageItemsSelection]="showPageItemsSelection"></baader-pagination></ng-template><div class="baader-table-root">    <div class="top-parent">        @if (filterInputPosition === \'top\') {        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>        }        @if (paginatorPosition === \'top\') {        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>        }    </div>    @if (!error && dataView && displayColumns) {    <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList        [cdkDropListDisabled]="editingRowIndex >= 0">        <table class="baader-table" cdk-table [dataSource]="dataView" [trackBy]="trackTableIndex">            <ng-container [cdkColumnDef]="EDIT_NAME">                <th class="edit-header" cdk-header-cell *cdkHeaderCellDef></th>                <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">                    <div class="edit-options">                        @if (row[INDEX_NAME] === editingRowIndex) {                        <div tabindex="{{1000+i}}" class="edit-save" (click)="saveEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, saveEditRow, row[INDEX_NAME])">{{saveRowLabel}}</div>                        <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, stopEditRow, row[INDEX_NAME])">{{cancelEditRowLabel}}</div>                        } @else {                        <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, toggleEditRow, row[INDEX_NAME])">{{editRowLabel}}</div>                        }                    </div>                </td>            </ng-container>            @for (colspec of displayColumns; track $index) {            <ng-container [cdkColumnDef]="colspec.name">                <th ccdk-header-cell *cdkHeaderCellDef>                    <div tabindex="100" class="sortable" (click)="toggleSortMode(colspec.name)"                        (keydown)="sortColumnKbd($event, colspec.name)">                        <div class="sort-icon">                            {{ sortIcons[sort.column !== colspec.name ? 0 : sort.mode] }}                        </div>                        <div class="column-label">                            {{colspec.displayName}}                        </div>                    </div>                </th>                <td cdk-cell *cdkCellDef="let row; let i = index;">                    <!--                        Switching to inline editing breaks the layout due to the input element not playing                         nice with resizable rows. Perhaps a script-driven solution for resizing could solve this.                        Another alternative I\'ve explored was showing cell content in a styled, disabled input element.                        This allows for a nice UX as it doesn\'t cause the layout to jump when using                        to inline editing, however it is poor web semantics.                    -->                    @if (row[INDEX_NAME] !== editingRowIndex) {                    <div class="cell-content">{{row[colspec.name]}}</div>                    } @else if (editRowCopy) {                    <input tabindex="{{1000+i}}" class="edit-inplace" type="text"                        [(ngModel)]="editRowCopy[colspec.name]"                        [disabled]="editRowCopy[INDEX_NAME] !== editingRowIndex" />                    } @else {                    <div>ERR</div>                    }                </td>            </ng-container>            }            <tr cdk-header-row *cdkHeaderRowDef="getDisplayColumnNames()"></tr>            <tr cdk-row *cdkRowDef="let row; columns: getDisplayColumnNames()" [cdkDragStartDelay]="400" cdkDrag                cdkDragLockAxis="y" [cdkDragData]="row">            </tr>        </table>    </div>    } @else if (showErrorDetails && error) {    <div class="table-info error">        <div class="table-info-content">            <h4 class="table-info-header">Table Error:</h4>            <div class="table-info-text">{{error}}</div>        </div>    </div>    } @else {    <div class="table-info loading">        <div class="table-info-content">            @if (!error) {            <h4 class="table-info-header">Table Info:</h4>            <div class="table-info-text">{{loadingText}}</div>            } @else {            <h4 class="table-info-header">Table Info:</h4>            <div class="table-info-text">No Data.</div>            }        </div>    </div>    }    <div class="bottom-parent">        @if (paginatorPosition === \'bottom\') {        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>        }        @if (filterInputPosition === \'bottom\') {        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>        }    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><ng-template #filterInputTemplate>    <baader-filter-input [hidden]="error || !showFilter" [filter]="filter.filter" [category]="filter.column"        categoryLabel="Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"        (filterChange)="filter.filter = $event; filterChanged.emit()"        [categorySelect]="showCategoryFilter ? getFilterColumnNames() : null"></baader-filter-input></ng-template><ng-template #paginatorTemplate>    <baader-pagination [hidden]="error || !showPaginator" [pageItems]="pageItems" [totalItems]="currentFilteredItems()"        (pageChanged)="setRange($event)" [showPageItemsSelection]="showPageItemsSelection"></baader-pagination></ng-template><div class="baader-table-root">    <div class="top-parent">        @if (filterInputPosition === \'top\') {        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>        }        @if (paginatorPosition === \'top\') {        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>        }    </div>    @if (!error && dataView && displayColumns) {    <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList        [cdkDropListDisabled]="editRowCopy">        <table class="baader-table" cdk-table [dataSource]="dataView" [trackBy]="trackTableIndex">            <ng-container [cdkColumnDef]="EDIT_NAME">                <th class="edit-header" cdk-header-cell *cdkHeaderCellDef></th>                <td class="edit-button-cell" cdk-cell *cdkCellDef="let row; let i = index;">                    <div class="edit-options">                        @if (editRowCopy && row[INDEX_NAME] === editRowCopy[INDEX_NAME]) {                        <div tabindex="{{1000+i}}" class="edit-save" (click)="saveEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, saveEditRow, row[INDEX_NAME])">{{saveRowLabel}}</div>                        <div tabindex="{{1000+i}}" class="edit-save" (click)="stopEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, stopEditRow, row[INDEX_NAME])">{{cancelEditRowLabel}}</div>                        } @else {                        <div tabindex="{{1000+i}}" class="edit-edit" (click)="toggleEditRow(row[INDEX_NAME])"                            (keydown)="editRowKbd($event, toggleEditRow, row[INDEX_NAME])">{{editRowLabel}}</div>                        }                    </div>                </td>            </ng-container>            @for (colspec of displayColumns; track $index) {            <ng-container [cdkColumnDef]="colspec.name">                <th ccdk-header-cell *cdkHeaderCellDef>                    <div tabindex="100" class="sortable" (click)="toggleSortMode(colspec.name)"                        (keydown)="sortColumnKbd($event, colspec.name)">                        <div class="sort-icon">                            {{ sortIcons[sort.column !== colspec.name ? 0 : sort.mode] }}                        </div>                        <div class="column-label">                            {{colspec.displayName}}                        </div>                    </div>                </th>                <td cdk-cell *cdkCellDef="let row; let i = index;">                    <!--                        Switching to inline editing breaks the layout due to the input element not playing                         nice with resizable rows. Perhaps a script-driven solution for resizing could solve this.                        Another alternative I\'ve explored was showing cell content in a styled, disabled input element.                        This allows for a nice UX as it doesn\'t cause the layout to jump when using                        to inline editing, however it is poor web semantics.                    -->                    @if (!editRowCopy || row[INDEX_NAME] !== editRowCopy[INDEX_NAME]) {                    <div class="cell-content">{{row[colspec.name]}}</div>                    } @else if (editRowCopy) {                    <input tabindex="{{1000+i}}" class="edit-inplace" type="text"                        [(ngModel)]="editRowCopy[colspec.name]" />                    } @else {                    <div>ERR</div>                    }                </td>            </ng-container>            }            <tr cdk-header-row *cdkHeaderRowDef="getDisplayColumnNames()"></tr>            <tr cdk-row *cdkRowDef="let row; columns: getDisplayColumnNames()" [cdkDragStartDelay]="400" cdkDrag                cdkDragLockAxis="y" [cdkDragData]="row">            </tr>        </table>    </div>    } @else if (showErrorDetails && error) {    <div class="table-info error">        <div class="table-info-content">            <h4 class="table-info-header">Table Error:</h4>            <div class="table-info-text">{{error}}</div>        </div>    </div>    } @else {    <div class="table-info loading">        <div class="table-info-content">            @if (!error) {            <h4 class="table-info-header">Table Info:</h4>            <div class="table-info-text">{{loadingText}}</div>            } @else {            <h4 class="table-info-header">Table Info:</h4>            <div class="table-info-text">No Data.</div>            }        </div>    </div>    }    <div class="bottom-parent">        @if (paginatorPosition === \'bottom\') {        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>        }        @if (filterInputPosition === \'bottom\') {        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>        }    </div></div></div>'
     var COMPONENTS = [{'name': 'FilterInputComponent', 'selector': 'baader-filter-input'},{'name': 'PaginationComponent', 'selector': 'baader-pagination'},{'name': 'TableViewComponent', 'selector': 'baader-table-view'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TableViewComponent'};

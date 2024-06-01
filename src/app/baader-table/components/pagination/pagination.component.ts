@@ -4,8 +4,32 @@ import { RangeState } from '../../shared/table.model';
 
 /**
  * Generic Pagination component.
- * Configured by setting total items and items per page.
+ * Configured by setting totalItems and itemsPerPage.
  * Triggers pageChanges event whenever the selected page changes.
+ * 
+ * ```typescript
+ * // your.component.ts
+ * 
+ * @Component({
+ *   // ...
+ *   imports: [PaginationComponent],
+ *   templateUrl: './your.component.html',
+ *   // ...
+ * })
+ * export class YourComponent {
+ *   mydata : object[] = [];
+ * 
+ *   setRage(range : RangeState) {
+ *     // Your logic here that causes the view of mydata to show only the range of data provided by the paginator.
+ *   }
+ * }
+ * ```
+ * 
+ * ```html
+ * <!-- your.component.html -->
+ * <baader-pagination [totalItems]="mydata.length" (pageChanged)="setRange($event)"></baader-pagination>
+ * <!-- Your data view template here  -->
+ * ```
  */
 @Component({
   selector: 'baader-pagination',

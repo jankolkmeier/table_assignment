@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, EventEmitter, ViewChild, OnInit, Output } from '@angular/core';
+import { Component, Input, AfterViewInit, EventEmitter, ViewChild, OnInit } from '@angular/core';
 import { KeyValuePipe, AsyncPipe, CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -120,6 +120,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   readonly INDEX_NAME = TABLE_INDEX_COLUMN_NAME;
   readonly EDIT_NAME = '__edit';
 
+  // TODO: consider making these Output()s?
   dataChanged: EventEmitter<TableRow[]> = new EventEmitter<TableRow[]>();
   rangeChanged: EventEmitter<RangeState> = new EventEmitter<RangeState>();
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
@@ -303,7 +304,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   }
 
   /**
-   * Fetches the data from url & updates the table.
+   * Subscribe to the dataSource observable and store the result in this.table.
+   * New data will trigger a dataChanged event and cause the table view to update.
    */
   fetchData() {
     if (this.dataSource$ === null) {
@@ -473,18 +475,11 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   }
 
   /**
-   * Handle Drop event from Cdk's DragDropModule.
+   * Handle Drop event from Cdk's DragDropModule. This will affect the source data order if in default sorting mode.
    * @param event CdkDragDrop event describing the drag and drop operation.
    */
   dropRow(event: CdkDragDrop<TableRow>) {
-    /*
-    Note that there are some oddities with how drag & drop should/could behave when working with a sorted or filtered table.
-     - I propose that we update only the filtered view order when any kind of filter or sorting is applied. 
-     - That means once a filter is applied again or changed, the effect of the reordering is voided.
-     - However if there is no other filter applied, we can change the order of the base dataset by changing the __index value.
-    This is still not a perfect solution without also making this transparent to the user.
-    But how to do this would require knowing more context of how this table is used. Ideally of course, this behaviour is configurable. 
-    */
+    // See the report for a discussion on this feature 
     const dragged_index = event.item.data[this.INDEX_NAME];
     const move_to_index = this.dataView![event.currentIndex][this.INDEX_NAME];
 

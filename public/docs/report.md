@@ -32,6 +32,10 @@ TODO
 TODO
 
 ## (Nice to have) The table should support drag and drop to reorder rows.
+    Note that there are some oddities with how drag & drop should/could behave when working with a sorted or filtered table.
+     - I propose that we update only the filtered view order when any kind of filter or sorting is applied. 
+     - That means once a filter is applied again or changed, the effect of the reordering is voided.
+     - However if there is no other filter applied, we can change the order of the base dataset by changing the __index value.
 TODO
 
 ## (Nice to have) The table should allow users to reorder and resize columns.

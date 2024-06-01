@@ -129,7 +129,31 @@ Optional features are:</p>
 <ul>
 <li>Provide a list of categories to select from for the filter</li>
 </ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// your.component.ts
 
+&#64;Component({
+  // ...
+  imports: [FilterInputComponent],
+  templateUrl: &#39;./your.component.html&#39;,
+  // ...
+})
+export class YourComponent {
+  filter: string = &quot;&quot;; // Search string to filter data on
+  category: string = &quot;&quot;; // Additional category to limit search to
+  categories: string[] = [ &quot;products&quot;, &quot;users&quot; ];
+
+  filterChanged(f : string) {
+    // update search results based on new filter string
+  }
+
+  categoryChanged(c : string) {
+    // update search results based on new category
+  }
+}</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- your.component.html --&gt;
+    &lt;baader-filter-input [category]=&quot;category&quot; (categoryChange)=&quot;categoryChanged()&quot;
+                         [filter]=&quot;filter&quot; (filterChange)=&quot;filterChanged()&quot;
+                   [categorySelect]=&quot;categories&quot;&gt;&lt;/baader-filter-input&gt;
+&lt;!-- Your data view template here  --&gt;</code></pre></div>
     </p>
 
 
@@ -326,7 +350,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:57</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -352,7 +376,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:66</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -378,7 +402,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:64</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -399,7 +423,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:52</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -425,7 +449,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:60</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -451,7 +475,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:63</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -477,7 +501,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:68</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -501,7 +525,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:58</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -522,7 +546,7 @@ Optional features are:</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:61</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -555,8 +579,8 @@ Optional features are:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -624,8 +648,8 @@ Optional features are:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -663,8 +687,8 @@ Optional features are:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -742,7 +766,7 @@ Optional features are:</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -772,7 +796,7 @@ Optional features are:</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/baader-table/components/filter-input/filter-input.component.ts:52</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -827,6 +851,38 @@ import { FormsModule } from &#x27;@angular/forms&#x27;;
  * A generic component that can be used to create filter input fields.
  * Optional features are:
  *  - Provide a list of categories to select from for the filter
+ * 
+ * &#x60;&#x60;&#x60;typescript
+ * // your.component.ts
+ * 
+ * @Component({
+ *   // ...
+ *   imports: [FilterInputComponent],
+ *   templateUrl: &#x27;./your.component.html&#x27;,
+ *   // ...
+ * })
+ * export class YourComponent {
+ *   filter: string &#x3D; &quot;&quot;; // Search string to filter data on
+ *   category: string &#x3D; &quot;&quot;; // Additional category to limit search to
+ *   categories: string[] &#x3D; [ &quot;products&quot;, &quot;users&quot; ];
+ *   
+ *   filterChanged(f : string) {
+ *     // update search results based on new filter string
+ *   }
+ * 
+ *   categoryChanged(c : string) {
+ *     // update search results based on new category
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ * 
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- your.component.html --&gt;
+ *     &lt;baader-filter-input [category]&#x3D;&quot;category&quot; (categoryChange)&#x3D;&quot;categoryChanged()&quot; 
+ *                          [filter]&#x3D;&quot;filter&quot; (filterChange)&#x3D;&quot;filterChanged()&quot;
+ *                    [categorySelect]&#x3D;&quot;categories&quot;&gt;&lt;/baader-filter-input&gt;
+ * &lt;!-- Your data view template here  --&gt;
+ * &#x60;&#x60;&#x60;
  */
 @Component({
   selector: &#x27;baader-filter-input&#x27;,
@@ -855,7 +911,6 @@ export class FilterInputComponent {
   @Input() categoryDefaultValue &#x3D; &quot;&quot;;
 
   @Input() resetLabel &#x3D; &quot;Clear&quot;;
-
 
   /**
    * Input field for filter string changed
