@@ -124,8 +124,25 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Table Component for displaying, searching and sorting tables.</p>
+        <p>Table Component for displaying, searching and sorting tables.
+To render data, use exactly one of these Input properties:
+  <code class="no-auto-link">url</code>, <code class="no-auto-link">data</code> or <code class="no-auto-link">data$</code></p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// ...
 
+&#64;Component({
+  // ...
+  imports: [TableViewComponent],
+  // ...
+})
+export class ProductsPageComponent {
+  products_data_url = &quot;/data/products.json&quot;;
+  products_display_columns = [
+    { name: &quot;id&quot;, displayName: &quot;ID&quot; },
+    { name: &quot;title&quot;, displayName: &quot;Title&quot; },
+    { name: &quot;category&quot;, displayName: &quot;Category&quot; },
+    { name: &quot;price&quot;, displayName: &quot;Price&quot; },
+ ];
+}</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;baader-table-view [columns]=&quot;products_display_columns&quot; [url]=&quot;products_data_url&quot;&gt;&lt;/baader-table-view&gt;</code></pre></div>
     </p>
 
 
@@ -459,7 +476,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:99</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:124</a></div>
                             </td>
                         </tr>
 
@@ -520,7 +537,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:86</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -541,7 +558,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:68</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -562,7 +579,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:58</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -583,7 +600,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:63</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -609,7 +626,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:85</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -635,7 +652,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:82</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -661,7 +678,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:88</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -687,7 +704,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:78</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -713,7 +730,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:81</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -739,7 +756,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:84</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -765,7 +782,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:76</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -791,7 +808,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:87</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -817,7 +834,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:75</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -843,7 +860,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:74</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -869,7 +886,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:73</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -895,7 +912,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:83</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -916,7 +933,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:53</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -950,8 +967,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="190"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:190</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:215</a></div>
                         </td>
                     </tr>
 
@@ -1021,8 +1038,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="380"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:380</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="405"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:405</a></div>
                         </td>
                     </tr>
 
@@ -1095,8 +1112,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:170</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -1138,8 +1155,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="439"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:439</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="464"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:464</a></div>
                         </td>
                     </tr>
 
@@ -1212,8 +1229,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="402"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:402</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="427"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:427</a></div>
                         </td>
                     </tr>
 
@@ -1318,8 +1335,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="266"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:266</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="291"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:291</a></div>
                         </td>
                     </tr>
 
@@ -1357,8 +1374,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="247"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:247</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="272"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:272</a></div>
                         </td>
                     </tr>
 
@@ -1400,8 +1417,8 @@ I figured we might</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="179"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:179</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="204"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:204</a></div>
                         </td>
                     </tr>
 
@@ -1444,8 +1461,8 @@ This should not return columns like __index or __edit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:187</a></div>
                         </td>
                     </tr>
 
@@ -1487,8 +1504,8 @@ This should not return columns like __index or __edit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="154"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:154</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:179</a></div>
                         </td>
                     </tr>
 
@@ -1530,8 +1547,8 @@ This should not return columns like __index or __edit.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:168</a></div>
                         </td>
                     </tr>
 
@@ -1570,8 +1587,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:129</a></div>
                         </td>
                     </tr>
 
@@ -1607,8 +1624,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="331"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:331</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="356"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:356</a></div>
                         </td>
                     </tr>
 
@@ -1681,8 +1698,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="255"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:255</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="280"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:280</a></div>
                         </td>
                     </tr>
 
@@ -1755,8 +1772,8 @@ in AfterViewInit before wiring the events.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="239"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:239</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="264"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:264</a></div>
                         </td>
                     </tr>
 
@@ -1834,8 +1851,8 @@ Adds the column(s) for additional features of this table component, such as:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="227"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:227</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:252</a></div>
                         </td>
                     </tr>
 
@@ -1904,8 +1921,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="301"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:301</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="326"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:326</a></div>
                         </td>
                     </tr>
 
@@ -1985,8 +2002,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="390"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:390</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="415"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:415</a></div>
                         </td>
                     </tr>
 
@@ -2075,8 +2092,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="368"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:368</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="393"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:393</a></div>
                         </td>
                     </tr>
 
@@ -2149,8 +2166,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:318</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="343"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:343</a></div>
                         </td>
                     </tr>
 
@@ -2223,8 +2240,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="356"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:356</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="381"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:381</a></div>
                         </td>
                     </tr>
 
@@ -2297,8 +2314,8 @@ This has no effect if pagination is disabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="413"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:413</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="438"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:438</a></div>
                         </td>
                     </tr>
 
@@ -2372,8 +2389,8 @@ sorting mode of the column provided</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="293"
-                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:293</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="318"
+                                    class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:318</a></div>
                         </td>
                     </tr>
 
@@ -2473,7 +2490,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -2504,7 +2521,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:73</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -2535,7 +2552,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -2566,7 +2583,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -2597,7 +2614,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -2629,7 +2646,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:78</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -2654,7 +2671,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:85</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -2685,7 +2702,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:86</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -2716,7 +2733,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:75</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -2750,7 +2767,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:96</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -2781,7 +2798,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:83</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -2807,7 +2824,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:77</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -2843,7 +2860,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -2877,7 +2894,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -2908,7 +2925,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:81</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -2942,7 +2959,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:88</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -2973,7 +2990,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -3004,7 +3021,7 @@ sorting mode of the column provided</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -3034,7 +3051,7 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:53</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -3093,7 +3110,7 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:58</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -3152,7 +3169,7 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:63</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -3211,7 +3228,7 @@ sorting mode of the column provided</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/baader-table/components/table-view/table-view.component.ts:68</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -3274,6 +3291,31 @@ import { environment } from &#x27;../../../../environments/environment&#x27;;
 
 /**
  * Table Component for displaying, searching and sorting tables.
+ * To render data, use exactly one of these Input properties: 
+ *   &lt;code class&#x3D;&quot;no-auto-link&quot;&gt;url&lt;/code&gt;, &lt;code class&#x3D;&quot;no-auto-link&quot;&gt;data&lt;/code&gt; or &lt;code class&#x3D;&quot;no-auto-link&quot;&gt;data$&lt;/code&gt;
+ * 
+ * &#x60;&#x60;&#x60;typescript
+ * // ...
+ * 
+ * @Component({
+ *   // ...
+ *   imports: [TableViewComponent],
+ *   // ...
+ * })
+ * export class ProductsPageComponent {
+ *   products_data_url &#x3D; &quot;/data/products.json&quot;;
+ *   products_display_columns &#x3D; [
+ *     { name: &quot;id&quot;, displayName: &quot;ID&quot; },
+ *     { name: &quot;title&quot;, displayName: &quot;Title&quot; },
+ *     { name: &quot;category&quot;, displayName: &quot;Category&quot; },
+ *     { name: &quot;price&quot;, displayName: &quot;Price&quot; },
+ *  ];
+ * }
+ * &#x60;&#x60;&#x60;
+ * 
+ * &#x60;&#x60;&#x60;html
+ * &lt;baader-table-view [columns]&#x3D;&quot;products_display_columns&quot; [url]&#x3D;&quot;products_data_url&quot;&gt;&lt;/baader-table-view&gt;
+ * &#x60;&#x60;&#x60;
  */
 @Component({
   selector: &#x27;baader-table-view&#x27;,
