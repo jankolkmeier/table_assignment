@@ -1,30 +1,27 @@
 <ng-template #filterInputTemplate>
-    <div class="filter-parent" [hidden]="!showFilter">
-        <baader-filter-input [filter]="filter.filter" [category]="filter.column" filterLabel="Search Table:"
-            categoryLabel="In Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
-            (filterChange)="filter.filter = $event; filterChanged.emit()"
-            [categorySelect]="getFilterColumnNames()"></baader-filter-input>
-    </div>
+    <baader-filter-input [hidden]="error || !showFilter" [filter]="filter.filter" [category]="filter.column"
+        categoryLabel="Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
+        (filterChange)="filter.filter = $event; filterChanged.emit()"
+        [categorySelect]="showCategoryFilter ? getFilterColumnNames() : null"></baader-filter-input>
 </ng-template>
 
 <ng-template #paginatorTemplate>
-    <div class="paginator-parent" [hidden]="!showPaginator">
-        <baader-pagination [pageItems]="pageItems" [totalItems]="currentFilteredItems()"
-            (pageChanged)="setRange($event)"></baader-pagination>
-    </div>
+    <baader-pagination [hidden]="error || !showPaginator" [pageItems]="pageItems" [totalItems]="currentFilteredItems()"
+        (pageChanged)="setRange($event)" [showPageItemsSelection]="showPageItemsSelection"></baader-pagination>
 </ng-template>
 
 <div class="baader-table-root">
+    <div class="top-parent">
+        @if (filterInputPosition === 'top') {
+        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
+        }
+
+        @if (paginatorPosition === 'top') {
+        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>
+        }
+    </div>
+
     @if (!error && dataView && displayColumns) {
-
-    @if (filterInputPosition === 'top') {
-    <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
-    }
-
-    @if (paginatorPosition === 'top') {
-    <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>
-    }
-
     <div class="table-droplist table-scroll" (cdkDropListDropped)="dropRow($event)" cdkDropList
         [cdkDropListDisabled]="editingRowIndex >= 0">
         <table class="baader-table" cdk-table [dataSource]="dataView" [trackBy]="trackTableIndex">
@@ -82,24 +79,40 @@
             }
 
             <tr cdk-header-row *cdkHeaderRowDef="getDisplayColumnNames()"></tr>
-            <tr cdk-row *cdkRowDef="let row; columns: getDisplayColumnNames()" cdkDrag cdkDragLockAxis="y"
-                [cdkDragData]="row">
+            <tr cdk-row *cdkRowDef="let row; columns: getDisplayColumnNames()" [cdkDragStartDelay]="400" cdkDrag
+                cdkDragLockAxis="y" [cdkDragData]="row">
             </tr>
         </table>
     </div>
-
-    @if (paginatorPosition === 'bottom') {
-    <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>
-    }
-
-    @if (filterInputPosition === 'bottom') {
-    <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
-    }
-
-    } @else if (showErrors && error) {
-    <div class="error">Error: {{error}}</div>
+    } @else if (showErrorDetails && error) {
+    <div class="table-info error">
+        <div class="table-info-content">
+            <h4 class="table-info-header">Table Error:</h4>
+            <div class="table-info-text">{{error}}</div>
+        </div>
+    </div>
     } @else {
-    <div class="loading">{{loadingText}}</div>
+    <div class="table-info loading">
+        <div class="table-info-content">
+            @if (!error) {
+            <h4 class="table-info-header">Table Info:</h4>
+            <div class="table-info-text">{{loadingText}}</div>
+            } @else {
+            <h4 class="table-info-header">Table Info:</h4>
+            <div class="table-info-text">No Data.</div>
+            }
+        </div>
+    </div>
     }
+
+    <div class="bottom-parent">
+        @if (paginatorPosition === 'bottom') {
+        <ng-container *ngTemplateOutlet="paginatorTemplate"></ng-container>
+        }
+
+        @if (filterInputPosition === 'bottom') {
+        <ng-container *ngTemplateOutlet="filterInputTemplate"></ng-container>
+        }
+    </div>
 
 </div>

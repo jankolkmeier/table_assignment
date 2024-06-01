@@ -1,10 +1,87 @@
-<h3>Test Page</h3>
+<h2>Test Environment - Validating Table Features</h2>
 
-@for (t of tables; track $index) {
-<baader-table-view [columns]="t.columns" [url]="t.url"></baader-table-view>
-}
+<h3>Initializing Tables</h3>
+<p>Below are three tables, each initialized differently.</p>
+<div class="grid">
+    <div class="col-12 lg:col-4">
+        <baader-table-view [showFilter]="false" [pageItems]="5" [data]="testDataProcessed"></baader-table-view>
+        <p>The table above is initialized with data from memory, not from an url/http request. </p>
+    </div>
+    <div class="col-12 lg:col-4">
+        <baader-table-view [showFilter]="false" [pageItems]="5" [data$]="testDataDelayed$"></baader-table-view>
+        <p>The table above is initialized with data from memory wrapped in an observable, simulating artificial delay.
+            Contents should appear after 3 seconds</p>
+    </div>
+    <div class="col-12 lg:col-4">
+        <baader-table-view [showFilter]="false" [pageItems]="5" [url]="testUrl2"></baader-table-view>
+        <p>The table above is initialized with an url. An HTTP request is made in the background and the data is shown
+            as soon as it is completed.</p>
+    </div>
+</div>
 
-<button (click)="cycleThirdTable()">{{tables[1].url}}</button>
-<baader-table-view [columns]="tables[thirdTableIdx].columns" [url]="tables[thirdTableIdx].url"></baader-table-view>
+<h3>Dynamic table data source</h3>
+<div class="grid">
+    <div class="col-12 lg:col-8">
+        <baader-table-view [columns]="tables[thirdTableIdx].columns" [pageItems]="5"
+            [url]="tables[thirdTableIdx].url"></baader-table-view>
+    </div>
+    <div class="col-12 lg:col-4">
+        <p>When changing the data source url dynamically, the table should reinitialize with the new data. Press this
+            button to test:
+        </p>
+        <p>
+            <button class="large-button" (click)="cycleThirdTable()">{{tables[thirdTableIdx].url}}</button>
+        </p>
+    </div>
+</div>
 
-<baader-table-view [data]="testDataProcessed"></baader-table-view>
+<h3>Editing Table Content</h3>
+<p>The two tables both display data from the same source. Editing cell content or reordering rows in one table is
+    reflected in the other. View settings such as search filters, sorting, or the current page do not affect other
+    tables.</p>
+<p>Note that reordering rows only affects the actual data if no sort or search filter is applied.</p>
+<div class="grid">
+    <div class="col-12 lg:col-6">
+        <baader-table-view [columns]="tables[1].columns" [url]="tables[1].url"></baader-table-view>
+    </div>
+    <div class="col-12 lg:col-6">
+        <baader-table-view [columns]="tables[1].columns" [url]="tables[1].url"></baader-table-view>
+    </div>
+</div>
+
+<h3>Table Controls</h3>
+<div class="grid">
+    <div class="col-12 lg:col-4">
+        <p>The table's interface can be configured. Use the controls below to try different options on the next table.
+        </p>
+        <ul>
+            @for (ctrl of testBoolControlKeys; track $index) {
+            <li>
+                <input type="checkbox" [(ngModel)]="testBoolControls[ctrl]" /> {{ctrl}}
+            </li>
+            }
+        </ul>
+    </div>
+    <div class="col-12 lg:col-8">
+        <baader-table-view [columns]="tables[0].columns" [url]="tables[0].url"
+            [showPaginator]="testBoolControls['showPaginator']"
+            [showPageItemsSelection]="testBoolControls['showPageItemsSelection']"
+            [showFilter]="testBoolControls['showFilter']" [showCategoryFilter]="testBoolControls['showCategoryFilter']"
+            [paginatorPosition]="testBoolControls['paginatorPositionTop'] ? 'top' : 'bottom'"
+            [filterInputPosition]="testBoolControls['filterPositionTop'] ? 'top' : 'bottom'"></baader-table-view>
+    </div>
+</div>
+
+<h3>Table Errors.</h3>
+<p>Mistakes happen. We can control if we show error details to users..</p>
+<div class="grid">
+    <div class="col-12 md:col-6">
+        <baader-table-view [showFilter]="false" [pageItems]="5" url="this is not a url"></baader-table-view>
+        <p>The table above is initialized using an invalid URL - it should show the http error.</p>
+    </div>
+    <div class="col-12 md:col-6">
+        <baader-table-view [showErrorDetails]="false" [showFilter]="false" [pageItems]="5"></baader-table-view>
+        <p>The table above is initialized with wrong parameters, but showErrorDetails is disabled. It should show no
+            error details.</p>
+    </div>
+</div>

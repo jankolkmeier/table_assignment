@@ -8,6 +8,7 @@
         <div class="current">{{pageLabel}} {{_currentPage+1}} / {{totalPages()}}</div>
         <div tabindex="6" class="nav next {{ _currentPage+1 === totalPages() ? 'disabled' : '' }}"
             (keyup)="navButtonKbd(1, $event)" (click)="changePage(1)">{{nextLabel}}</div>
+        @if (showPageItemsSelection) {
         <div class="page-items-parent">
             <div class="page-items-label">
                 {{pageItemsLabel}}
@@ -18,5 +19,6 @@
                 }
             </select>
         </div>
+        }
     </div>
 </div>

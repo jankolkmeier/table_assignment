@@ -17,6 +17,7 @@
     text-align: left;
     position: relative;
     resize: horizontal;
+    font-weight: normal;
     overflow-y: auto;
 }
 
@@ -137,7 +138,7 @@ cdk-drop-list {
 
 .cdk-drag-preview {
     display: table;
-    text-align: center;
+    text-align: left;
 }
 
 .cdk-drag-placeholder {
@@ -147,3 +148,49 @@ cdk-drop-list {
 .column-resize {
     cursor: col-resize;
 }
+
+.table-info {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background-color: #e7ecf3;
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.table-info-content {
+    text-align: left;
+    margin: 0 auto;
+    padding: 1em 1em 2em 1em;
+    max-width: 400px;
+    background-color: #d7e4f0;
+}
+
+.table-info.error {
+    background-color: #f3e7e7;
+}
+
+.table-info.error .table-info-content {
+    background-color: #f1dbdb;
+}
+
+.top-parent,
+.bottom-parent {
+    user-select: none;
+    padding: 5px;
+    font-size: 0.9em;
+    background-color: #155488;
+    color: #ffffff;
+    text-align: right;
+    border-radius: 5px 5px 0 0;
+}
+
+.bottom-parent {
+    background-color: #083d69;
+    border-radius: 0 0 5px 5px;
+}
+
+/*
+
+    background-color: #27679b;
+    */

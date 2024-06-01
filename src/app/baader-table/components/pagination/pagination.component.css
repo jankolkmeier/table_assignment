@@ -1,26 +1,29 @@
 .baader-pagination-root {
-    user-select: none;
-    width: 100%;
-    text-align: center;
-    background-color: #27679b;
-    color: #ffffff;
+    font-size: 0.8em;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0.5em;
 }
 
 .baader-pagination-root .controls>div {
     display: inline-block;
-    padding: 1em 2em;
+    padding: 0.4em 0.8em;
 }
 
-.baader-pagination-root .controls .nav.disabled {
-    background-color: #27679b;
-    color: #eee;
+.baader-pagination-root .controls .nav.disabled,
+.baader-pagination-root .controls .nav.disabled:hover {
+    background-color: #4779a1;
+    color: #c0c9d8;
+    cursor: default;
     /*
     visibility: hidden;
     */
 }
 
 .baader-pagination-root .controls .nav {
+    font-size: 1.5em;
     background-color: #3071a7;
+    border-radius: 5px;
 }
 
 .baader-pagination-root .controls .nav:hover {

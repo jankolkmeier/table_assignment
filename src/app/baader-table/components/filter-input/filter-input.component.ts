@@ -28,7 +28,7 @@ export class FilterInputComponent {
   @Input() filter = "";
   @Output() filterChange = new EventEmitter<string>();
 
-  @Input() filterLabel = "Filter:";
+  @Input() filterLabel = "Search:";
   @Input() categoryLabel = "In Category:";
 
   @Input() categoryDefaultValue = "";

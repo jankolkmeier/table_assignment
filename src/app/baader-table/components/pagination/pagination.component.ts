@@ -25,6 +25,9 @@ export class PaginationComponent implements OnInit {
   pageItemOptions = [5, 10, 20, 50, 100];
 
   @Input()
+  showPageItemsSelection = true;
+
+  @Input()
   set totalItems(n: number | null) {
     this._totalItems = n;
   }
@@ -34,7 +37,7 @@ export class PaginationComponent implements OnInit {
   @Input() pageLabel = "Page";
   @Input() previousLabel = "←";
   @Input() nextLabel = "→";
-  @Input() pageItemsLabel = "Items per page";
+  @Input() pageItemsLabel = "Show Items";
 
   _totalItems: number | null = null;
   _currentPage = 0;

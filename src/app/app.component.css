@@ -5,10 +5,8 @@
 }
 
 .page {
-    margin: 1em auto;
+    margin: 3em auto;
     padding: 0;
-    border: 1px solid #003158;
-    background-color: #f3fafc;
 }
 
 nav ul {

@@ -46,18 +46,20 @@ export class TableViewComponent implements AfterViewInit, OnInit {
 
 
   @Input() showPaginator = true;
+  @Input() showPageItemsSelection = false;
   @Input() showFilter = true;
+  @Input() showCategoryFilter = false;
 
   @Input() pageItems = 10;
 
   /* View Customization */
-  @Input() paginatorPosition = 'bottom';
+  @Input() paginatorPosition = 'top';
   @Input() filterInputPosition = 'top';
   @Input() sortIcons = ['▤', '▼', '▲'];
   @Input() saveRowLabel = '🖫';
   @Input() editRowLabel = '✎';
   @Input() cancelEditRowLabel = '🗙';
-  @Input() showErrors = true;
+  @Input() showErrorDetails = true;
   @Input() loadingText = "Initializing table...";
 
   @ViewChild(PaginationComponent) paginator!: PaginationComponent;
@@ -243,7 +245,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @returns Return an array of columns names
    */
   getDisplayColumnNames(): string[] {
-    return [this.EDIT_NAME, ... this.displayColumns ? this.displayColumns.map((col) => col.name) : []];
+    return [... this.displayColumns ? this.displayColumns.map((col) => col.name) : [], this.EDIT_NAME];
   }
 
   /**
@@ -275,7 +277,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       })
     ).subscribe({
       error: (e) => {
-        this.error = `Failed to get data from dataSource`;
+        this.error = `Failed to get data from configured source.\nError: ${e?.message}`;
         if (!environment.prod)
           console.error(e);
       }
@@ -336,7 +338,6 @@ export class TableViewComponent implements AfterViewInit, OnInit {
       const editIndex = this.table!.data.findIndex((r) => (r[this.INDEX_NAME] === this.editRowCopy![this.INDEX_NAME]));
       this.table!.data[editIndex] = this.editRowCopy;
       this.dataChanged.emit();
-      return;
     } else {
       // Managed by TableDataService - use save function
       this.dataService.saveTableChages(

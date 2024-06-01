@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { TableViewComponent } from '../../baader-table/components/table-view/table-view.component';
 import { TableDataService } from '../../baader-table/services/table-data.service';
 import { ColumnSpec, Table } from '../../baader-table/shared/table.model';
+import { Observable, delay, of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 interface TableSettings {
+  description: string,
   url: string,
   columns: ColumnSpec[]
 }
 
 @Component({
   selector: 'app-test-page',
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [TableViewComponent],
+  imports: [FormsModule, TableViewComponent],
   templateUrl: './test-page.component.html',
   styleUrl: './test-page.component.css'
 })
@@ -140,13 +144,30 @@ export class TestPageComponent {
   ];
 
   testDataProcessed: Table;
+  testDataDelayed$: Observable<Table>
 
   constructor(private dataService: TableDataService) {
     this.testDataProcessed = dataService.processTableData(this.testData);
+    this.testDataDelayed$ = of(this.testDataProcessed).pipe(
+      delay(5000)
+    );
   }
+
+  testBoolControls: Record<string, boolean> = {
+    "showPaginator": true,
+    "showPageItemsSelection": true,
+    "showFilter": true,
+    "showCategoryFilter": true,
+    "filterPositionTop": true,
+    "paginatorPositionTop": true
+  };
+
+  testBoolControlKeys = Object.keys(this.testBoolControls);
+
 
   tables = [
     {
+      description: "",
       url: "/data/products.json",
       columns: [
         { name: "id", displayName: "ID" },
@@ -165,10 +186,14 @@ export class TestPageComponent {
         { name: "location.street.name", displayName: "Street Name" },
         { name: "location.street.number", displayName: "Street Number" }
       ]
+    }, {
+      url: "https://jsonplaceholder.typicode.com/users",
+      columns: null
     }
 
   ] as TableSettings[];
 
+  testUrl2 = "https://jsonplaceholder.typicode.com/albums";
   thirdTableIdx = 0;
 
   cycleThirdTable() {

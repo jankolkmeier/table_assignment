@@ -1,9 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
 body {
     font-family: sans-serif;
     color: #04223a;
+    background-color: #f5f7fd;
 }
 
-div.baader-table-root {
-    margin: 2em 0;
+.baader-table-root .table-scroll {
+    min-height: 200px;
+    max-height: 600px;
 }
