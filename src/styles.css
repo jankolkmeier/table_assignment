@@ -3,3 +3,7 @@ body {
     font-family: sans-serif;
     color: #04223a;
 }
+
+div.baader-table-root {
+    margin: 2em 0;
+}
