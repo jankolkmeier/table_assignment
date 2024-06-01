@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map, of, shareReplay, tap } from 'rxjs';
 import { TABLE_INDEX_COLUMN_NAME, Table, TableRow } from '../shared/table.model';
 import { TableUtils } from '../shared/table-utils';
+import { environment } from '../../../environments/environment';
 
 /**
  * Service for fetching & processing table data. 
@@ -63,9 +64,17 @@ export class TableDataService {
         return this.processTableData(response, url)
       }),
       tap(table => {
-        console.log(`Cached ${url} with a table of ${Object.keys(table.spec).length} columns and ${table.data.length} rows`);
+        const notify_changes = this.cache.has(url);
+        if (!environment.prod)
+          console.log(`Cached ${url} with a table of ${Object.keys(table.spec).length} columns and ${table.data.length} rows`);
         this.cache.set(url, table);
         this.ongoingRequests.delete(url);
+
+        if (notify_changes) {
+          if (!environment.prod)
+            console.log(`Updated previously cached table. Notifying of changes`);
+          this.dataSourceChanged.emit(url);
+        }
       }),
       shareReplay(1)
     );
@@ -113,7 +122,8 @@ export class TableDataService {
     }
     const table = this.cache.get(src);
     const replaceIndex = table!.data.findIndex((r) => (r[TABLE_INDEX_COLUMN_NAME] == newRowData[TABLE_INDEX_COLUMN_NAME]));
-    console.log(`Replacing row ${replaceIndex} Old Data / New Data:`, table!.data[replaceIndex], newRowData);
+    if (!environment.prod)
+      console.log(`Replacing row ${replaceIndex} Old Data / New Data:`, table!.data[replaceIndex], newRowData);
     table!.data[replaceIndex] = newRowData;
     this.dataSourceChanged.emit(src);
   }

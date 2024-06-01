@@ -10,6 +10,7 @@ import { PaginationComponent } from '../pagination/pagination.component'
 import { FilterInputComponent } from '../filter-input/filter-input.component';
 import { Observable, debounce, interval, map, merge, of, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../../environments/environment';
 
 /**
  * Table Component for displaying, searching and sorting tables.
@@ -273,7 +274,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
     ).subscribe({
       error: (e) => {
         this.error = `Failed to get data from dataSource`;
-        console.error(e);
+        if (!environment.prod)
+          console.error(e);
       }
     });
   }
@@ -311,7 +313,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    */
   stopEditRow(rowIndex: number) {
     if (this.editRowCopy === null || rowIndex !== this.editRowCopy[this.INDEX_NAME]) {
-      console.warn(`Failed to stop editing, was not editing row ${rowIndex}`)
+      if (!environment.prod)
+        console.warn(`Failed to stop editing, was not editing row ${rowIndex}`)
     }
     this.editingRowIndex = -1;
     this.editRowCopy = null;
@@ -323,7 +326,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    */
   saveEditRow(rowIndex: number) {
     if (this.editRowCopy === null || rowIndex !== this.editRowCopy[this.INDEX_NAME]) {
-      console.warn(`Not saving changes - not currently editing a copy of this row`);
+      if (!environment.prod)
+        console.warn(`Not saving changes - not currently editing a copy of this row`);
       return;
     } else if (this.editRowCopy !== null && !this.dataService.isCached(this.table?.url)) {
       // Not managed by TableDataService - edit directly in memory
