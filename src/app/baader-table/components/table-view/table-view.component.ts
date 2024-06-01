@@ -69,20 +69,20 @@ export class TableViewComponent implements AfterViewInit, OnInit {
 
   error: string | null = null;
 
-  readonly INDEX = TABLE_INDEX_COLUMN_NAME;
+  readonly INDEX_NAME = TABLE_INDEX_COLUMN_NAME;
+  readonly EDIT_NAME = '__edit';
 
   dataChanged: EventEmitter<TableRow[]> = new EventEmitter<TableRow[]>();
   rangeChanged: EventEmitter<RangeState> = new EventEmitter<RangeState>();
   sortChanged: EventEmitter<SortState> = new EventEmitter<SortState>();
   filterChanged: EventEmitter<FilterState> = new EventEmitter<FilterState>();
 
-  editColumnName = '__edit';
 
   editingRowIndex = -1;
 
   sort: SortState = {
     mode: ColumnSort.ASC,
-    column: this.INDEX
+    column: this.INDEX_NAME
   };
   range: RangeState = {
     start: 0,
@@ -144,7 +144,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @returns true if not in default sort order
    */
   isCustomSorted() {
-    return this.sort.column !== this.INDEX;
+    return this.sort.column !== this.INDEX_NAME;
   }
 
   /**
@@ -223,7 +223,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   setDisplayColumns(columns: ColumnSpec[]) {
     this.displayColumns = columns;
     this.displayColumnNames = this.displayColumns.map((col) => col.name);
-    this.displayColumnNames.unshift(this.editColumnName);
+    this.displayColumnNames.unshift(this.EDIT_NAME);
   }
 
   /**
@@ -268,7 +268,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @returns the unique __index property set in prepareTable
    */
   trackTableIndex(index: number, row: TableRow) {
-    return row[this.INDEX];
+    return row[this.INDEX_NAME];
   }
 
   /**
@@ -293,7 +293,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @param rowIndex of the edited row
    */
   stopEditRow(rowIndex: number) {
-    console.log(`Finished editing row ${rowIndex}. New data: `, this.table!.data.filter((r) => (r[this.INDEX] === rowIndex)));
+    console.log(`Finished editing row ${rowIndex}. New data: `, this.table!.data.filter((r) => (r[this.INDEX_NAME] === rowIndex)));
     this.editingRowIndex = -1;
   }
 
@@ -353,7 +353,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
 
     // If back to default, sort by __index column instead.
     if (this.sort.mode == ColumnSort.NONE) {
-      this.sort.column = this.INDEX;
+      this.sort.column = this.INDEX_NAME;
       this.sort.mode = ColumnSort.ASC;
     }
 
@@ -374,8 +374,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
     This is still not a perfect solution without also making this transparent to the user.
     But how to do this would require knowing more context of how this table is used. Ideally of course, this behaviour is configurable. 
     */
-    const dragged_index = event.item.data[this.INDEX];
-    const move_to_index = this.dataView![event.currentIndex][this.INDEX];
+    const dragged_index = event.item.data[this.INDEX_NAME];
+    const move_to_index = this.dataView![event.currentIndex][this.INDEX_NAME];
 
     // Update view only first
     moveItemInArray(this.dataView!, event.previousIndex, event.currentIndex);
@@ -383,12 +383,12 @@ export class TableViewComponent implements AfterViewInit, OnInit {
 
     if (!this.isFiltered() && !this.isCustomSorted()) {
       // If no finter is applied, we can meaningfully change the order in the source data
-      const data_dragged_pos = this.table!.data.findIndex((row) => (row[this.INDEX] === dragged_index));
-      const data_move_to_pos = this.table!.data.findIndex((row) => (row[this.INDEX] === move_to_index));
+      const data_dragged_pos = this.table!.data.findIndex((row) => (row[this.INDEX_NAME] === dragged_index));
+      const data_move_to_pos = this.table!.data.findIndex((row) => (row[this.INDEX_NAME] === move_to_index));
       moveItemInArray(this.table!.data, data_dragged_pos, data_move_to_pos);
       // Re-index 
       for (let idx = 0; idx < this.table!.data.length; idx++) {
-        this.table!.data[idx][this.INDEX] = idx;
+        this.table!.data[idx][this.INDEX_NAME] = idx;
       }
 
       // Trigger change detection
