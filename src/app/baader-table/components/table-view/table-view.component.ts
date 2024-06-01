@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, EventEmitter, ViewChild, OnInit } from '@angular/core';
 import { KeyValuePipe, AsyncPipe, CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -21,19 +21,21 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.css'
 })
-export class TableViewComponent implements AfterViewInit {
+export class TableViewComponent implements AfterViewInit, OnInit {
 
   @Input()
   set url(url: string) {
-    if (this.dataSource$ === null || (this.table !== null && this.table.url !== url)) {
-      this.dataSource$ = this.dataService.getTable$(url);
-      this.fetchData();
-    }
+    this.setDataSource(this.dataService.getTable$(url));
   }
 
   @Input()
   set data(table: Table) {
-    this.dataSource$ = of(table);
+    this.setDataSource(of(table));
+  }
+
+  @Input()
+  set data$(table$: Observable<Table>) {
+    this.setDataSource(table$);
   }
 
   @Input()
@@ -59,7 +61,6 @@ export class TableViewComponent implements AfterViewInit {
   dataSource$: Observable<Table> | null = null;
 
   table: Table | null = null;
-  //_data: TableRow[] | null = null;
 
   displayColumns: ColumnSpec[] | null = null;
   displayColumnNames: string[] | null = null;
@@ -95,21 +96,8 @@ export class TableViewComponent implements AfterViewInit {
   constructor(private dataService: TableDataService) {
   }
 
-  /**
-   * We wait for all child views (such as pagination) to be resolved   
-   * in AfterViewInit before wiring the events, as some depend on children.
-   */
-  ngAfterViewInit() {
-
-    // Jump back to first page when we change sort or filter
-    this.sortChanged.subscribe(() => (this.paginator.setPage(0)));
-    this.filterChanged.subscribe(() => (this.paginator.setPage(0)));
-    this.dataChanged.subscribe(() => (this.paginator?.setPage(0)));
-
-
-    // Get data - at this point in the component lifecycle the dataSource$ should be configured...
-    // Either through the data or url property.
-    this.fetchData();
+  ngOnInit() {
+    // At this point either url or data inputs are configured and we can start getting the data.
 
     // When any of these events happen, we need to re-filter the data based on the 
     // current page, sort and filter settings.
@@ -119,13 +107,28 @@ export class TableViewComponent implements AfterViewInit {
       this.filterChanged,
       this.dataChanged
     ).pipe(
-      // Debounce these events slightly in case many get triggered quickly
+      // Debounce these events slightly in case many get triggered in quick succession
       debounce(() => interval(10))
     ).subscribe(() => {
-      if (this.table != null) {
+      if (this.table !== null) {
         this.dataView = this.createDataView(this.table.data);
       }
     });
+
+    // Fetch the prepared data. When completed, this will trigger the dataChanged event,
+    // which will cause the above pipe to trigger and update the view.
+    this.fetchData();
+  }
+
+  /**
+   * We wait for all child views (such as pagination) to be resolved   
+   * in AfterViewInit before wiring the events.
+   */
+  ngAfterViewInit() {
+    // Jump back to first page when we change sort or filter
+    this.sortChanged.subscribe(() => (this.paginator?.setPage(0)));
+    this.filterChanged.subscribe(() => (this.paginator?.setPage(0)));
+    this.dataChanged.subscribe(() => (this.paginator?.setPage(0)));
   }
 
   /**
@@ -224,6 +227,18 @@ export class TableViewComponent implements AfterViewInit {
   }
 
   /**
+   * Set the data source. If there already is other data, fetch the new data to replace view.
+   * @param t observable of a table object
+   */
+  setDataSource(t: Observable<Table>) {
+    this.dataSource$ = t;
+    if (this.table !== null) {
+      // Only fetch if table isn't set yet (otherwise fetch is called in ngOnInit)
+      this.fetchData();
+    }
+  }
+
+  /**
    * Fetches the data from url & updates the table.
    */
   fetchData() {
@@ -240,7 +255,7 @@ export class TableViewComponent implements AfterViewInit {
       })
     ).subscribe({
       error: (e) => {
-        this.error = `Failed to fetch data from url ${this.url}`;
+        this.error = `Failed to get data from dataSource`;
         console.error(e);
       }
     });

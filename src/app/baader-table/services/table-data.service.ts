@@ -68,8 +68,6 @@ export class TableDataService {
       shareReplay(1)
     );
 
-    console.log(request$);
-
     this.ongoingRequests.set(url, request$);
     return request$;
   }
@@ -82,11 +80,13 @@ export class TableDataService {
    */
   processTableData(raw: object[], src?: string): Table {
     const data = raw.map(TableUtils.flattenObjectToRow);
+
+    const spec = TableUtils.inferColumnTypes(data.slice(0, 10));
+
     for (let idx = 0; idx < data.length; idx++) {
       data[idx][TABLE_INDEX_COLUMN_NAME] = idx;
     }
 
-    const spec = TableUtils.inferColumnTypes(data.slice(0, 10));
     return {
       spec: spec,
       data: data,
