@@ -14,6 +14,31 @@ import { environment } from '../../../../environments/environment';
 
 /**
  * Table Component for displaying, searching and sorting tables.
+ * To render data, use exactly one of these Input properties: 
+ *   <code class="no-auto-link">url</code>, <code class="no-auto-link">data</code> or <code class="no-auto-link">data$</code>
+ * 
+ * ```typescript
+ * // ...
+ * 
+ * @Component({
+ *   // ...
+ *   imports: [TableViewComponent],
+ *   // ...
+ * })
+ * export class ProductsPageComponent {
+ *   products_data_url = "/data/products.json";
+ *   products_display_columns = [
+ *     { name: "id", displayName: "ID" },
+ *     { name: "title", displayName: "Title" },
+ *     { name: "category", displayName: "Category" },
+ *     { name: "price", displayName: "Price" },
+ *  ];
+ * }
+ * ```
+ * 
+ * ```html
+ * <baader-table-view [columns]="products_display_columns" [url]="products_data_url"></baader-table-view>
+ * ```
  */
 @Component({
   selector: 'baader-table-view',

@@ -5,7 +5,7 @@
 export const TABLE_INDEX_COLUMN_NAME = '__index';
 
 /**
- * Describe sorting state of a column
+ * Describe sorting state of a column.
  */
 export enum ColumnSort {
     NONE = 0,
@@ -17,8 +17,19 @@ export enum ColumnSort {
  * Used to describe columns, preferred display names in header column, and to describe the dataType in the column.
  */
 export interface ColumnSpec {
+    /**
+     * The property name of the row
+     */
     name: string;
+
+    /**
+     * The name to display in the header
+     */
     displayName: string;
+
+    /**
+     * The data type of the column data. May be used in the future for input validation. Currently not in use.
+     */
     dataType?: string;
 }
 
@@ -26,18 +37,49 @@ export interface ColumnSpec {
  * The following interfaces represent the state of the data viewed,
  * I.e. by which column they are sorted or filtered, what range of the data is looked at (i.e. based on pagination).
  */
+
+/**
+ * Represents how a table is sorted. 
+ */
 export interface SortState {
+    /**
+     * The column to sort by (empty string means default sorting)
+     */
     column: string;
+
+    /**
+     * The direction to sort in.
+     */
     mode: ColumnSort;
 }
 
+/**
+ * Represents the search function state of a TableView
+ */
 export interface FilterState {
+    /**
+     * The column to search in (search through all columns if empty string)
+     */
     column: string;
+
+    /**
+     * The search string to filter on.
+     */
     filter: string;
 }
 
+/**
+ * Represents the range of data a table is looking at.
+ */
 export interface RangeState {
+    /**
+     * The index of the first row to look at.
+     */
     start: number;
+
+    /**
+     * The number of rows to show after.
+     */
     length: number;
 }
 
@@ -52,7 +94,8 @@ export type TableSpec = Record<string, ColumnSpec>
 export type TableRow = Record<string, string | number | boolean | null>;
 
 /**
- * A Table is the combination of row data data and description of it's columns
+ * A Table is the combination of row data data and description of it's columns.
+ * Optionally, the data source url can be stored.
  */
 export interface Table {
     spec: TableSpec;

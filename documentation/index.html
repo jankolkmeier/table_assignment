@@ -83,20 +83,27 @@
                    <div class="content-data">
 
 <h1>TableAssignment</h1>
-<p>For details on the Assignment, see <code>ASSIGNMENT.md</code>.
-This project is a docker container that can be used with VSCodes Dev Container features.
-The angular project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 18.0.1.</p>
-<h2>Development server</h2>
-<p>Run <code>ng serve</code> to host the application using the dev server.
+<p>This is a programming assinment. For details on the assignment, see <code>public/docs/description.md</code>. 
+My report on the assignment can be found under <code>public/docs/report.md</code>. 
+The documentation of the table module can be found here: <a href="https://jankolkmeier.github.io/table_assignment/">jankolkmeier.github.io/table_assignment</a>. </p>
+<p>The angular project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 18.0.1.</p>
+<h2>Live Demo</h2>
+<p>A live version may still be running <a href="https://tableassignment.kolkmeier.com/">here</a>.</p>
+<h2>Use with as VSCode Dev Container</h2>
+<p>This project is a docker container that can be used with <a href="https://code.visualstudio.com/docs/devcontainers/containers">VSCode&#39;s Dev Container</a> feature. 
+Make sure you have <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a> and the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Dev Containers Extension</a> installed for VSCode.</p>
+<p>Clone this project and open the folder with VSCode, then press <code>ctrl+shift+p</code> and run <code>Dev Containers: Rebuild and Reopen in Container</code>. This will take a while for the first time.
+This should also install all the project dependencies (i.e it automatically runs <code>npm install</code>).</p>
+<p>Then open a terminal in the dev container and follow the instructions under <code>Development Server</code>.</p>
+<h2>Run without a Dev Container</h2>
+<p>Make sure you have a compatible node version and the angular v18 client installed. If not, follow <a href="https://angular.dev/tutorials/first-app#local-development-environment">these instructions</a>.</p>
+<p>Clone this project and open a terminal inside the project folder. Run <code>npm install</code> to install all dependencies.
+Then follow the instructions under <code>Development Server</code>.</p>
+<h2>Running Development Server</h2>
+<p>Run <code>ng serve --poll 500</code> to host the application using the dev server.
 The port is <code>:4342</code>. This container is configured to forward this port to your machine.
 The application should be available under <code>http://localhost:4342/</code> once the dev server is running.</p>
-<p>Note that for Dev Container compatibility, this dev server is configured to listen to host 0.0.0.0 (all interfaces). 
-So beware if you&#39;re running this outside of a docker container.</p>
-<h2>Build</h2>
-<p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
-<h2>Running unit tests</h2>
-<p>TODO
-Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
+<p>Note that for Dev Container compatibility, this dev server is configured to listen to host 0.0.0.0 (all interfaces). So beware if you&#39;re running this outside of a docker container.</p>
 
 
 

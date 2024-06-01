@@ -518,14 +518,16 @@ Expects the root element of the response to be an array-of-records-type (use get
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/baader-table/services/table-data.service.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/baader-table/services/table-data.service.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Is a table data of this url in the cache.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -536,6 +538,7 @@ Expects the root element of the response to be an array-of-records-type (use get
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -550,6 +553,10 @@ Expects the root element of the response to be an array-of-records-type (use get
                                             </td>
 
 
+                                            <td>
+                                                    <p>table data url</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -585,8 +592,8 @@ Expects the root element of the response to be an array-of-records-type (use get
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/baader-table/services/table-data.service.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/baader-table/services/table-data.service.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -675,8 +682,8 @@ Expects the root element of the response to be an array-of-records-type (use get
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/baader-table/services/table-data.service.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/baader-table/services/table-data.service.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -685,8 +692,6 @@ Expects the root element of the response to be an array-of-records-type (use get
                 <td class="col-md-4">
                         <div class="io-description"><p>Save a changed row: implemented here as a simple replace operation on the cached memory.
 For a proper implementation this would need more context to properly update the data (i.e. a REST API definition).</p>
-<p>Also beware that for a proper implementation, we would need to be able to undo the flattening process of nested objects
-i.e. by keeping track of a mapping when flattening, or by deriving it from the seperator used in the column name.</p>
 </div>
 
                             <div class="io-description">
@@ -893,6 +898,8 @@ export class TableDataService {
       return of(cachedResponse);
     }
 
+    // By caching ongoing request, two clients (i.e. TableViews) requesting the same location at the same time
+    // can share and wait for a singe http request.
     const ongoingRequest &#x3D; this.ongoingRequests.get(url);
     if (ongoingRequest) {
       return ongoingRequest;
@@ -946,15 +953,13 @@ export class TableDataService {
 
   /**
    * Save a changed row: implemented here as a simple replace operation on the cached memory.
-   * For a proper implementation this would need more context to properly update the data (i.e. a REST API definition).
-   * 
-   * Also beware that for a proper implementation, we would need to be able to undo the flattening process of nested objects
-   * i.e. by keeping track of a mapping when flattening, or by deriving it from the seperator used in the column name.  
-   * 
+   * For a proper implementation this would need more context to properly update the data (i.e. a REST API definition). 
    * @param src the url of the table in cache
    * @param newRowData the new row data (will replace the row based on the __index field in newRowData)
    */
   saveTableChages(src: string, newRowData: TableRow) {
+    // Beware that, for a proper implementation, we would need to be able to undo the flattening process of nested objects
+    // i.e. by keeping track of a mapping when flattening, or by deriving it from the seperator used in the column name.  
     if (!this.isCached(src)) {
       console.warn(&#x60;Can&#x27;t save data not managed by TableDataService&#x60;);
       return;
@@ -967,6 +972,11 @@ export class TableDataService {
     this.dataSourceChanged.emit(src);
   }
 
+  /**
+   * Is a table data of this url in the cache.
+   * @param url table data url
+   * @returns 
+   */
   isCached(url?: string): boolean {
     if (!url)
       return false;
