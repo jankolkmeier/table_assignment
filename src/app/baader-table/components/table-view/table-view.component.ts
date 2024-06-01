@@ -18,11 +18,12 @@ import { environment } from '../../../../environments/environment';
  *   <code class="no-auto-link">url</code>, <code class="no-auto-link">data</code> or <code class="no-auto-link">data$</code>
  * 
  * ```typescript
- * // ...
+ * // your.component.ts
  * 
  * @Component({
  *   // ...
  *   imports: [TableViewComponent],
+ *   templateUrl: './your.component.html',
  *   // ...
  * })
  * export class ProductsPageComponent {
@@ -37,6 +38,7 @@ import { environment } from '../../../../environments/environment';
  * ```
  * 
  * ```html
+ * <!-- your.component.html -->
  * <baader-table-view [columns]="products_display_columns" [url]="products_data_url"></baader-table-view>
  * ```
  */
@@ -49,21 +51,37 @@ import { environment } from '../../../../environments/environment';
 })
 export class TableViewComponent implements AfterViewInit, OnInit {
 
+  /**
+   * A url pointing to a .json containing table-like data. The data will be fetched using TableDataService and displayed. 
+   * Required if not using data or data$
+   */
   @Input()
   set url(url: string) {
     this.setDataSource(this.dataService.getTable$(url));
   }
 
+  /**
+   * A Table object.
+   * Required if not using url or data$.
+   */
   @Input()
   set data(table: Table) {
     this.setDataSource(of(table));
   }
 
+  /**
+   * An Observable of a Table object.
+   * Required if not using url or data.
+   */
   @Input()
   set data$(table$: Observable<Table>) {
     this.setDataSource(table$);
   }
 
+  /**
+   * Specify which columns to display in order, and how they are named in the header row.
+   * If not specified, all columns will be shown.
+   */
   @Input()
   set columns(columns: ColumnSpec[] | null) {
     this.displayColumns = columns;
