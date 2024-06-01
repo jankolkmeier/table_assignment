@@ -75,8 +75,8 @@
             </ng-container>
             }
 
-            <tr cdk-header-row *cdkHeaderRowDef="displayColumnNames"></tr>
-            <tr cdk-row *cdkRowDef="let row; columns: displayColumnNames" cdkDrag cdkDragLockAxis="y"
+            <tr cdk-header-row *cdkHeaderRowDef="getDisplayColumnNames()"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns: getDisplayColumnNames()" cdkDrag cdkDragLockAxis="y"
                 [cdkDragData]="row">
             </tr>
         </table>

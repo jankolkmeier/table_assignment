@@ -63,7 +63,6 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   table: Table | null = null;
 
   displayColumns: ColumnSpec[] | null = null;
-  displayColumnNames: string[] | null = null;
   dataView: TableRow[] | null = null;
   dataFilteredForPaginator = 0;
 
@@ -161,7 +160,7 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    * @returns a list of column names
    */
   getFilterColumnNames(): string[] {
-    return this.displayColumnNames == null ? [] : this.displayColumnNames?.filter((n) => {
+    return this.getDisplayColumnNames().filter((n) => {
       return this.displayColumns?.some((colspec) => (colspec.name == n));
     });
   }
@@ -222,8 +221,14 @@ export class TableViewComponent implements AfterViewInit, OnInit {
    */
   setDisplayColumns(columns: ColumnSpec[]) {
     this.displayColumns = columns;
-    this.displayColumnNames = this.displayColumns.map((col) => col.name);
-    this.displayColumnNames.unshift(this.EDIT_NAME);
+  }
+
+  /**
+   * Get the array of column names that should be displayed in the table (in order). 
+   * @returns Return an array of columns names
+   */
+  getDisplayColumnNames(): string[] {
+    return [this.EDIT_NAME, ... this.displayColumns ? this.displayColumns.map((col) => col.name) : []];
   }
 
   /**
