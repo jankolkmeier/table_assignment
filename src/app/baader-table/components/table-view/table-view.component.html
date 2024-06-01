@@ -9,7 +9,8 @@
 
 <ng-template #paginatorTemplate>
     <div class="paginator-parent" [hidden]="!showPaginator">
-        <baader-pagination [totalItems]="currentFilteredItems()" (pageChanged)="setRange($event)"></baader-pagination>
+        <baader-pagination [pageItems]="pageItems" [totalItems]="currentFilteredItems()"
+            (pageChanged)="setRange($event)"></baader-pagination>
     </div>
 </ng-template>
 

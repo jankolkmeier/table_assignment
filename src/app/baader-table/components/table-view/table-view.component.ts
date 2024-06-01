@@ -48,6 +48,8 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   @Input() showPaginator = true;
   @Input() showFilter = true;
 
+  @Input() pageItems = 10;
+
   /* View Customization */
   @Input() paginatorPosition = 'bottom';
   @Input() filterInputPosition = 'top';
