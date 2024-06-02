@@ -26,7 +26,7 @@ import { environment } from '../../../../environments/environment';
  *   templateUrl: './your.component.html',
  *   // ...
  * })
- * export class ProductsPageComponent {
+ * export class YourComponent {
  *   products_data_url = "/data/products.json";
  *   products_display_columns = [
  *     { name: "id", displayName: "ID" },
