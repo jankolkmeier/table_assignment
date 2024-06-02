@@ -1,8 +1,7 @@
 <ng-template #filterInputTemplate>
-    <baader-filter-input [hidden]="error || !showFilter" [filter]="filter.filter" [category]="filter.column"
-        categoryLabel="Column:" (categoryChange)="filter.column = $event; filterChanged.emit();"
-        (filterChange)="filter.filter = $event; filterChanged.emit()"
-        [categorySelect]="showCategoryFilter ? getFilterColumnNames() : null"></baader-filter-input>
+    <baader-filter-input [hidden]="error || !showFilter" [filter]="filter" (filterChange)="filterChanged.emit($event)"
+        [categorySelect]="showCategoryFilter ? getFilterColumnNames() : null"
+        categoryLabel="Column:"></baader-filter-input>
 </ng-template>
 
 <ng-template #paginatorTemplate>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FilterState } from '../../shared/table.model';
 
 
 /**
@@ -33,10 +34,10 @@ import { FormsModule } from '@angular/forms';
  * 
  * ```html
  * <!-- your.component.html -->
- *     <baader-filter-input [category]="category" (categoryChange)="categoryChanged()" 
- *                          [filter]="filter" (filterChange)="filterChanged()"
- *                    [categorySelect]="categories"></baader-filter-input>
+ * <baader-filter-input [filter]="filter" (filterChange)="filterChanged()"></baader-filter-input>
+ * 
  * <!-- Your data view template here  -->
+ * 
  * ```
  */
 @Component({
@@ -54,24 +55,20 @@ export class FilterInputComponent {
   }
   _categories: string[] | null = null;
 
-  @Input() category = "";
-  @Output() categoryChange = new EventEmitter<string>();
-
-  @Input() filter = "";
-  @Output() filterChange = new EventEmitter<string>();
+  @Input() filter: FilterState = { column: "", filter: "" };
+  @Output() filterChange = new EventEmitter<FilterState>();
 
   @Input() filterLabel = "Search:";
   @Input() categoryLabel = "In Category:";
 
   @Input() categoryDefaultValue = "";
-
   @Input() resetLabel = "Clear";
 
   /**
    * Input field for filter string changed
    */
   filterValueChanged(event: Event) {
-    this.filter = (event.target as HTMLInputElement).value;
+    this.filter.filter = (event.target as HTMLInputElement).value;
     this.filterChange.emit(this.filter);
   }
 
@@ -80,17 +77,16 @@ export class FilterInputComponent {
    * @param index index of the _categories array
    */
   selectedCategoryChanged(event: Event) {
-    this.category = (event.target as HTMLInputElement).value;
-    this.categoryChange.emit(this.category);
+    this.filter.column = (event.target as HTMLInputElement).value;
+    this.filterChange.emit(this.filter);
   }
 
   /**
    * Clear all filter parameters
    */
   resetFilter() {
-    this.category = "";
-    this.filter = "";
-    this.categoryChange.emit(this.category);
+    this.filter.filter = "";
+    this.filter.column = "";
     this.filterChange.emit(this.filter);
   }
 

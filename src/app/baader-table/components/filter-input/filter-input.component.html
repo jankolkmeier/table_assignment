@@ -3,7 +3,8 @@
         {{filterLabel}}
     </div>
     <div class="filter-parent">
-        <input tabindex="4" class="filter-text" type="text" [value]="filter" (input)="filterValueChanged($event)" />
+        <input tabindex="4" class="filter-text" type="text" [value]="filter.filter"
+            (input)="filterValueChanged($event)" />
     </div>
     @if (_categories) {
     <div class="categories">
@@ -11,7 +12,8 @@
             {{categoryLabel}}
         </div>
         <div class="category-parent">
-            <select tabindex="4" class="category-select" [value]="category" (change)="selectedCategoryChanged($event)">
+            <select tabindex="4" class="category-select" [value]="filter.column"
+                (change)="selectedCategoryChanged($event)">
                 @if (_categories.indexOf(categoryDefaultValue) === -1) {
                 <option value="{{categoryDefaultValue}}"></option>
                 }
