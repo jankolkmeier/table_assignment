@@ -17,6 +17,10 @@ import { environment } from '../../../../environments/environment';
  * To render data, use exactly one of these Input properties: 
  *   <code class="no-auto-link">url</code>, <code class="no-auto-link">data</code> or <code class="no-auto-link">data$</code>
  * 
+ * Columns to display can be selected using the <code class="no-auto-link">columns</code> input (see the example below)
+ * Note that the TableDataService that fetches table data flattens nested objects. 
+ * To display the data in data['name']['first'], specify 'name.first' as the column's name in <code class="no-auto-link">columns</code>.
+ * 
  * ```typescript
  * // your.component.ts
  * 
