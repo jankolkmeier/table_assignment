@@ -154,7 +154,7 @@ I have implemented resizing of the columns using CSS only:
 
 However, having more control over the column width may be beneficial for the user experience going forward. While the current implementation adapts to the displayed data automatically, it also adapts whenever the data changes slightly, i.e., when changing page, filtering, sorting, or enabling row editing.
 
-Resizing columns has not been implemented. I've looked into applying the same logic as used for reordering rows, but was unable to find a clean implementation. The issue is that `CdkTable` does not provide a directive for table header and body sections ([github issue](https://github.com/angular/components/issues/12402)). Manually templated `<thead>` and `<tbody>` templates will be overwritten by `CdkTable`. This way, we cannot separately have two drag groups inside the same table.
+Reordering columns has not been implemented. I've looked into applying the same logic as used for reordering rows, but was unable to find a clean implementation. The issue is that `CdkTable` does not provide a directive for table header and body sections ([github issue](https://github.com/angular/components/issues/12402)). Manually templated `<thead>` and `<tbody>` templates will be overwritten by `CdkTable`. This way, we cannot separately have two drag groups inside the same table.
 
 Reordering would still be possible by dynamically updating the `[column]` input of the TableView externally using a different UI element.
 
