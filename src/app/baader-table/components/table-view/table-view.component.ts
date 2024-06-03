@@ -102,10 +102,10 @@ export class TableViewComponent implements AfterViewInit, OnInit {
   /* View Customization */
   @Input() paginatorPosition = 'top';
   @Input() filterInputPosition = 'top';
-  @Input() sortIcons = ['▤', '▼', '▲'];
-  @Input() saveRowLabel = '🖫';
+  @Input() sortIcons = ['⮁', '⭣', '⭡'];
+  @Input() saveRowLabel = '☑';
   @Input() editRowLabel = '✎';
-  @Input() cancelEditRowLabel = '🗙';
+  @Input() cancelEditRowLabel = '☒';
   @Input() showErrorDetails = true;
   @Input() loadingText = "Initializing table...";
 
