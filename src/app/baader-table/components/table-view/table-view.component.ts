@@ -253,11 +253,10 @@ export class TableViewComponent implements AfterViewInit, OnInit {
     }
 
     this.dataFilteredForPaginator = filtered.length;
+    console.log('sort');
 
     // Then sort remainder
-    if (this.isCustomSorted()) {
-      filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.mode));
-    }
+    filtered.sort(TableUtils.sortTableFn(this.sort.column, this.sort.mode));
 
     // Then Slice
     if (this.showPaginator && this.range !== null) {
